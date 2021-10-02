@@ -1,6 +1,6 @@
 ﻿using System;
 namespace SoulShard.Utils
-    {
+{
     public class Timer
     {
         #region Variables
