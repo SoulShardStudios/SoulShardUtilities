@@ -23,5 +23,17 @@ namespace SoulShard.Utils
             Gizmos.DrawLine(positions[2], positions[3]);
             Gizmos.DrawLine(positions[3], positions[0]);
         }
+        public static void DrawRect(Rect rect)
+        {
+            Vector2 start = rect.position;
+            Vector2 up = rect.position + new Vector2(0, rect.height);
+            Vector2 top = rect.position + rect.size;
+            Vector2 bottom = rect.position + new Vector2(rect.width, 0);
+            Vector2[] positions = new Vector2[] { start, up, top, bottom };
+            Gizmos.DrawLine(positions[0], positions[1]);
+            Gizmos.DrawLine(positions[1], positions[2]);
+            Gizmos.DrawLine(positions[2], positions[3]);
+            Gizmos.DrawLine(positions[3], positions[0]);
+        }
     }
 }
