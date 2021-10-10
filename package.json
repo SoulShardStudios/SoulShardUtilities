@@ -1,0 +1,24 @@
+{
+  "name": "com.SoulShardStudios.SoulShardUtilities",
+  "version": "0.0.0",
+  "displayName": "SoulShardUtilities",
+  "description": "A collection of usefull project independant functions and constants",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "documentationUrl": "",
+  "changelogUrl": "",
+  "licensesUrl": "",
+  "dependencies": {
+  },
+  "keywords": [
+    "Utilities",
+    "Soul",
+    "Shard",
+    "SoulShard",
+    "SoulShardUtilities"
+  ],
+  "author": {
+    "name": "SoulShardStudios",
+    "email": "SoulShardStudios@gmail.com"
+  }
+}
