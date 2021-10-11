@@ -59,5 +59,16 @@ namespace SoulShard.Utils
             DeleteAllFilesInDirectory(path);
             DeleteAllFoldersInDirectory(path);
         }
+        public static void MakeFile(string path, byte[] bytes) => File.WriteAllBytes(path, bytes);
+        public static void DeleteFile(string path)
+        {
+            FileInfo file = new FileInfo(path);
+            file.Delete();
+        }
+        public static void DeleteFolder(string path)
+        {
+            DirectoryInfo directory = new DirectoryInfo(path);
+            directory.Delete();
+        }
     }
 }
