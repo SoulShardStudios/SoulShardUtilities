@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.IO;
 namespace SoulShard.Utils
 {
     public static class DirectoryHelp
@@ -18,7 +19,7 @@ namespace SoulShard.Utils
             return "";
         }
         // the actual conversions from unity path name to unity path
-        static string GetUnityPathFromString(string pathIndicator)
+        public static string GetUnityPathFromString(string pathIndicator)
         {
             switch (pathIndicator.ToLower())
             {
@@ -35,6 +36,28 @@ namespace SoulShard.Utils
                 default:
                     return "";
             }
+        }
+        public static void CreateDir(string path)
+        {
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+        }
+        public static void DeleteAllFilesInDirectory(string path)
+        {
+            DirectoryInfo di = new DirectoryInfo(path);
+            foreach (FileInfo file in di.GetFiles())
+                file.Delete();
+        }
+        public static void DeleteAllFoldersInDirectory(string path)
+        {
+            DirectoryInfo di = new DirectoryInfo(path);
+            foreach (DirectoryInfo dir in di.GetDirectories())
+                dir.Delete(true);
+        }
+        public static void DeleteAllContentsInDirectory(string path)
+        {
+            DeleteAllFilesInDirectory(path);
+            DeleteAllFoldersInDirectory(path);
         }
     }
 }
