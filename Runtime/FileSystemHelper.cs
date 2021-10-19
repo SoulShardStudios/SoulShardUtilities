@@ -2,8 +2,9 @@ using UnityEngine;
 using System.IO;
 namespace SoulShard.Utils
 {
-    public static class DirectoryHelp
+    public static class FileSystemHelper
     {
+        #region PathManagement
         // turns stuff like <persistentdata>/directory/file.fil and turns it into the actual directory for the persistent data path plus whatever you added on
         // this is useful for serializing these paths in the inspector by creating a shorthand for these variables.
         public static string ParsePath(string path)
@@ -37,16 +38,12 @@ namespace SoulShard.Utils
                     return "";
             }
         }
+        #endregion
+        #region DirectoryManagement
         public static void CreateDir(string path)
         {
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
-        }
-        public static void DeleteAllFilesInDirectory(string path)
-        {
-            DirectoryInfo di = new DirectoryInfo(path);
-            foreach (FileInfo file in di.GetFiles())
-                file.Delete();
         }
         public static void DeleteAllFoldersInDirectory(string path)
         {
@@ -59,16 +56,45 @@ namespace SoulShard.Utils
             DeleteAllFilesInDirectory(path);
             DeleteAllFoldersInDirectory(path);
         }
+        public static void DeleteFolder(string path)
+        {
+            DirectoryInfo directory = new DirectoryInfo(path);
+            directory.Delete();
+        }
+        #endregion
+        #region FileManagement
+        public static void DeleteAllFilesInDirectory(string path)
+        {
+            DirectoryInfo di = new DirectoryInfo(path);
+            foreach (FileInfo file in di.GetFiles())
+                file.Delete();
+        }
         public static void MakeFile(string path, byte[] bytes) => File.WriteAllBytes(path, bytes);
         public static void DeleteFile(string path)
         {
             FileInfo file = new FileInfo(path);
             file.Delete();
         }
-        public static void DeleteFolder(string path)
+        #endregion
+        #region AssetLoading
+        // Original Source: https://gist.github.com/openroomxyz
+        public static Texture2D LoadTexture2D(string filePath) => LoadTexture2DRawPath(ParsePath(filePath));
+        public static Texture2D LoadTexture2DRawPath(string filePath)
         {
-            DirectoryInfo directory = new DirectoryInfo(path);
-            directory.Delete();
+            if (!File.Exists(filePath))
+                return null;
+            byte[] fileData = File.ReadAllBytes(filePath);
+            Texture2D tex = new Texture2D(2, 2);
+            tex.LoadImage(fileData);
+            return tex;
         }
+        public static string LoadText(string filePath) => LoadTextRawPath(ParsePath(filePath));
+        public static string LoadTextRawPath(string filePath)
+        {
+            if (!File.Exists(filePath))
+                return null;
+            return File.ReadAllText(filePath);
+        }
+        #endregion
     }
 }
