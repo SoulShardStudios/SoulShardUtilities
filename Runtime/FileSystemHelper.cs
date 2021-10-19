@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.IO;
+using System.Collections.Generic;
 namespace SoulShard.Utils
 {
     public static class FileSystemHelper
@@ -61,19 +62,49 @@ namespace SoulShard.Utils
             DirectoryInfo directory = new DirectoryInfo(path);
             directory.Delete();
         }
-        #endregion
-        #region FileManagement
+        public static string[] GetAllFileNamesInDirectory(string directory)
+        {
+            string[] paths = GetAllFilePathsInDirectory(directory);
+            if (paths == null)
+                return null;
+            string[] names = new string[paths.Length];
+            for (int i = 0; i < paths.Length; i++)
+                names[i] = GetFileName(paths[i]);
+            return names;
+        }
+        public static string[] GetAllFilePathsInDirectory(string directory)
+        {
+            List<string> paths = new List<string>(0);
+            if (!Directory.Exists(directory))
+                return null;
+            foreach (var path in Directory.GetFiles(directory))
+                paths.Add(path);
+            return paths.ToArray();
+        }
         public static void DeleteAllFilesInDirectory(string path)
         {
             DirectoryInfo di = new DirectoryInfo(path);
             foreach (FileInfo file in di.GetFiles())
                 file.Delete();
         }
+        #endregion
+        #region FileManagement
         public static void MakeFile(string path, byte[] bytes) => File.WriteAllBytes(path, bytes);
         public static void DeleteFile(string path)
         {
             FileInfo file = new FileInfo(path);
             file.Delete();
+        }
+        public static string GetFileName(string path) => Path.GetFileName(path);
+        public static string GetFileExt(string path)
+        {
+            FileInfo fi = new FileInfo(path);
+            return fi.Extension;
+        }
+        public static bool FileIsReadonly(string path)
+        {
+            FileInfo fi = new FileInfo(path);
+            return fi.IsReadOnly;
         }
         #endregion
         #region AssetLoading
