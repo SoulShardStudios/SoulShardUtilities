@@ -1,8 +1,8 @@
 using UnityEngine;
-namespace Soulshard.Utils
+namespace SoulShard.Utils
 {
     // parses all unity vector types from strings with the format (axis1, axis2, e.t.c.)
-    public class VectorParsing
+    public class VectorParser
     {
         // parses a string to find a vector var EX: "THIS IS A TEST STRING (0,100)" where (0,100) is the vector. it removed everything but 0,100,
         // and returns that for further processing and possible conversion
