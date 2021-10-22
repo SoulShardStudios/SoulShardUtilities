@@ -109,14 +109,15 @@ namespace SoulShard.Utils
         #endregion
         #region AssetLoading
         // Original Source: https://gist.github.com/openroomxyz
-        public static Texture2D LoadTexture2D(string filePath) => LoadTexture2DRawPath(ParsePath(filePath));
-        public static Texture2D LoadTexture2DRawPath(string filePath)
+        public static Texture2D LoadTexture2D(string filePath, TextureFormat format, bool mipChain) => LoadTexture2DRawPath(ParsePath(filePath), format, mipChain);
+        public static Texture2D LoadTexture2DRawPath(string filePath, TextureFormat format, bool mipChain)
         {
             if (!File.Exists(filePath))
                 return null;
             byte[] fileData = File.ReadAllBytes(filePath);
             Texture2D tex = new Texture2D(2, 2);
             tex.LoadImage(fileData);
+            TextureConvert.ConvertTexture2DFormat(ref tex, format, mipChain);
             return tex;
         }
         public static string LoadText(string filePath) => LoadTextRawPath(ParsePath(filePath));
