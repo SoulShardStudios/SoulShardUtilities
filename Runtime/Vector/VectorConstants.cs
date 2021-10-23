@@ -2,7 +2,7 @@
 namespace SoulShard.Utils
 {
     // constants needed for the utilities and for the games that import the utilities
-    public static class Constants
+    public static class VectorConstants
     {
         #region Vector Constants
         #region Direction Collections

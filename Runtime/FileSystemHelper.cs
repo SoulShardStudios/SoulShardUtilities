@@ -117,7 +117,7 @@ namespace SoulShard.Utils
             byte[] fileData = File.ReadAllBytes(filePath);
             Texture2D tex = new Texture2D(2, 2);
             tex.LoadImage(fileData);
-            TextureConvert.ConvertTexture2DFormat(ref tex, format, mipChain);
+            TextureHelp.ConvertTexture2DFormat(ref tex, format, mipChain);
             return tex;
         }
         public static string LoadText(string filePath) => LoadTextRawPath(ParsePath(filePath));
