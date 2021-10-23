@@ -10,20 +10,17 @@ namespace SoulShard.Utils
         public uint chunkSize;
         public bool drawChunkBorders;
         public Color chunkBorderColor;
-        public string name;
         public Vector2Int chunkSizeV2I { get => new Vector2Int((int)chunkSize, (int)chunkSize); }
         public Vector2Int GetChunkPosFromWorldPos(Vector2Int position) => VectorMath.RoundVector2((Vector2)position / chunkSizeV2I);
         public Vector2Int GetPositionWithinChunk(Vector2Int position) => VectorMath.ModVector2(position, (int)chunkSize) + ((chunkSizeV2I / 2));
-        public ChunkMapInt2D(Color chunkBorderColor, uint chunkSize = 1, bool drawChunkBorders = true, string name = "")
+        public ChunkMapInt2D(Color chunkBorderColor, uint chunkSize = 1, bool drawChunkBorders = true)
         {
-            this.name = name;
             this.chunkSize = chunkSize;
             this.chunkBorderColor = chunkBorderColor;
             this.drawChunkBorders = drawChunkBorders;
         }
-        public ChunkMapInt2D(uint chunkSize = 1, bool drawChunkBorders = true, string name = "")
+        public ChunkMapInt2D(uint chunkSize = 1, bool drawChunkBorders = true)
         {
-            this.name = name;
             this.chunkSize = chunkSize;
             chunkBorderColor = Color.white;
             this.drawChunkBorders = drawChunkBorders;
