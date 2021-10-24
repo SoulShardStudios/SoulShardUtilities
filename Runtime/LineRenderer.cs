@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using SoulShard.Utils;
+// renders a rasterized line according to bresenhams line algorithm
 public static class LineRenderer
 {
 

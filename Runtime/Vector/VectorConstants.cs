@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 namespace SoulShard.Utils
 {
-    // constants needed for the utilities and for the games that import the utilities
+    // a collection of general vector constants.
     public static class VectorConstants
     {
         #region Direction Collections

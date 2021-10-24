@@ -14,10 +14,10 @@ namespace SoulShard.Utils
             newTex.Apply();
             return newTex;
         }
-        // generates a completely empty texture to be copied to new chunks
-        public static Texture2D GenerateEmptyTexture(int size, Color color)
+        // generates a completely empty texture according to the color specified
+        public static Texture2D GenerateEmptyTexture(int size, Color color, TextureFormat format = TextureFormat.RGBA32, bool mipChain = true)
         {
-            Texture2D emptyTexture = new Texture2D(size, size);
+            Texture2D emptyTexture = new Texture2D(size, size, format, mipChain);
             emptyTexture.SetPixels(0, 0, size, size,
                 Methods.GenerateNewArray(size * size, color));
             emptyTexture.Apply();
