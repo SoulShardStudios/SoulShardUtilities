@@ -4,7 +4,7 @@ namespace SoulShard.Utils
 {
     // allows for management and math related to an infinitely tiled 2d plane of chunks (as monobehavior), with ints used as the positioning method
     [System.Serializable]
-    public class ChunkMapInt2D<T> where T : MonoBehaviour
+    public partial class ChunkMapInt2D<T> where T : MonoBehaviour
     {
         #region Vars
         [HideInInspector] public Dictionary<Vector2Int, T> chunks = new Dictionary<Vector2Int, T>();
