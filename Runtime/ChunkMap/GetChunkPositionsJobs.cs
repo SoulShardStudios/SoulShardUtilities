@@ -89,7 +89,7 @@ namespace SoulShard.Utils
                         Vector2 vector = (Vector2)positions[index] / chunkSize;
                         Vector2Int chunk = new Vector2Int(Mathf.RoundToInt(vector.x), Mathf.RoundToInt(vector.y));
                         if (chunks.Contains(chunk))
-                            return;
+                            continue;
                         chunks.Add(chunk);
                     }
                 }
