@@ -20,81 +20,63 @@ namespace SoulShard.Utils
         {
             NativeArray<Vector2Int> returned;
             if (!unique)
-                returned = ChunkMapInt2DJobs.GetChunksForPositionsJobWrapped(positions, chunkSizeV2I, innerLoopBatchCount, allocation);
+                returned = ChunkMapInt2DJobs.StandardParallelChunkJob
+                    <ChunkMapInt2DJobs.GetChunksForPositionsJob, NativeArray<Vector2Int>>
+                    (positions, chunkSizeV2I, innerLoopBatchCount, allocation);
             else
-                returned = ChunkMapInt2DJobs.GetUniqueChunksForPositionsJobWrapped(positions, chunkSizeV2I, allocation);
+                returned = ChunkMapInt2DJobs.StandardChunkJob
+                    <ChunkMapInt2DJobs.GetUniqueChunksForPositionsJob, NativeList<Vector2Int>>
+                    (positions, chunkSizeV2I, allocation);
             return returned;
         }
         private static partial class ChunkMapInt2DJobs
         {
-            #region GetChunksForPositions
-            public static NativeArray<Vector2Int> GetChunksForPositionsJobWrapped(NativeArray<Vector2Int> positions, Vector2Int chunkSize, int innerLoopBatchCount, Allocator allocation)
-            {
-                NativeArray<Vector2Int> chunks = new NativeArray<Vector2Int>(positions.Length, allocation);
-
-                GetChunksForPositionsJob job = new GetChunksForPositionsJob()
-                {
-                    positions = positions,
-                    chunks = chunks,
-                    chunkSize = chunkSize
-                };
-                int batchCount = innerLoopBatchCount > 0 ? innerLoopBatchCount : positions.Length / 10;
-                if (batchCount == 0)
-                    batchCount = 1;
-                JobHandle jobHandle = job.Schedule(positions.Length, batchCount);
-                jobHandle.Complete();
-                return chunks;
-            }
-
             [BurstCompile]
-            struct GetChunksForPositionsJob : IJobParallelFor
+            public struct GetChunksForPositionsJob : IJobParallelFor, IChunkJob<NativeArray<Vector2Int>>
             {
-                public NativeArray<Vector2Int> positions;
-                public NativeArray<Vector2Int> chunks;
-                public Vector2Int chunkSize;
+                NativeArray<Vector2Int> positions;
+                NativeArray<Vector2Int> @return;
+                Vector2Int chunkSize;
+                public void Init(NativeArray<Vector2Int> @return, NativeArray<Vector2Int> positions, Vector2Int chunkSize)
+                {
+                    this.@return = @return;
+                    this.positions = positions;
+                    this.chunkSize = chunkSize;
+                }
+                public NativeArray<Vector2Int> GenerateOutput(int length, Allocator allocation) =>
+                    new NativeArray<Vector2Int>(positions.Length, allocation);
                 public void Execute(int index)
                 {
                     Vector2 vector = (Vector2)positions[index] / chunkSize;
-                    chunks[index] = new Vector2Int(Mathf.RoundToInt(vector.x), Mathf.RoundToInt(vector.y));
+                    @return[index] = new Vector2Int(Mathf.RoundToInt(vector.x), Mathf.RoundToInt(vector.y));
                 }
             }
-            #endregion
-            #region UniqueChunkPositions
-            public static NativeArray<Vector2Int> GetUniqueChunksForPositionsJobWrapped(NativeArray<Vector2Int> positions, Vector2Int chunkSize, Allocator allocation)
-            {
-                
-                NativeList<Vector2Int> chunks = new NativeList<Vector2Int>(Allocator.TempJob);
-                GetUniqueChunksForPositionsJob job = new GetUniqueChunksForPositionsJob()
-                {
-                    positions = positions,
-                    chunks = chunks,
-                    chunkSize = chunkSize
-                };
-                JobHandle jobHandle = job.Schedule();
-                jobHandle.Complete();
-                NativeArray<Vector2Int> n_chunks = new NativeArray<Vector2Int>(chunks, allocation);
-                chunks.Dispose();
-                return n_chunks;
-            }
             [BurstCompile]
-            struct GetUniqueChunksForPositionsJob : IJob
+            public struct GetUniqueChunksForPositionsJob : IJob, IChunkJob<NativeList<Vector2Int>>
             {
-                public NativeArray<Vector2Int> positions;
-                public NativeList<Vector2Int> chunks;
-                public Vector2Int chunkSize;
+                NativeArray<Vector2Int> positions;
+                NativeList<Vector2Int> @return;
+                Vector2Int chunkSize;
+                public NativeList<Vector2Int> GenerateOutput(int length, Allocator allocation) =>
+                    new NativeList<Vector2Int>(length, allocation);
+                public void Init(NativeList<Vector2Int> @return, NativeArray<Vector2Int> positions, Vector2Int chunkSize)
+                {
+                    this.positions = positions;
+                    this.chunkSize = chunkSize;
+                    this.@return = @return;
+                }
                 public void Execute()
                 {
                     for (int index = 0; index < positions.Length; index++)
                     {
                         Vector2 vector = (Vector2)positions[index] / chunkSize;
                         Vector2Int chunk = new Vector2Int(Mathf.RoundToInt(vector.x), Mathf.RoundToInt(vector.y));
-                        if (chunks.Contains(chunk))
+                        if (@return.Contains(chunk))
                             continue;
-                        chunks.Add(chunk);
+                        @return.Add(chunk);
                     }
                 }
             }
-            #endregion
         }
     }
 }
