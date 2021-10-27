@@ -4,10 +4,10 @@ namespace SoulShard.Utils
 {
     public partial class ChunkMapInt2D<T>
     {
-        interface IChunkJob<_T>
+        interface IChunkJob<_returnType> where _returnType: struct
         {
-            public void Init(_T @return, NativeArray<Vector2Int> positions, Vector2Int chunkSize);
-            public _T GenerateOutput(int length, Allocator allocation);
+            public void Init(_returnType @return, NativeArray<Vector2Int> positions, Vector2Int chunkSize);
+            public _returnType GenerateOutput(int length, Allocator allocation);
         }
     }
 }

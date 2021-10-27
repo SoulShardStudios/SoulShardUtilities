@@ -11,7 +11,7 @@ namespace SoulShard.Utils
             float _start = Time.realtimeSinceStartup;
             a?.Invoke();
             float _end = Time.realtimeSinceStartup;
-            return (_end- _start) * 1000f;
+            return (_end - _start) * 1000f;
         }
         public static void SpeedTestDebug(Action a, string taskName)
         {

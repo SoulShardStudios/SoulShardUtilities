@@ -23,21 +23,15 @@ namespace SoulShard.Utils
         // the actual conversions from unity path name to unity path
         public static string GetUnityPathFromString(string pathIndicator)
         {
-            switch (pathIndicator.ToLower())
+            return pathIndicator.ToLower() switch
             {
-                case "consolelog":
-                    return Application.consoleLogPath;
-                case "data":
-                    return Application.dataPath;
-                case "persistentdata":
-                    return Application.persistentDataPath;
-                case "streamingassets":
-                    return Application.streamingAssetsPath;
-                case "temporarycache":
-                    return Application.temporaryCachePath;
-                default:
-                    return "";
-            }
+                "consolelog" => Application.consoleLogPath,
+                "data" => Application.dataPath,
+                "persistentdata" => Application.persistentDataPath,
+                "streamingassets" => Application.streamingAssetsPath,
+                "temporarycache" => Application.temporaryCachePath,
+                _ => "",
+            };
         }
         #endregion
         #region DirectoryManagement

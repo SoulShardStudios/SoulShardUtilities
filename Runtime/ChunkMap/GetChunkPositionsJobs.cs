@@ -18,16 +18,16 @@ namespace SoulShard.Utils
         }
         public NativeArray<Vector2Int> GetChunksForPositionsJob(NativeArray<Vector2Int> positions, int innerLoopBatchCount = -1, Allocator allocation = Allocator.TempJob, bool unique = false)
         {
-            NativeArray<Vector2Int> returned;
+            NativeArray<Vector2Int> @return;
             if (!unique)
-                returned = ChunkMapInt2DJobs.StandardParallelChunkJob
+                @return = ChunkMapInt2DJobs.StandardParallelChunkJob
                     <ChunkMapInt2DJobs.GetChunksForPositionsJob, NativeArray<Vector2Int>>
                     (positions, chunkSizeV2I, innerLoopBatchCount, allocation);
             else
-                returned = ChunkMapInt2DJobs.StandardChunkJob
+                @return = ChunkMapInt2DJobs.StandardChunkJob
                     <ChunkMapInt2DJobs.GetUniqueChunksForPositionsJob, NativeList<Vector2Int>>
                     (positions, chunkSizeV2I, allocation);
-            return returned;
+            return @return;
         }
         private static partial class ChunkMapInt2DJobs
         {

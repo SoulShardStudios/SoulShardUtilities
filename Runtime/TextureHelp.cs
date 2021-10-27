@@ -7,21 +7,21 @@ namespace SoulShard.Utils
         public static Texture2D ConvertTexture2DFormat(Texture2D tex, TextureFormat format, bool mipChain)
         {
             //Create new empty Texture
-            Texture2D newTex = new Texture2D(tex.width, tex.height, format, mipChain);
+            Texture2D @return = new Texture2D(tex.width, tex.height, format, mipChain);
             //Copy old texture pixels into new one
-            newTex.SetPixels(tex.GetPixels());
+            @return.SetPixels(tex.GetPixels());
             //Apply
-            newTex.Apply();
-            return newTex;
+            @return.Apply();
+            return @return;
         }
         // generates a completely empty texture according to the color specified
         public static Texture2D GenerateEmptyTexture(int size, Color color, TextureFormat format = TextureFormat.RGBA32, bool mipChain = true)
         {
-            Texture2D emptyTexture = new Texture2D(size, size, format, mipChain);
-            emptyTexture.SetPixels(0, 0, size, size,
+            Texture2D @return = new Texture2D(size, size, format, mipChain);
+            @return.SetPixels(0, 0, size, size,
                 Methods.GenerateNewArray(size * size, color));
-            emptyTexture.Apply();
-            return emptyTexture;
+            @return.Apply();
+            return @return;
         }
     }
 }
