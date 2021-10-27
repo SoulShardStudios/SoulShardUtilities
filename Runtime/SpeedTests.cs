@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 using UnityEngine;
 using System;
 namespace SoulShard.Utils
@@ -42,4 +41,3 @@ namespace SoulShard.Utils
 
     }
 }
-#endif
