@@ -7,13 +7,6 @@ namespace SoulShard.Utils
     {
         private static partial class ChunkMapInt2DJobs
         {
-            static int GetBatchAmount(int size, int partitions, int manualPartition)
-            {
-                int batchCount = manualPartition > 0 ? manualPartition : size / partitions;
-                if (batchCount == 0)
-                    batchCount = 1;
-                return batchCount;
-            }
             public static _jobOutputType StandardParallelChunkJob
                 <_jobType, _jobOutputType>
                 (NativeArray<Vector2Int> positions, Vector2Int chunkSize, int innerLoopBatchCount, Allocator allocation)
@@ -23,7 +16,7 @@ namespace SoulShard.Utils
                 _jobType job = new _jobType();
                 _jobOutputType @return = job.GenerateOutput(positions.Length, allocation);
                 job.Init(@return, positions, chunkSize);
-                JobHandle jobHandle = job.Schedule(positions.Length, GetBatchAmount(positions.Length, 10, innerLoopBatchCount));
+                JobHandle jobHandle = job.Schedule(positions.Length, JobHelper.GetBatchAmount(positions.Length, 10, innerLoopBatchCount));
                 jobHandle.Complete();
                 return @return;
             }
