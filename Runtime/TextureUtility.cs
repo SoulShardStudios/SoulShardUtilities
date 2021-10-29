@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace SoulShard.Utils
 {
-    public static class TextureHelp
+    public static class TextureUtility
     {
         public static void ConvertTexture2DFormat(ref Texture2D tex, TextureFormat format, bool mipChain) => tex = ConvertTexture2DFormat(tex, format, mipChain);
         public static Texture2D ConvertTexture2DFormat(Texture2D tex, TextureFormat format, bool mipChain)
@@ -19,7 +19,7 @@ namespace SoulShard.Utils
         {
             Texture2D @return = new Texture2D(size, size, format, mipChain);
             @return.SetPixels(0, 0, size, size,
-                Methods.GenerateNewArray(size * size, color));
+                General.GenerateNewArray(size * size, color));
             @return.Apply();
             return @return;
         }

@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace SoulShard.Utils
 {
-    public static class GizmosHelp
+    public static class GizmosUtility
     {
         public static void DrawRect(Rect rect, int PPU, Vector2 position)
         {

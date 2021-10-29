@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 namespace SoulShard.Utils
 {
-    public static class FileSystemHelper
+    public static class FileSystemUtility
     {
         #region PathManagement
         // turns stuff like <persistentdata>/directory/file.fil and turns it into the actual directory for the persistent data path plus whatever you added on
@@ -111,7 +111,7 @@ namespace SoulShard.Utils
             byte[] fileData = File.ReadAllBytes(filePath);
             Texture2D tex = new Texture2D(2, 2);
             tex.LoadImage(fileData);
-            TextureHelp.ConvertTexture2DFormat(ref tex, format, mipChain);
+            TextureUtility.ConvertTexture2DFormat(ref tex, format, mipChain);
             return tex;
         }
         public static string LoadText(string filePath) => LoadTextRawPath(ParsePath(filePath));

@@ -16,7 +16,7 @@ namespace SoulShard.Utils
                 _jobType job = new _jobType();
                 _jobOutputType @return = job.GenerateOutput(positions.Length, allocation);
                 job.Init(@return, positions, chunkSize);
-                JobHandle jobHandle = job.Schedule(positions.Length, JobHelper.GetBatchAmount(positions.Length, 10, innerLoopBatchCount));
+                JobHandle jobHandle = job.Schedule(positions.Length, JobUtility.GetBatchAmount(positions.Length, 10, innerLoopBatchCount));
                 jobHandle.Complete();
                 return @return;
             }

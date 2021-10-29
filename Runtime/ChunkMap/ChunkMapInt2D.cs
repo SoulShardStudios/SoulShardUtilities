@@ -40,7 +40,7 @@ namespace SoulShard.Utils
             if (!drawChunkBorders)
                 return;
             foreach (KeyValuePair<Vector2Int, T> k in chunks)
-                GizmosHelp.DrawRect(new Rect(k.Value.transform.position, chunkSizeV2I), PPU, k.Value.gameObject.transform.position);
+                GizmosUtility.DrawRect(new Rect(k.Value.transform.position, chunkSizeV2I), PPU, k.Value.gameObject.transform.position);
         }
         // gets a specific chunk. this is needed to make sure my idiot self doesn't cause a keynotfoundexception when acessing the dict
         public T GetChunk(Vector2Int position)

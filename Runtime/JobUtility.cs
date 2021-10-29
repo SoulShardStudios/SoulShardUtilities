@@ -1,6 +1,6 @@
 namespace SoulShard.Utils
 {
-    public static class JobHelper
+    public static class JobUtility
     {
         public static int GetBatchAmount(int size, int partitions, int manualPartition)
         {

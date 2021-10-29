@@ -2,7 +2,7 @@
 #pragma warning disable
 namespace SoulShard.Utils
 {
-    public static class Methods
+    public static class General
     {
         // gets the proper texture2d from a spritesheet or regular sprite
         public static Texture2D GetTextureFromSprite(Sprite Sprite)
