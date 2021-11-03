@@ -17,5 +17,12 @@ namespace SoulShard.Utils
                 mod += m;
             return mod;
         }
+        public static float PositiveMod(float value, float m)
+        {
+            float mod = value % m;
+            if (mod < 0)
+                mod += m;
+            return mod;
+        }
     }
 }

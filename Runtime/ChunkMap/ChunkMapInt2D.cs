@@ -15,8 +15,8 @@ namespace SoulShard.Utils
         public Vector2Int chunkSizeV2I { get => new Vector2Int((int)chunkSize, (int)chunkSize); }
         #endregion
         #region ChunkPosConversion
-        public Vector2Int GetChunkPosFromWorldPos(Vector2Int position) => VectorMath.RoundVector2((Vector2)position / chunkSizeV2I);
-        public Vector2Int GetPositionWithinChunk(Vector2Int position) => VectorMath.ModVector2(position, (int)chunkSize) + ((chunkSizeV2I / 2));
+        public Vector2Int GetChunkPosFromWorldPos(Vector2Int position) => VectorMath.RoundVector((Vector2)position / chunkSizeV2I);
+        public Vector2Int GetPositionWithinChunk(Vector2Int position) => VectorMath.ModVector(position, (int)chunkSize) + ((chunkSizeV2I / 2));
         #endregion
         #region Constructors
         public ChunkMapInt2D(Color chunkBorderColor, uint chunkSize = 1, bool drawChunkBorders = true)
