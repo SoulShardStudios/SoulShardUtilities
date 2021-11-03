@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 namespace SoulShard.Utils
 {
     public class Timer
@@ -17,7 +18,7 @@ namespace SoulShard.Utils
         // handles the incrementation of the timer in real time (run this in an update loop)
         public void HandleTimerUnscaled()
         {
-            _currentCooldown -= UnityEngine.Time.unscaledDeltaTime;
+            _currentCooldown -= Time.unscaledDeltaTime;
             if (_currentCooldown <= 0 && !_done)
             {
                 OnDone?.Invoke();
@@ -27,7 +28,7 @@ namespace SoulShard.Utils
         // handles the incrementation of the timer in scald in game time (run this in an update loop)
         public void HandleTimerScaled()
         {
-            _currentCooldown -= UnityEngine.Time.deltaTime;
+            _currentCooldown -= Time.deltaTime;
             if (_currentCooldown <= 0 && !_done)
             {
                 OnDone?.Invoke();

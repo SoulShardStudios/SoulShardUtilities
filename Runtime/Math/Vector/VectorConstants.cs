@@ -2,7 +2,7 @@
 namespace SoulShard.Utils
 {
     // a collection of general vector constants.
-    public static class VectorConstants
+    public struct VectorConstants
     {
         #region Direction Collections
         public static readonly Vector2[] CardianlsVf = { Vector2Int.down, Vector2Int.up, Vector2Int.left, Vector2Int.right };

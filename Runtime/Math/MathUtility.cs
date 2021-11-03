@@ -1,7 +1,6 @@
-using UnityEngine;
 namespace SoulShard.Utils
 {
-    public class MathUtility : MonoBehaviour
+    public struct MathUtility
     {
         public static uint PositiveMod(int value, uint m)
         {

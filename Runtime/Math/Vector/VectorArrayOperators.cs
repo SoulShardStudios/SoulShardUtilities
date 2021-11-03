@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 namespace SoulShard.Utils
 {
-    public static partial class VectorMath
+    public partial struct VectorMath
     {
         #region VectorArrayOperations
         // translates every vector in an array by the given vector

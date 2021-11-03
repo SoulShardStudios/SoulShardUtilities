@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace SoulShard.Utils
 {
-    public static partial class VectorMath
+    public partial struct VectorMath
     {
         #region Clamp
         #region Floats

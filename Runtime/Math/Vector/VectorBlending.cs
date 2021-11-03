@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace SoulShard.Utils
 {
-    public static partial class VectorMath
+    public partial struct VectorMath
     {
         public static void BlendVector2(Vector2[] blendTo, ref Vector2 toBlend) => toBlend = BlendVector2(blendTo, toBlend);
         public static Vector2 BlendVector2(Vector2[] blendTo, Vector2 toBlend)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SoulShard.Utils;
 // renders a rasterized line according to bresenhams line algorithm
-public static class LineRenderer
+public struct LineRenderer
 {
 
     //source: http://ericw.ca/notes/bresenhams-line-algorithm-in-csharp.html
