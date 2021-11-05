@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace SoulShard.Utils
 {
-    public struct ColorUtility
+    public struct _ColorUtility
     {
         // just converts a color32 array to colors array, or vice versa
         public static void ConvertColorArrToColor32Arr(ref Color32[] colors, Color[] oldColors) =>
