@@ -16,6 +16,10 @@ namespace SoulShard.Utils
         public static readonly Vector2[] CardinalsAndDiagonalsVf = { Vector2.down, Vector2.up, Vector2.left, Vector2.right, new Vector2(-0.75f, -0.75f), new Vector2(-0.75f, 0.75f), new Vector2(0.75f, -0.75f), new Vector2(0.75f, 0.75f) };
         public static readonly Vector2[] CardinalsAndDiagonalsZeroVf = { Vector2.down, Vector2.up, Vector2.left, Vector2.right, new Vector2(-0.75f, -0.75f), new Vector2(-0.75f, 0.75f), new Vector2(0.75f, -0.75f), new Vector2(0.75f, 0.75f), Vector2.zero };
         #endregion
-        public static readonly Vector2[] DefaultUV = { new Vector2(0, 0), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0) };
+        #region QuadInfo
+        public static readonly Vector2[] QuadUV = { new Vector2(0, 0), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0) };
+        public static readonly Vector3[] QuadVerts = { new Vector3(0, 1), new Vector3(1, 1), new Vector3(0, 0), new Vector3(1, 0) };
+        public static readonly int[] QuadIndicies = { 0, 1, 2, 2, 1, 3 };
+        #endregion
     }
 }
