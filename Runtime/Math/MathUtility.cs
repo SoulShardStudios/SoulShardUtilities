@@ -1,6 +1,6 @@
 namespace SoulShard.Utils
 {
-    public struct MathUtility
+    public partial struct MathUtility
     {
         public static uint PositiveMod(int value, uint m)
         {
