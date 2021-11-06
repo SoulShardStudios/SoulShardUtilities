@@ -232,5 +232,13 @@ namespace SoulShard.Utils
         }
         #endregion
         #endregion
+        // creates a boundsint out of a start and end coordinate (ask @lubba64#5426 for why this is used)
+        public static BoundsInt CreateBoundsInt(Vector3Int start, Vector3Int end)
+        {
+            Vector3Int realStart = new Vector3Int(start.x < end.x ? start.x : end.x, start.y < end.y ? start.y : end.y, 0);
+            Vector3Int realEnd = new Vector3Int(start.x > end.x ? start.x : end.x, start.y > end.y ? start.y : end.y, 0);
+            Vector3Int size = realEnd - realStart + new Vector3Int(0, 0, 1);
+            return new BoundsInt(realStart, size);
+        }
     }
 }

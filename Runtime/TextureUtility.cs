@@ -19,9 +19,23 @@ namespace SoulShard.Utils
         {
             Texture2D @return = new Texture2D(size, size, format, mipChain);
             @return.SetPixels(0, 0, size, size,
-                General.GenerateNewArray(size * size, color));
+                CollectionUtility.GenerateNewArray(size * size, color));
             @return.Apply();
             return @return;
+        }
+        // gets the proper texture2d from a spritesheet or regular sprite
+        public static Texture2D GetTextureFromSprite(Sprite Sprite)
+        {
+            if (Sprite != null)
+            {
+                var @return = new Texture2D((int)Sprite.textureRect.width, (int)Sprite.textureRect.height);
+                var pixels = Sprite.texture.GetPixels((int)Sprite.textureRect.x, (int)Sprite.textureRect.y, (int)Sprite.textureRect.width, (int)Sprite.textureRect.height);
+                @return.SetPixels(pixels);
+                @return.Apply();
+                @return.name = Sprite.name;
+                return @return;
+            }
+            return null;
         }
     }
 }
