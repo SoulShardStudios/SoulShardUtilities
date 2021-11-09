@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-namespace Soulshard.Utils
+namespace SoulShard.Utils
 {
     /// <summary>
     /// A monobehavior wrapping audio manager play and stop commands for the convenience of UI access.

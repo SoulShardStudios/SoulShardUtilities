@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-namespace Soulshard.Utils
+namespace SoulShard.Utils
 {
     /// <summary>
     /// ScriptableObject that contains the information to play a possibly random sound with custom pitch, volume, e.t.c.

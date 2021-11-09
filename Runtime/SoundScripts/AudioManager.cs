@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
-namespace Soulshard.Utils
+namespace SoulShard.Utils
 {
     /// <summary>
     /// A singleton responsible for allowing any script to play or stop specfic SoundBytes.

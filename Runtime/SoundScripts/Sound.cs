@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace Soulshard.Utils
+namespace SoulShard.Utils
 {
     /// <summary>
     /// stores a sound and some extra associated data for use in SoundBytes
