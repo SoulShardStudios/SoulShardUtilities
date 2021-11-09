@@ -1,5 +1,8 @@
 namespace SoulShard.Utils
 {
+    /// <summary>
+    /// provides multiple basic math functions, not included in UnityEngine.mathf
+    /// </summary>
     public partial struct MathUtility
     {
         public static uint PositiveMod(int value, uint m)
