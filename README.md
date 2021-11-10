@@ -3,6 +3,7 @@ A General Unity Utilities Package, just clone the repository into a unity projec
 
 Includes alot of functionality:
  - Various Vector Math Helper Functions
+ - A basic sound manager
  - General Timer Class
  - More Gizmos Functionality
  - File System Management
