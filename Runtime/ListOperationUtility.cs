@@ -1,9 +1,19 @@
 ﻿using UnityEngine;
 namespace SoulShard.Utils
 {
+    /// <summary>
+    /// contains some basic functions to generate and manager collections
+    /// </summary>
     public static class CollectionUtility
     {
-        // returns a new 2d array, initialized with a default value.
+        /// <summary>
+        /// generates a new 2d array with a default value
+        /// </summary>
+        /// <typeparam name="T">the type of the collection</typeparam>
+        /// <param name="xLength">the x length of the array</param>
+        /// <param name="yLength">the y length of the array</param>
+        /// <param name="defaultValue">the default value for the array</param>
+        /// <returns>the new collection</returns>
         public static T[,] GenerateNew2dArray<T>(int xLength, int yLength, T defaultValue) where T : new()
         {
             T[,] @return = new T[xLength, yLength];
@@ -16,10 +26,13 @@ namespace SoulShard.Utils
             }
             return @return;
         }
-
-        // generates a new 2d array.
-        public static T[,] GenerateNew2dArray<T>(int xLength, int yLength) => new T[xLength, yLength];
-        // generates a new array with a default value
+        /// <summary>
+        /// generates a new array with a default value
+        /// </summary>
+        /// <typeparam name="T">the type of the collection</typeparam>
+        /// <param name="length">the length of the new collection</param>
+        /// <param name="defaultValue">the default value of the collection</param>
+        /// <returns>the new collection</returns>
         public static T[] GenerateNewArray<T>(int length, T defaultValue)
         {
             T[] @return = new T[length];
@@ -27,7 +40,12 @@ namespace SoulShard.Utils
                 @return[i] = defaultValue;
             return @return;
         }
-        // gets a specific component from every gameobject in the list, and returns a list of the components.
+        /// <summary>
+        /// gets a specific component from every gameobject in the list, and returns a list of the components.
+        /// </summary>
+        /// <typeparam name="T">the component to get from every object</typeparam>
+        /// <param name="toGetComponentFrom">the array to get the components from</param>
+        /// <returns>the collection of monobehaviors</returns>
         public static T[] GetComponentFromGameObjectList<T>(GameObject[] toGetComponentFrom) where T : MonoBehaviour
         {
             T[] @return = new T[toGetComponentFrom.Length];
@@ -35,7 +53,12 @@ namespace SoulShard.Utils
                 @return[i] = toGetComponentFrom[i].GetComponent<T>();
             return @return;
         }
-        // takes in a boolean list and checks if all the values are the same
+        /// <summary>
+        /// takes in a boolean list and checks if all the values are the same
+        /// </summary>
+        /// <typeparam name="T">the type of the collection</typeparam>
+        /// <param name="list">the collection to compare</param>
+        /// <returns>whether the list contains all of the same values</returns>
         public static bool? ListIsRepeatedValues<T>(T[] list) where T: System.IEquatable<T>
         {
             if (list.Length == 0)

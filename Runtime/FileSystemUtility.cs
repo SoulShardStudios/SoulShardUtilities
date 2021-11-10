@@ -3,11 +3,17 @@ using System.IO;
 using System.Collections.Generic;
 namespace SoulShard.Utils
 {
+    /// <summary>
+    /// stores various basic methods for managing a filesystem
+    /// </summary>
     public static class FileSystemUtility
     {
         #region PathManagement
-        // turns stuff like <persistentdata>/directory/file.fil and turns it into the actual directory for the persistent data path plus whatever you added on
-        // this is useful for serializing these paths in the inspector by creating a shorthand for these variables.
+        /// <summary>
+        /// turns stuff like <persistentdata>/directory/file.fil and turns it into the actual directory for the persistent data path plus whatever you added on. this is useful for serialising file paths
+        /// </summary>
+        /// <param name="path">the path to parse</param>
+        /// <returns>the parsed path</returns>
         public static string ParsePath(string path)
         {
             if (path[0] != '<')
@@ -20,7 +26,11 @@ namespace SoulShard.Utils
             }
             return "";
         }
-        // the actual conversions from unity path name to unity path
+        /// <summary>
+        /// the actual conversions from unity path name to unity path
+        /// </summary>
+        /// <param name="pathIndicator">the indicator for a unity path name</param>
+        /// <returns>the unity path for the given indicator</returns>
         public static string GetUnityPathFromString(string pathIndicator)
         {
             return pathIndicator.ToLower() switch
@@ -35,27 +45,48 @@ namespace SoulShard.Utils
         }
         #endregion
         #region DirectoryManagement
+        /// <summary>
+        /// creates a directory
+        /// </summary>
+        /// <param name="path">the path to perform this operation with</param>
         public static void CreateDir(string path)
         {
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
         }
+        /// <summary>
+        /// deletes all folders from a given directory
+        /// </summary>
+        /// <param name="path">the path to perform this operation with</param>
         public static void DeleteAllFoldersInDirectory(string path)
         {
             DirectoryInfo di = new DirectoryInfo(path);
             foreach (DirectoryInfo dir in di.GetDirectories())
                 dir.Delete(true);
         }
+        /// <summary>
+        /// deletes all contents (files and folders from a given directory
+        /// </summary>
+        /// <param name="path">the path to perform this operation with</param>
         public static void DeleteAllContentsInDirectory(string path)
         {
             DeleteAllFilesInDirectory(path);
             DeleteAllFoldersInDirectory(path);
         }
+        /// <summary>
+        /// deletes a folder at a given path
+        /// </summary>
+        /// <param name="path">the path to perform this operation with</param>
         public static void DeleteFolder(string path)
         {
             DirectoryInfo directory = new DirectoryInfo(path);
             directory.Delete();
         }
+        /// <summary>
+        /// gets all file names in a given directory
+        /// </summary>
+        /// <param name="directory">the directory to perform this operation with</param>
+        /// <returns> an array of file names</returns>
         public static string[] GetAllFileNamesInDirectory(string directory)
         {
             string[] paths = GetAllFilePathsInDirectory(directory);
@@ -66,6 +97,11 @@ namespace SoulShard.Utils
                 names[i] = GetFileName(paths[i]);
             return names;
         }
+        /// <summary>
+        /// gets all file paths in a given directory
+        /// </summary>
+        /// <param name="directory"></param>
+        /// <returns>an array of file paths</returns>
         public static string[] GetAllFilePathsInDirectory(string directory)
         {
             List<string> paths = new List<string>(0);
@@ -75,26 +111,54 @@ namespace SoulShard.Utils
                 paths.Add(path);
             return paths.ToArray();
         }
-        public static void DeleteAllFilesInDirectory(string path)
+        /// <summary>
+        /// deletes all files in a given directory
+        /// </summary>
+        /// <param name="directory">the directory to perform this operation on</param>
+        public static void DeleteAllFilesInDirectory(string directory)
         {
-            DirectoryInfo di = new DirectoryInfo(path);
+            DirectoryInfo di = new DirectoryInfo(directory);
             foreach (FileInfo file in di.GetFiles())
                 file.Delete();
         }
         #endregion
         #region FileManagement
+        /// <summary>
+        /// makes a file at the given path with the given bytes
+        /// </summary>
+        /// <param name="path">the path to perform this operation with</param>
+        /// <param name="bytes">the bytes to write to the file</param>
         public static void MakeFile(string path, byte[] bytes) => File.WriteAllBytes(path, bytes);
+        /// <summary>
+        /// deletes a file at a given path
+        /// </summary>
+        /// <param name="path">the path to perform this operation on</param>
         public static void DeleteFile(string path)
         {
             FileInfo file = new FileInfo(path);
             file.Delete();
         }
+        /// <summary>
+        /// gets the file name in a given path
+        /// </summary>
+        /// <param name="path">the path to perform this operation with</param>
+        /// <returns>the name of the file</returns>
         public static string GetFileName(string path) => Path.GetFileName(path);
+        /// <summary>
+        /// gets the file extension in a given path 
+        /// </summary>
+        /// <param name="path">the path to perform this operation with</param>
+        /// <returns>the file extension</returns>
         public static string GetFileExt(string path)
         {
             FileInfo fi = new FileInfo(path);
             return fi.Extension;
         }
+        /// <summary>
+        /// checks if a file at the given path is readonly
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static bool FileIsReadonly(string path)
         {
             FileInfo fi = new FileInfo(path);
@@ -102,24 +166,47 @@ namespace SoulShard.Utils
         }
         #endregion
         #region AssetLoading
-        // Original Source: https://gist.github.com/openroomxyz
-        public static Texture2D LoadTexture2D(string filePath, TextureFormat format, bool mipChain) => LoadTexture2DRawPath(ParsePath(filePath), format, mipChain);
-        public static Texture2D LoadTexture2DRawPath(string filePath, TextureFormat format, bool mipChain)
+        /// <summary>
+        /// loads a Texture2D from a given path
+        /// </summary>
+        /// <param name="path">the path to perform this operation with</param>
+        /// <param name="format">the format to set to the imported texture</param>
+        /// <param name="mipChain">the mipchain value to set to the imported texture</param>
+        /// <returns>the imported Texture2D</returns>
+        public static Texture2D LoadTexture2D(string path, TextureFormat format, bool mipChain) => LoadTexture2DRawPath(ParsePath(path), format, mipChain);
+        /// <summary>
+        /// loads a Texture2D from a given raw path with no path preprocessing
+        /// </summary>
+        /// <param name="path">the path to perform this operation with</param>
+        /// <param name="format">the format to set to the imported texture</param>
+        /// <param name="mipChain">the mipchain value to set to the imported texture</param>
+        /// <returns>the imported Texture2D</returns>
+        public static Texture2D LoadTexture2DRawPath(string path, TextureFormat format, bool mipChain)
         {
-            if (!File.Exists(filePath))
+            if (!File.Exists(path))
                 return null;
-            byte[] fileData = File.ReadAllBytes(filePath);
+            byte[] fileData = File.ReadAllBytes(path);
             Texture2D tex = new Texture2D(2, 2);
             tex.LoadImage(fileData);
             TextureUtility.ConvertTexture2DFormat(ref tex, format, mipChain);
             return tex;
         }
-        public static string LoadText(string filePath) => LoadTextRawPath(ParsePath(filePath));
-        public static string LoadTextRawPath(string filePath)
+        /// <summary>
+        /// loads the text from a given path
+        /// </summary>
+        /// <param name="path">the path to perform this operation with</param>
+        /// <returns>the contents of the file in text form</returns>
+        public static string LoadText(string path) => LoadTextRawPath(ParsePath(path));
+        /// <summary>
+        /// loads the text from a given path with no path preprocessing
+        /// </summary>
+        /// <param name="path">the path to perform this operation with</param>
+        /// <returns>the contents of the file in text form</returns>
+        public static string LoadTextRawPath(string path)
         {
-            if (!File.Exists(filePath))
+            if (!File.Exists(path))
                 return null;
-            return File.ReadAllText(filePath);
+            return File.ReadAllText(path);
         }
         #endregion
     }

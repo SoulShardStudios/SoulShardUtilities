@@ -2,24 +2,43 @@ using UnityEngine;
 using System;
 namespace SoulShard.Utils
 {
+    /// <summary>
+    /// tests for checking the speed of operations
+    /// </summary>
     public static class SpeedTests
     {
         public const string Units = "In Miliseconds";
+        /// <summary>
+        /// gets the difference between two points in time in Milliseconds
+        /// </summary>
+        /// <param name="a">ending time</param>
+        /// <param name="b">starting time</param>
+        /// <returns>the difference in milliseconds</returns>
         public static float GetDiffInMS(float a, float b) => Mathf.Abs(a - b) * 1000f;
         public static float SpeedTest(Action a)
         {
             float _start = Time.realtimeSinceStartup;
             a?.Invoke();
             float _end = Time.realtimeSinceStartup;
-            return (_end - _start) * 1000f;
+            return GetDiffInMS(_start,_end);
         }
+        /// <summary>
+        /// debugs the completion time and operation name for the given task
+        /// </summary>
+        /// <param name="a">the task to test for</param>
+        /// <param name="taskName">the task name</param>
         public static void SpeedTestDebug(Action a, string taskName)
         {
             float speedTestResults = SpeedTest(a);
             Debug.Log((taskName, Units, speedTestResults));
         }
 
-        public static float[] SpeedTestDebug(Action[] actions)
+        /// <summary>
+        /// gets the completion times for a list of actions
+        /// </summary>
+        /// <param name="actions">the list of actions to test for</param>
+        /// <returns>the list of completion times</returns>
+        public static float[] SpeedTest(Action[] actions)
         {
             float[] diffs = new float[actions.Length];
             for(int i = 0; i < actions.Length; i++)
@@ -30,9 +49,15 @@ namespace SoulShard.Utils
             }
             return diffs;
         }
+        /// <summary>
+        /// debugs the completion times for a list of actions
+        /// </summary>
+        /// <param name="actions">the list tasks to test for</param>
+        /// <param name="taskNames">the names of the tasks</param>
+        /// <param name="testName">the name of the entire test</param>
         public static void SpeedTestDebug(Action[] actions, string[] taskNames = null, string? testName = null)
         {
-            float[] speedTestResults = SpeedTestDebug(actions);
+            float[] speedTestResults = SpeedTest(actions);
             Debug.Log(testName != null ? testName : "Test");
             for(int i = 0; i < speedTestResults.Length; i++)
                 Debug.Log((taskNames?[i] ?? i.ToString(), Units, speedTestResults[i]));

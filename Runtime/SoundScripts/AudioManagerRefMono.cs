@@ -7,7 +7,15 @@ namespace SoulShard.Utils
     /// </summary>
     public class AudioManagerRefMono : MonoBehaviour
     {
+        /// <summary>
+        /// play a sound with a given name
+        /// </summary>
+        /// <param name="SoundName">the name of the sound to play</param>
         public void PlaySoundCommand(string SoundName) => AudioManager.S.PlaySound(SoundName);
+        /// <summary>
+        /// stop a specific sound from playing
+        /// </summary>
+        /// <param name="SoundName">the name of the sound to stop playing</param>
         public void StopSoundCommand(string SoundName) => AudioManager.S.StopSound(SoundName);
     }
 }

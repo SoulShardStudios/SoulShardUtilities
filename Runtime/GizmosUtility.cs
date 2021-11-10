@@ -1,8 +1,17 @@
 using UnityEngine;
 namespace SoulShard.Utils
 {
+    /// <summary>
+    /// a utility for drawing specifc things easier with gizmos
+    /// </summary>
     public static class GizmosUtility
     {
+        /// <summary>
+        /// draws a rect with some given parameters with unity gizmos
+        /// </summary>
+        /// <param name="rect">the rect to draw</param>
+        /// <param name="PPU">the pixels per unit of the rect</param>
+        /// <param name="position">the position of the rect</param>
         public static void DrawRect(Rect rect, int PPU, Vector2 position)
         {
             int scale = PPU;
@@ -23,6 +32,10 @@ namespace SoulShard.Utils
             Gizmos.DrawLine(positions[2], positions[3]);
             Gizmos.DrawLine(positions[3], positions[0]);
         }
+        /// <summary>
+        /// draws a rect with some given parameters with unity gizmos
+        /// </summary>
+        /// <param name="rect">the rect to draw</param>
         public static void DrawRect(Rect rect)
         {
             Vector2 start = rect.position;

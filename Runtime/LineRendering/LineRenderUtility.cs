@@ -2,11 +2,18 @@ using UnityEngine;
 using System.Linq;
 namespace SoulShard.Utils
 {
-    // renders a rasterized line according to bresenhams line algorithm
+    /// <summary>
+    /// struct responsible for containing the code that renders a rasterized line according to bresenhams line algorithm
+    /// Source for the algorithm: http://ericw.ca/notes/bresenhams-line-algorithm-in-csharp.html
+    /// </summary>
     public partial struct LineRenderUtility
     {
-
-        //source: http://ericw.ca/notes/bresenhams-line-algorithm-in-csharp.html
+        /// <summary>
+        /// the line renderer preprocessing used to generate the parameters for computing the line
+        /// </summary>
+        /// <param name="pos0">beginning position for a line</param>
+        /// <param name="pos1">ending position for the line</param>
+        /// <returns></returns>
         public static LineRenderVars LineRenderPreProcessing(Vector2Int pos0, Vector2Int pos1)
         {
             bool steep = Mathf.Abs(pos1.y - pos0.y) > Mathf.Abs(pos1.x - pos0.x);
@@ -49,6 +56,13 @@ namespace SoulShard.Utils
                 pos1 = pos1,
             };
         }
+        /// <summary>
+        /// interpolates a line with a given shape copied to every positon
+        /// </summary>
+        /// <param name="pos0">beginning position for the line</param>
+        /// <param name="pos1">ending position for the line</param>
+        /// <param name="shape">the shape that is copied over the line</param>
+        /// <returns>a rasterized line</returns>
         public static Vector2Int[] InterpolateLineWithShapeApplied(Vector2Int pos0, Vector2Int pos1, Vector2Int[] shape) => VectorMath.TranslateVectorsToArray(InterpolateLine(pos0, pos1).ToArray(), shape);
     }
 }

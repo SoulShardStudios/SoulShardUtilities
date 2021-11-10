@@ -1,7 +1,9 @@
 using UnityEngine;
 namespace SoulShard.Utils
 {
-    // a simple animator controller, this allows for better 2D animation control.
+    /// <summary>
+    /// a simple animator controller, this allows for better 2D animation control.
+    /// </summary>
     public class AnimatorController : MonoBehaviour
     {
         [SerializeField] protected Animator _animator;

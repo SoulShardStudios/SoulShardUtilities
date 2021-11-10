@@ -10,6 +10,9 @@ namespace SoulShard.Utils
     {
         #region Vars
         [SerializeField] AudioMixerGroup _mixer;
+        /// <summary>
+        /// the singleton value for this class
+        /// </summary>
         public static AudioManager S { get; private set; }
         public SoundByte[] _sounds;
         #endregion
@@ -20,6 +23,11 @@ namespace SoulShard.Utils
             foreach (SoundByte S in _sounds)
                 InitializeAudioClip(S);
         }
+        /// <summary>
+        /// converts a name to a given SoundByte stored in the AudioManagers
+        /// </summary>
+        /// <param name="SoundName">the name of the sound</param>
+        /// <returns>the associated SoundByte</returns>
         public SoundByte ConvertSoundNameToSound(string SoundName)
         {
             if (_sounds.Length == 0)
@@ -53,13 +61,29 @@ namespace SoulShard.Utils
         }
         #endregion
         #region Sound Playing methods
+        /// <summary>
+        /// Play a specific sound
+        /// </summary>
+        /// <param name="sound">the SoundByte to play</param>
         public void PlaySound(SoundByte sound)
         {
             RandomizeAudioClip(sound);
             sound?.Source.Play();
         }
+        /// <summary>
+        /// stop playing a specific sound if its currently playing
+        /// </summary>
+        /// <param name="sound">the SoundByte to stop playing</param>
         public void StopSound(SoundByte sound) => sound?.Source.Stop();
+        /// <summary>
+        /// stop playing a specific sound if its currently playing
+        /// </summary>
+        /// <param name="SoundName">the name of the sound to stop playing</param>
         public void StopSound(string SoundName) => StopSound(ConvertSoundNameToSound(SoundName));
+        /// <summary>
+        /// Play a specific sound
+        /// </summary>
+        /// <param name="SoundName">the name of the sound to play</param>
         public void PlaySound(string SoundName) => PlaySound(ConvertSoundNameToSound(SoundName));
         #endregion
         #endregion

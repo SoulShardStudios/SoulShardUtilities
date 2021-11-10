@@ -16,9 +16,6 @@ namespace SoulShard.Utils
         /// </summary>
         /// <param name="blendTo">The list of vectors that can be used in blending</param>
         /// <param name="toBlend">The vector to blend</param>
-        //
-        // summary:
-        //      blending is used for selecting the closest vector to the one to blend out of the blendTo List.
         public static Vector2 BlendVector2(Vector2[] blendTo, Vector2 toBlend)
         {
             float SmallestDist = 10;

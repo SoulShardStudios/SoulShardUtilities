@@ -11,7 +11,7 @@ namespace SoulShard.Utils
     // however its alot harder to do and this file shows that. some really jank code here
     // I could not find a clean way to not repeat alot of job code
     // I did as much as I could with scheduling but thats all.
-    public partial class ChunkMapInt2D<T>
+    public partial class ChunkMapInt2D<_chunkType>
     {
         interface IChunkJob<_returnType> where _returnType : struct
         {
@@ -19,12 +19,32 @@ namespace SoulShard.Utils
             public _returnType GenerateOutput(int length, Allocator allocation);
         }
         #region JobHandling
+        /// <summary>
+        /// converts an array of world positions to an array of inner chunk positions using unity jobs
+        /// </summary>
+        /// <param name="positions"> the positions to convert </param>
+        /// <returns> the converted inner chunk positions </returns>
         public Vector2Int[] ConvertToInnerChunkPositionsJob(Vector2Int[] positions) =>
             ConvertToSingleChunkPositionsJob<Jobs.InnerChunkPositionConversionJob>(positions);
+        /// <summary>
+        /// converts an array of world positions to an array of outer chunk positions using unity jobs
+        /// </summary>
+        /// <param name="positions"> the positions to convert </param>
+        /// <returns> the converted outer chunk positions </returns>
         public Vector2Int[] ConvertToOuterChunkPositionsJob(Vector2Int[] positions) =>
             ConvertToSingleChunkPositionsJob<Jobs.OuterChunkPositionConversionJob>(positions);
+        /// <summary>
+        /// converts an array of world positions to an array of unique outer chunk positions using unity jobs
+        /// </summary>
+        /// <param name="positions"> the positions to convert </param>
+        /// <returns> the converted outer chunk positions </returns>
         public Vector2Int[] ConvertToOuterChunkPositionsJobUnique(Vector2Int[] positions) =>
             ConvertToSingleChunkPositionsJob<Jobs.OuterChunkPositionConversionJob>(positions).Distinct().ToArray();
+        /// <summary>
+        /// converts an array of world positions to an array of chunk positions using unity jobs
+        /// </summary>
+        /// <param name="positions"> the positions to convert </param>
+        /// <returns> the converted chunk positions </returns>
         public ChunkPosition[] ConvertToChunkPositionsJob(Vector2Int[] positions)
         {
             ChunkPosition[] @return = new ChunkPosition[positions.Length];

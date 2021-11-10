@@ -6,6 +6,12 @@ namespace SoulShard.Utils
 {
     public partial struct LineRenderUtility
     {
+        /// <summary>
+        /// interpolates a rasterized line between point 0 and point 1 using bresenhams line algorithm
+        /// </summary>
+        /// <param name="pos0">the beginning position for the line</param>
+        /// <param name="pos1">the ending position for the line</param>
+        /// <returns>the list of points that make up the line </returns>
         public static Vector2Int[] InterpolateLine(Vector2Int pos0, Vector2Int pos1)
         {
             NativeList<Vector2Int> native = new NativeList<Vector2Int>(0, Allocator.TempJob); ;

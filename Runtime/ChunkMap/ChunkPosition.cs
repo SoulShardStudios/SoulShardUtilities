@@ -2,10 +2,18 @@ using UnityEngine;
 using System;
 namespace SoulShard.Utils
 {
-    // this stores the chunks world position, and the position within the chunk together.
+    /// <summary>
+    /// stores the chunks world position, and the position within the chunk together, as one datatype for faster processing.
+    /// </summary>
     public struct ChunkPosition : IEquatable<ChunkPosition>, IFormattable
     {
+        /// <summary>
+        /// outer position in the chunk
+        /// </summary>
         public Vector2Int outer;
+        /// <summary>
+        /// inner position in the chunk
+        /// </summary>
         public Vector2Int inner;
         public ChunkPosition(Vector2Int outer, Vector2Int inner)
         {

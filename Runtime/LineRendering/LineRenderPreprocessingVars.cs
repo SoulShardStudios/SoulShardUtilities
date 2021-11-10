@@ -1,6 +1,9 @@
 using UnityEngine;
 namespace SoulShard.Utils
 {
+    /// <summary>
+    /// a small struct for storing the parameters needed to compute the line algorithm
+    /// </summary>
     public struct LineRenderVars
     {
         // input positions
