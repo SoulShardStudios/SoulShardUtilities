@@ -22,6 +22,8 @@ namespace SoulShard.Utils
         }
         public SoundByte ConvertSoundNameToSound(string SoundName)
         {
+            if (_sounds.Length == 0)
+                return null;
             foreach (SoundByte S in _sounds)
                 if (S.Name.ToLower() == SoundName.ToLower() && S.name != "")
                     return S;
@@ -42,6 +44,8 @@ namespace SoulShard.Utils
         }
         void RandomizeAudioClip(SoundByte sound)
         {
+            if (sound == null)
+                return;
             int index = Random.Range(0, sound.possibleSounds.Length);
             sound.Source.clip = sound.possibleSounds[index].audio;
             sound.Source.volume = sound.possibleSounds[index].Volume;
@@ -52,9 +56,9 @@ namespace SoulShard.Utils
         public void PlaySound(SoundByte sound)
         {
             RandomizeAudioClip(sound);
-            sound.Source.Play();
+            sound?.Source.Play();
         }
-        public void StopSound(SoundByte sound) => sound.Source.Stop();
+        public void StopSound(SoundByte sound) => sound?.Source.Stop();
         public void StopSound(string SoundName) => StopSound(ConvertSoundNameToSound(SoundName));
         public void PlaySound(string SoundName) => PlaySound(ConvertSoundNameToSound(SoundName));
         #endregion
