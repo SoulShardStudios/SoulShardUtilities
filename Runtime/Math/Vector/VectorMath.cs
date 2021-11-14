@@ -331,7 +331,7 @@ namespace SoulShard.Utils
         }
         #endregion
         #endregion
-        #region PositiveModulo
+        #region Positive Modulo
         #region Floats
         /// <summary>
         /// applies the positive modulo operator on all components of a vector
@@ -401,6 +401,92 @@ namespace SoulShard.Utils
         }
         #endregion
         #endregion
+        #region Missing Basic Operators
+        #region Multiplication
+        /// <summary>
+        /// unity doesn't support this basic operation on this type for some reason, this is a non-native stand in
+        /// </summary>
+        /// <param name="input">the value to be multiplied</param>
+        /// <param name="multiplyBy">the value to multiply by</param>
+        /// <returns>the multiplied value</returns>
+        public static Vector3 MultiplyVector(Vector3 @input, Vector3 multiplyBy)
+        {
+            float x = @input.x * multiplyBy.x;
+            float y = @input.y * multiplyBy.y;
+            float z = @input.z * multiplyBy.z;
+            return new Vector3(x, y, z);
+        }
+        /// <summary>
+        /// unity doesn't support this basic operation on this type for some reason, this is a non-native stand in
+        /// </summary>
+        /// <param name="input">the value to be multiplied</param>
+        /// <param name="multiplyBy">the value to multiply by</param>
+        /// <returns>the multiplied value</returns>
+        public static Vector4 MultiplyVector(Vector4 @input, Vector4 multiplyBy)
+        {
+            float x = @input.x * multiplyBy.x;
+            float y = @input.y * multiplyBy.y;
+            float z = @input.z * multiplyBy.z;
+            float w = @input.w * multiplyBy.w;
+            return new Vector4(x, y, z, w);
+        }
+        #endregion
+        #region Division
+        /// <summary>
+        /// unity doesn't support this basic operation on this type for some reason, this is a non-native stand in
+        /// </summary>
+        /// <param name="input">the value to be divided</param>
+        /// <param name="divideBy">the value to divide by</param>
+        /// <returns>the divided value</returns>
+        public static Vector2Int DivideVector(Vector2Int @input, Vector2Int divideBy)
+        {
+            int x = @input.x / divideBy.x;
+            int y = @input.y / divideBy.y;
+            return new Vector2Int(x, y);
+        }
+        /// <summary>
+        /// unity doesn't support this basic operation on this type for some reason, this is a non-native stand in
+        /// </summary>
+        /// <param name="input">the value to be divided</param>
+        /// <param name="divideBy">the value to divide by</param>
+        /// <returns>the divided value</returns>
+        public static Vector3Int DivideVector(Vector3Int @input, Vector3Int divideBy)
+        {
+            int x = @input.x / divideBy.x;
+            int y = @input.y / divideBy.y;
+            int z = @input.z / divideBy.z;
+            return new Vector3Int(x, y, z);
+        }
+        /// <summary>
+        /// unity doesn't support this basic operation on this type for some reason, this is a non-native stand in
+        /// </summary>
+        /// <param name="input">the value to be divided</param>
+        /// <param name="divideBy">the value to divide by</param>
+        /// <returns>the divided value</returns>
+        public static Vector3 DivideVector(Vector3 @input, Vector3 divideBy)
+        {
+            float x = @input.x / divideBy.x;
+            float y = @input.y / divideBy.y;
+            float z = @input.z / divideBy.z;
+            return new Vector3(x, y, z);
+        }
+        /// <summary>
+        /// unity doesn't support this basic operation on this type for some reason, this is a non-native stand in
+        /// </summary>
+        /// <param name="input">the value to be divided</param>
+        /// <param name="divideBy">the value to divide by</param>
+        /// <returns>the divided value</returns>
+        public static Vector4 DivideVector(Vector4 @input, Vector4 divideBy)
+        {
+            float x = @input.x / divideBy.x;
+            float y = @input.y / divideBy.y;
+            float z = @input.z / divideBy.z;
+            float w = @input.w / divideBy.w;
+            return new Vector4(x, y, z, w);
+        }
+        #endregion
+        #endregion
+        #region Other
         /// <summary>
         /// creates a boundsint out of a start and end coordinate
         /// </summary>
@@ -414,5 +500,6 @@ namespace SoulShard.Utils
             Vector3Int size = realEnd - realStart + new Vector3Int(0, 0, 1);
             return new BoundsInt(realStart, size);
         }
+        #endregion
     }
 }

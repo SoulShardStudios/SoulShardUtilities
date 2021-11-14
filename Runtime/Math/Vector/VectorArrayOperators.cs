@@ -165,13 +165,13 @@ namespace SoulShard.Utils
         /// <param name="toBeMultiplied">the array to be multiplied</param>
         /// <param name="multiplyBy">the value to be multiplied</param>
         /// <returns>the multiplied array</returns>
-        public static Vector3[] MultiplyVectorArray(Vector3[] toBeMultiplied, float multiplyBy)
+        public static Vector3[] MultiplyVectorArray(Vector3[] toBeMultiplied, Vector3 multiplyBy)
         {
             Vector3[] @return = new Vector3[toBeMultiplied.Length];
             if (toBeMultiplied == null)
                 return null;
             for (int i = 0; i < toBeMultiplied.Length; i++)
-                @return[i] = toBeMultiplied[i] * multiplyBy;
+                @return[i] = MultiplyVector(toBeMultiplied[i], multiplyBy);
             return @return;
         }
         /// <summary>
@@ -180,13 +180,13 @@ namespace SoulShard.Utils
         /// <param name="toBeMultiplied">the array to be multiplied</param>
         /// <param name="multiplyBy">the value to be multiplied</param>
         /// <returns>the multiplied array</returns>
-        public static Vector4[] MultiplyVectorArray(Vector4[] toBeMultiplied, float multiplyBy)
+        public static Vector4[] MultiplyVectorArray(Vector4[] toBeMultiplied, Vector4 multiplyBy)
         {
             Vector4[] @return = new Vector4[toBeMultiplied.Length];
             if (toBeMultiplied == null)
                 return null;
             for (int i = 0; i < toBeMultiplied.Length; i++)
-                @return[i] = toBeMultiplied[i] * multiplyBy;
+                @return[i] = MultiplyVector(toBeMultiplied[i], multiplyBy);
             return @return;
         }
         #endregion
@@ -197,13 +197,13 @@ namespace SoulShard.Utils
         /// <param name="toBeDivided">the array to be divided</param>
         /// <param name="divideBy">the value to be divided</param>
         /// <returns>the divided array</returns>
-        public static Vector2Int[] DivideVectorArray(Vector2Int[] toBeDivided, int divideBy)
+        public static Vector2Int[] DivideVectorArray(Vector2Int[] toBeDivided, Vector2Int divideBy)
         {
             Vector2Int[] @return = new Vector2Int[toBeDivided.Length];
             if (toBeDivided == null)
                 return null;
             for (int i = 0; i < toBeDivided.Length; i++)
-                @return[i] = toBeDivided[i] / divideBy;
+                @return[i] = DivideVector(toBeDivided[i], divideBy);
             return @return;
         }
         /// <summary>
@@ -212,13 +212,13 @@ namespace SoulShard.Utils
         /// <param name="toBeDivided">the array to be divided</param>
         /// <param name="divideBy">the value to be divided</param>
         /// <returns>the divided array</returns>
-        public static Vector3Int[] DivideVectorArray(Vector3Int[] toBeDivided, int divideBy)
+        public static Vector3Int[] DivideVectorArray(Vector3Int[] toBeDivided, Vector3Int divideBy)
         {
             Vector3Int[] @return = new Vector3Int[toBeDivided.Length];
             if (toBeDivided == null)
                 return null;
             for (int i = 0; i < toBeDivided.Length; i++)
-                @return[i] = toBeDivided[i] / divideBy;
+                @return[i] = DivideVector(toBeDivided[i], divideBy);
             return @return;
         }
         /// <summary>
@@ -227,7 +227,7 @@ namespace SoulShard.Utils
         /// <param name="toBeDivided">the array to be divided</param>
         /// <param name="divideBy">the value to be divided</param>
         /// <returns>the divided array</returns>
-        public static Vector2[] DivideVectorArray(Vector2[] toBeDivided, float divideBy)
+        public static Vector2[] DivideVectorArray(Vector2[] toBeDivided, Vector2 divideBy)
         {
             Vector2[] @return = new Vector2[toBeDivided.Length];
             if (toBeDivided == null)
@@ -242,13 +242,13 @@ namespace SoulShard.Utils
         /// <param name="toBeDivided">the array to be divided</param>
         /// <param name="divideBy">the value to be divided</param>
         /// <returns>the divided array</returns>
-        public static Vector3[] DivideVectorArray(Vector3[] toBeDivided, float divideBy)
+        public static Vector3[] DivideVectorArray(Vector3[] toBeDivided, Vector3 divideBy)
         {
             Vector3[] @return = new Vector3[toBeDivided.Length];
             if (toBeDivided == null)
                 return null;
             for (int i = 0; i < toBeDivided.Length; i++)
-                @return[i] = toBeDivided[i] / divideBy;
+                @return[i] = DivideVector(toBeDivided[i], divideBy);
             return @return;
         }
         /// <summary>
@@ -257,13 +257,13 @@ namespace SoulShard.Utils
         /// <param name="toBeDivided">the array to be divided</param>
         /// <param name="divideBy">the value to be divided</param>
         /// <returns>the divided array</returns>
-        public static Vector4[] DivideVectorArray(Vector4[] toBeDivided, float divideBy)
+        public static Vector4[] DivideVectorArray(Vector4[] toBeDivided, Vector4 divideBy)
         {
             Vector4[] @return = new Vector4[toBeDivided.Length];
             if (toBeDivided == null)
                 return null;
             for (int i = 0; i < toBeDivided.Length; i++)
-                @return[i] = toBeDivided[i] / divideBy;
+                @return[i] = DivideVector(toBeDivided[i], divideBy);
             return @return;
         }
         #endregion
