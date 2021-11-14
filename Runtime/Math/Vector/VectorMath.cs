@@ -9,13 +9,28 @@ namespace SoulShard.Utils
     public partial struct VectorMath
     {
         #region Generics
+        #region With Operating Number
         #region Ints
+        /// <summary>
+        /// Applies an operation to all components of a vector
+        /// </summary>
+        /// <param name="input">the input value to apply the operation to</param>
+        /// <param name="operateWith">the value to apply the operation with</param>
+        /// <param name="operation">the operation to apply</param>
+        /// <returns>the modified vector</returns>
         public static Vector2Int VectorOperation(Vector2Int @input, Vector2Int operateWith, Func<int, int, int> operation)
         {
             int x = operation(@input.x, operateWith.x);
             int y = operation(@input.y, operateWith.y);
             return new Vector2Int(x, y);
         }
+        /// <summary>
+        /// Applies an operation to all components of a vector
+        /// </summary>
+        /// <param name="input">the input value to apply the operation to</param>
+        /// <param name="operateWith">the value to apply the operation with</param>
+        /// <param name="operation">the operation to apply</param>
+        /// <returns>the modified vector</returns>
         public static Vector3Int VectorOperation(Vector3Int @input, Vector3Int operateWith, Func<int, int, int> operation)
         {
             int x = operation(@input.x, operateWith.x);
@@ -25,12 +40,26 @@ namespace SoulShard.Utils
         }
         #endregion
         #region Floats
+        /// <summary>
+        /// Applies an operation to all components of a vector
+        /// </summary>
+        /// <param name="input">the input value to apply the operation to</param>
+        /// <param name="operateWith">the value to apply the operation with</param>
+        /// <param name="operation">the operation to apply</param>
+        /// <returns>the modified vector</returns>
         public static Vector2 VectorOperation(Vector2 @input, Vector2 operateWith, Func<float, float, float> operation)
         {
             float x = operation(@input.x, operateWith.x);
             float y = operation(@input.y, operateWith.y);
             return new Vector2(x, y);
         }
+        /// <summary>
+        /// Applies an operation to all components of a vector
+        /// </summary>
+        /// <param name="input">the input value to apply the operation to</param>
+        /// <param name="operateWith">the value to apply the operation with</param>
+        /// <param name="operation">the operation to apply</param>
+        /// <returns>the modified vector</returns>
         public static Vector3 VectorOperation(Vector3 @input, Vector3 operateWith, Func<float, float, float> operation)
         {
             float x = operation(@input.x, operateWith.x);
@@ -38,6 +67,13 @@ namespace SoulShard.Utils
             float z = operation(@input.z, operateWith.z);
             return new Vector3(x, y, z);
         }
+        /// <summary>
+        /// Applies an operation to all components of a vector
+        /// </summary>
+        /// <param name="input">the input value to apply the operation to</param>
+        /// <param name="operateWith">the value to apply the operation with</param>
+        /// <param name="operation">the operation to apply</param>
+        /// <returns>the modified vector</returns>
         public static Vector4 VectorOperation(Vector4 @input, Vector4 operateWith, Func<float, float, float> operation)
         {
             float x = operation(@input.x, operateWith.x);
@@ -46,6 +82,77 @@ namespace SoulShard.Utils
             float w = operation(@input.w, operateWith.w);
             return new Vector4(x, y, z, w);
         }
+        #endregion
+        #endregion
+        #region Without Operating Number
+        #region Ints
+        /// <summary>
+        /// Applies an operation to all components of a vector
+        /// </summary>
+        /// <param name="input">the input value to apply the operation to</param>
+        /// <param name="operation">the operation to apply</param>
+        /// <returns>the modified vector</returns>
+        public static Vector2Int VectorOperation(Vector2Int @input, Func<int, int> operation)
+        {
+            int x = operation(@input.x);
+            int y = operation(@input.y);
+            return new Vector2Int(x, y);
+        }
+        /// <summary>
+        /// Applies an operation to all components of a vector
+        /// </summary>
+        /// <param name="input">the input value to apply the operation to</param>
+        /// <param name="operation">the operation to apply</param>
+        /// <returns>the modified vector</returns>
+        public static Vector3Int VectorOperation(Vector3Int @input, Func<int, int> operation)
+        {
+            int x = operation(@input.x);
+            int y = operation(@input.y);
+            int z = operation(@input.z);
+            return new Vector3Int(x, y, z);
+        }
+        #endregion
+        #region Floats
+        /// <summary>
+        /// Applies an operation to all components of a vector
+        /// </summary>
+        /// <param name="input">the input value to apply the operation to</param>
+        /// <param name="operation">the operation to apply</param>
+        /// <returns>the modified vector</returns>
+        public static Vector2 VectorOperation(Vector2 @input, Func<float, float> operation)
+        {
+            float x = operation(@input.x);
+            float y = operation(@input.y);
+            return new Vector2(x, y);
+        }
+        /// <summary>
+        /// Applies an operation to all components of a vector
+        /// </summary>
+        /// <param name="input">the input value to apply the operation to</param>
+        /// <param name="operation">the operation to apply</param>
+        /// <returns>the modified vector</returns>
+        public static Vector3 VectorOperation(Vector3 @input, Func<float, float> operation)
+        {
+            float x = operation(@input.x);
+            float y = operation(@input.y);
+            float z = operation(@input.z);
+            return new Vector3(x, y, z);
+        }
+        /// <summary>
+        /// Applies an operation to all components of a vector
+        /// </summary>
+        /// <param name="input">the input value to apply the operation to</param>
+        /// <param name="operation">the operation to apply</param>
+        /// <returns>the modified vector</returns>
+        public static Vector4 VectorOperation(Vector4 @input, Func<float, float> operation)
+        {
+            float x = operation(@input.x);
+            float y = operation(@input.y);
+            float z = operation(@input.z);
+            float w = operation(@input.w);
+            return new Vector4(x, y, z, w);
+        }
+        #endregion
         #endregion
         #endregion
         #region Clamp
@@ -123,6 +230,7 @@ namespace SoulShard.Utils
         }
         #endregion
         #endregion
+        #region Rounders
         #region Round
         /// <summary>
         /// applies Mathf.Round() to all components of the desired vector
@@ -236,6 +344,7 @@ namespace SoulShard.Utils
             float w = Mathf.Floor(@input.w);
             return new Vector4(x, y, z, w);
         }
+        #endregion
         #endregion
         #region Absolute Value
         #region Floats
