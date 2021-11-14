@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -7,6 +8,46 @@ namespace SoulShard.Utils
     /// </summary>
     public partial struct VectorMath
     {
+        #region Generics
+        #region Ints
+        public static Vector2Int VectorOperation(Vector2Int @input, Vector2Int operateWith, Func<int, int, int> operation)
+        {
+            int x = operation(@input.x, operateWith.x);
+            int y = operation(@input.y, operateWith.y);
+            return new Vector2Int(x, y);
+        }
+        public static Vector3Int VectorOperation(Vector3Int @input, Vector3Int operateWith, Func<int, int, int> operation)
+        {
+            int x = operation(@input.x, operateWith.x);
+            int y = operation(@input.y, operateWith.y);
+            int z = operation(@input.z, operateWith.z);
+            return new Vector3Int(x, y, z);
+        }
+        #endregion
+        #region Floats
+        public static Vector2 VectorOperation(Vector2 @input, Vector2 operateWith, Func<float, float, float> operation)
+        {
+            float x = operation(@input.x, operateWith.x);
+            float y = operation(@input.y, operateWith.y);
+            return new Vector2(x, y);
+        }
+        public static Vector3 VectorOperation(Vector3 @input, Vector3 operateWith, Func<float, float, float> operation)
+        {
+            float x = operation(@input.x, operateWith.x);
+            float y = operation(@input.y, operateWith.y);
+            float z = operation(@input.z, operateWith.z);
+            return new Vector3(x, y, z);
+        }
+        public static Vector4 VectorOperation(Vector4 @input, Vector4 operateWith, Func<float, float, float> operation)
+        {
+            float x = operation(@input.x, operateWith.x);
+            float y = operation(@input.y, operateWith.y);
+            float z = operation(@input.z, operateWith.z);
+            float w = operation(@input.w, operateWith.w);
+            return new Vector4(x, y, z, w);
+        }
+        #endregion
+        #endregion
         #region Clamp
         #region Floats
         /// <summary>
