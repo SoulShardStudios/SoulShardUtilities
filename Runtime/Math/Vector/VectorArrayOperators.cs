@@ -113,5 +113,159 @@ namespace SoulShard.Utils
             return @return;
         }
         #endregion
+        #region MultiplyArray
+        /// <summary>
+        /// multiplies every vector in a vector array
+        /// </summary>
+        /// <param name="toBeMultiplied">the array to be multiplied</param>
+        /// <param name="multiplyBy">the value to be multiplied</param>
+        /// <returns>the multiplied array</returns>
+        public static Vector2Int[] MultiplyVectorArray(Vector2Int[] toBeMultiplied, Vector2Int multiplyBy)
+        {
+            Vector2Int[] @return = new Vector2Int[toBeMultiplied.Length];
+            if (toBeMultiplied == null)
+                return null;
+            for (int i = 0; i < toBeMultiplied.Length; i++)
+                @return[i] = toBeMultiplied[i] * multiplyBy;
+            return @return;
+        }
+        /// <summary>
+        /// multiplies every vector in a vector array
+        /// </summary>
+        /// <param name="toBeMultiplied">the array to be multiplied</param>
+        /// <param name="multiplyBy">the value to be multiplied</param>
+        /// <returns>the multiplied array</returns>
+        public static Vector3Int[] MultiplyVectorArray(Vector3Int[] toBeMultiplied, Vector3Int multiplyBy)
+        {
+            Vector3Int[] @return = new Vector3Int[toBeMultiplied.Length];
+            if (toBeMultiplied == null)
+                return null;
+            for (int i = 0; i < toBeMultiplied.Length; i++)
+                @return[i] = toBeMultiplied[i] * multiplyBy;
+            return @return;
+        }
+        /// <summary>
+        /// multiplies every vector in a vector array
+        /// </summary>
+        /// <param name="toBeMultiplied">the array to be multiplied</param>
+        /// <param name="multiplyBy">the value to be multiplied</param>
+        /// <returns>the multiplied array</returns>
+        public static Vector2[] MultiplyVectorArray(Vector2[] toBeMultiplied, Vector2 multiplyBy)
+        {
+            Vector2[] @return = new Vector2[toBeMultiplied.Length];
+            if (toBeMultiplied == null)
+                return null;
+            for (int i = 0; i < toBeMultiplied.Length; i++)
+                @return[i] = toBeMultiplied[i] * multiplyBy;
+            return @return;
+        }
+        /// <summary>
+        /// multiplies every vector in a vector array
+        /// </summary>
+        /// <param name="toBeMultiplied">the array to be multiplied</param>
+        /// <param name="multiplyBy">the value to be multiplied</param>
+        /// <returns>the multiplied array</returns>
+        public static Vector3[] MultiplyVectorArray(Vector3[] toBeMultiplied, float multiplyBy)
+        {
+            Vector3[] @return = new Vector3[toBeMultiplied.Length];
+            if (toBeMultiplied == null)
+                return null;
+            for (int i = 0; i < toBeMultiplied.Length; i++)
+                @return[i] = toBeMultiplied[i] * multiplyBy;
+            return @return;
+        }
+        /// <summary>
+        /// multiplies every vector in a vector array
+        /// </summary>
+        /// <param name="toBeMultiplied">the array to be multiplied</param>
+        /// <param name="multiplyBy">the value to be multiplied</param>
+        /// <returns>the multiplied array</returns>
+        public static Vector4[] MultiplyVectorArray(Vector4[] toBeMultiplied, float multiplyBy)
+        {
+            Vector4[] @return = new Vector4[toBeMultiplied.Length];
+            if (toBeMultiplied == null)
+                return null;
+            for (int i = 0; i < toBeMultiplied.Length; i++)
+                @return[i] = toBeMultiplied[i] * multiplyBy;
+            return @return;
+        }
+        #endregion
+        #region DivideVectorArray
+        /// <summary>
+        /// divides every vector in a vector array
+        /// </summary>
+        /// <param name="toBeDivided">the array to be divided</param>
+        /// <param name="divideBy">the value to be divided</param>
+        /// <returns>the divided array</returns>
+        public static Vector2Int[] DivideVectorArray(Vector2Int[] toBeDivided, int divideBy)
+        {
+            Vector2Int[] @return = new Vector2Int[toBeDivided.Length];
+            if (toBeDivided == null)
+                return null;
+            for (int i = 0; i < toBeDivided.Length; i++)
+                @return[i] = toBeDivided[i] / divideBy;
+            return @return;
+        }
+        /// <summary>
+        /// divides every vector in a vector array
+        /// </summary>
+        /// <param name="toBeDivided">the array to be divided</param>
+        /// <param name="divideBy">the value to be divided</param>
+        /// <returns>the divided array</returns>
+        public static Vector3Int[] DivideVectorArray(Vector3Int[] toBeDivided, int divideBy)
+        {
+            Vector3Int[] @return = new Vector3Int[toBeDivided.Length];
+            if (toBeDivided == null)
+                return null;
+            for (int i = 0; i < toBeDivided.Length; i++)
+                @return[i] = toBeDivided[i] / divideBy;
+            return @return;
+        }
+        /// <summary>
+        /// divides every vector in a vector array
+        /// </summary>
+        /// <param name="toBeDivided">the array to be divided</param>
+        /// <param name="divideBy">the value to be divided</param>
+        /// <returns>the divided array</returns>
+        public static Vector2[] DivideVectorArray(Vector2[] toBeDivided, float divideBy)
+        {
+            Vector2[] @return = new Vector2[toBeDivided.Length];
+            if (toBeDivided == null)
+                return null;
+            for (int i = 0; i < toBeDivided.Length; i++)
+                @return[i] = toBeDivided[i] / divideBy;
+            return @return;
+        }
+        /// <summary>
+        /// divides every vector in a vector array
+        /// </summary>
+        /// <param name="toBeDivided">the array to be divided</param>
+        /// <param name="divideBy">the value to be divided</param>
+        /// <returns>the divided array</returns>
+        public static Vector3[] DivideVectorArray(Vector3[] toBeDivided, float divideBy)
+        {
+            Vector3[] @return = new Vector3[toBeDivided.Length];
+            if (toBeDivided == null)
+                return null;
+            for (int i = 0; i < toBeDivided.Length; i++)
+                @return[i] = toBeDivided[i] / divideBy;
+            return @return;
+        }
+        /// <summary>
+        /// divides every vector in a vector array
+        /// </summary>
+        /// <param name="toBeDivided">the array to be divided</param>
+        /// <param name="divideBy">the value to be divided</param>
+        /// <returns>the divided array</returns>
+        public static Vector4[] DivideVectorArray(Vector4[] toBeDivided, float divideBy)
+        {
+            Vector4[] @return = new Vector4[toBeDivided.Length];
+            if (toBeDivided == null)
+                return null;
+            for (int i = 0; i < toBeDivided.Length; i++)
+                @return[i] = toBeDivided[i] / divideBy;
+            return @return;
+        }
+        #endregion
     }
 }
