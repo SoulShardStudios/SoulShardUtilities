@@ -5,7 +5,7 @@ namespace SoulShard.Utils
     /// <summary>
     /// this is an object that allows collision mesh data to be pushed to it and then rendered into a final mesh.
     /// </summary>
-    public struct NativeDynamicCollisionMesh
+    public struct NativeDynamicCollisionMesh: IDynamicCollisionMesh
     {
         public NativeList<Vector3> verticies;
         public NativeList<int> indicies;
