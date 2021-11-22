@@ -60,8 +60,9 @@ namespace SoulShard.Utils
         /// <param name="indicies">the indicies of the geometry</param>
         public void AddGeometry(Vector3[] verticies, int[] indicies)
         {
+            indicies = MathUtility.AddToList(indicies, previousVertsLength);
             JobUtility.AddToNativeList(this.verticies, verticies);
-            JobUtility.AddToNativeList(this.indicies, MathUtility.AddToList(indicies, previousVertsLength));
+            JobUtility.AddToNativeList(this.indicies, indicies);
             previousVertsLength = verticies.Length;
         }
         #endregion
@@ -69,9 +70,10 @@ namespace SoulShard.Utils
         /// generates the mesh for use
         /// </summary>
         /// <returns>the generated mesh</returns>
-        public Mesh Generate()
+        public Mesh Generate(string name)
         {
             Mesh Generated = new Mesh();
+            Generated.name = name;
             Generated.vertices = verticies.ToArray();
             Generated.triangles = indicies.ToArray();
             return Generated;

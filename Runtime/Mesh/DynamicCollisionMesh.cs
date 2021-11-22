@@ -45,9 +45,10 @@ namespace SoulShard.Utils
         /// generates the mesh for use
         /// </summary>
         /// <returns>the generated mesh</returns>
-        public Mesh Generate()
+        public Mesh Generate(string name)
         {
             Mesh Generated = new Mesh();
+            Generated.name = name;
             Generated.vertices = verticies.ToArray();
             Generated.triangles = indicies.ToArray();
             return Generated;
