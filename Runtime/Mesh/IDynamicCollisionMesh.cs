@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace SoulShard.Utils
 {
-    interface IDynamicCollisionMesh
+    public interface IDynamicCollisionMesh
     {
         public void Clear();
         public Mesh Generate();
