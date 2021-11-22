@@ -4,7 +4,7 @@ namespace SoulShard.Utils
     /// <summary>
     /// contains some basic functions to generate and manager collections
     /// </summary>
-    public static class CollectionUtility
+    public struct CollectionUtility
     {
         /// <summary>
         /// generates a new 2d array with a default value
