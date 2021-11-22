@@ -45,7 +45,7 @@ namespace SoulShard.Utils
         /// generates the mesh for use
         /// </summary>
         /// <returns>the generated mesh</returns>
-        public Mesh Generate(string name)
+        public Mesh Generate(string name = "")
         {
             Mesh Generated = new Mesh();
             Generated.name = name;
