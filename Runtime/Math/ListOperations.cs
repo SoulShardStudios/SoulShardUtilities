@@ -1,5 +1,5 @@
 using System;
-namespace SoulShard.Utils
+namespace SoulShard.Math
 {
     // this is just so that you can easily apply operations to an entire list without having to write a few lines of code each time
     // C# doesnt support generics for operators yet so this cannot sadly, be a generic

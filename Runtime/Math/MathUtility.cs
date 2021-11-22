@@ -1,4 +1,4 @@
-namespace SoulShard.Utils
+namespace SoulShard.Math
 {
     /// <summary>
     /// provides multiple basic math functions, not included in UnityEngine.mathf

@@ -1,11 +1,61 @@
 ﻿using UnityEngine;
-namespace SoulShard.Utils
+namespace SoulShard.Math
 {
     /// <summary>
     /// a collection of general vector constants.
     /// </summary>
     public struct VectorConstants
     {
+        #region Missing Vector Constants
+        /// <summary>
+        /// shorthand for writing Vector3(1, 0, 1)
+        /// </summary>
+        public static readonly Vector3 zx = new Vector3(1, 0, 1);
+        /// <summary>
+        /// shorthand for writing Vector3(0, 1, 1)
+        /// </summary>
+        public static readonly Vector3 zy = new Vector3(0, 1, 1);
+        /// <summary>
+        /// shorthand for writing Vector3(1, 1, 0)
+        /// </summary>
+        public static readonly Vector3 yx = new Vector3(1, 1, 0);
+        /// <summary>
+        /// shorthand for writing Vector3(-1, 0, -1)
+        /// </summary>
+        public static readonly Vector3 zxNegative = new Vector3(-1, 0, -1);
+        /// <summary>
+        /// shorthand for writing Vector3(0, -1, -1)
+        /// </summary>
+        public static readonly Vector3 zyNegative = new Vector3(0, -1, -1);
+        /// <summary>
+        /// shorthand for writing Vector3(-1, -1, 0)
+        /// </summary>
+        public static readonly Vector3 yxNegative = new Vector3(-1, -1, 0);
+        /// <summary>
+        /// shorthand for writing Vector3Int(1, 0, 1)
+        /// </summary>
+        public static readonly Vector3Int zxInt = new Vector3Int(1, 0, 1);
+        /// <summary>
+        /// shorthand for writing Vector3Int(0, 1, 1)
+        /// </summary>
+        public static readonly Vector3Int zyInt = new Vector3Int(0, 1, 1);
+        /// <summary>
+        /// shorthand for writing Vector3Int(1, 1, 0)
+        /// </summary>
+        public static readonly Vector3Int yxInt = new Vector3Int(1, 1, 0);
+        /// <summary>
+        /// shorthand for writing Vector3Int(-1, 0, -1)
+        /// </summary>
+        public static readonly Vector3Int zxNegativeInt = new Vector3Int(-1, 0, -1);
+        /// <summary>
+        /// shorthand for writing Vector3Int(0, -1, -1)
+        /// </summary>
+        public static readonly Vector3Int zyNegativeInt = new Vector3Int(0, -1, -1);
+        /// <summary>
+        /// shorthand for writing Vector3Int(-1, -1, 0)
+        /// </summary>
+        public static readonly Vector3Int yxNegativeInt = new Vector3Int(-1, -1, 0);
+        #endregion
         #region Direction Collections
         /// <summary>
         /// cardinal directions in vector2 format

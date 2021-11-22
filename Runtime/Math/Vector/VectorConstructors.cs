@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace SoulShard.Utils
+namespace SoulShard.Math
 {
     public partial struct VectorMath
     {

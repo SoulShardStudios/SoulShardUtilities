@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Linq;
+using SoulShard.Math;
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -63,6 +64,7 @@ namespace SoulShard.Utils
         /// <param name="pos1">ending position for the line</param>
         /// <param name="shape">the shape that is copied over the line</param>
         /// <returns>a rasterized line</returns>
-        public static Vector2Int[] InterpolateLineWithShapeApplied(Vector2Int pos0, Vector2Int pos1, Vector2Int[] shape) => VectorMath.TranslateVectorsToArray(InterpolateLine(pos0, pos1).ToArray(), shape);
+        public static Vector2Int[] InterpolateLineWithShapeApplied(Vector2Int pos0, Vector2Int pos1, Vector2Int[] shape) => 
+            VectorMath.TranslateVectorsToArray(InterpolateLine(pos0, pos1).ToArray(), shape);
     }
 }

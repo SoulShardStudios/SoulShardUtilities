@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Collections;
+using SoulShard.Math;
 namespace SoulShard.Utils
 {
     /// <summary>

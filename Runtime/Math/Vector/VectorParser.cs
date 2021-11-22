@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace SoulShard.Utils
+namespace SoulShard.Math
 {
     /// <summary>
     /// parses all unity vector types from strings with the format (axis1, axis2, e.t.c.)

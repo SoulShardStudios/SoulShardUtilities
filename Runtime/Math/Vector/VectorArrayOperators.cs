@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-namespace SoulShard.Utils
+namespace SoulShard.Math
 {
     public partial struct VectorMath
     {

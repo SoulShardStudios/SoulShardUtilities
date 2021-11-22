@@ -1,6 +1,6 @@
 using UnityEngine;
 using System;
-namespace SoulShard.Utils
+namespace SoulShard.Math
 {
     /// <summary>
     /// Provides Multiple basic math functions specifically for vectors.
