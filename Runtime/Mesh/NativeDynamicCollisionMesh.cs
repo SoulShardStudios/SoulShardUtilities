@@ -18,6 +18,7 @@ namespace SoulShard.Utils
         /// </summary>
         public NativeList<int> indicies;
         int previousVertsLength;
+        bool allocated;
         #endregion
         #region Management
         /// <summary>
@@ -29,14 +30,18 @@ namespace SoulShard.Utils
             verticies = new NativeList<Vector3>(0, allocation);
             indicies = new NativeList<int>(0, allocation);
             previousVertsLength = 0;
+            allocated = true;
         }
         /// <summary>
         /// disposes all native collections inside of the DynamicMesh. (MUST CALL AFTER YOU'VE GENERATED AND ARE DONE WITH THE MESH)
         /// </summary>
         public void Dispose()
         {
+            if (!allocated)
+                return;
             verticies.Dispose();
             indicies.Dispose();
+            allocated = false;
         }
         /// <summary>
         /// clears the mesh data
