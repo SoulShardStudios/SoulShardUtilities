@@ -1,5 +1,7 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 namespace SoulShard.Utils
 {
     public static class DebugUtility
@@ -60,17 +62,17 @@ namespace SoulShard.Utils
                 Debug.Log((taskNames?[i] ?? i.ToString(), Units, speedTestResults[i]));
         }
         /// <summary>
-        /// Debugs the contents of an array
+        /// Debugs the contents of a collection
         /// </summary>
-        /// <typeparam name="T">the array type</typeparam>
-        /// <param name="array">the array to debug</param>
-        public static void DebugArrayContents<T>(T[] array)
+        /// <typeparam name="T">the collection type</typeparam>
+        /// <param name="collection">the collection to debug</param>
+        public static void LogCollection<T>(IEnumerable<T> collection)
         {
             string ToDebug = "";
-            for (int i = 0; i < array.Length; i++)
-                ToDebug += array[i].ToString() + (i + 1 != array.Length ? ", " : "");
+            T[] arr = collection.ToArray();
+            for (int i = 0; i < collection.Count(); i++)
+                ToDebug += arr[i].ToString() + (i + 1 != collection.Count() ? ", " : "");
             Debug.Log(ToDebug);
         }
     }
-
 }
