@@ -71,7 +71,26 @@ namespace SoulShard.Utils
             string ToDebug = "";
             T[] arr = collection.ToArray();
             for (int i = 0; i < collection.Count(); i++)
-                ToDebug += arr[i].ToString() + (i + 1 != collection.Count() ? ", " : "");
+            {
+                string comma = (i + 1 != collection.Count() ? ", " : "");
+                ToDebug += arr[i].ToString() + comma;
+            }
+            Debug.Log(ToDebug);
+        }
+        /// <summary>
+        /// Debugs the contents of a collection
+        /// </summary>
+        /// <typeparam name="T">the collection type</typeparam>
+        /// <param name="collection">the collection to debug</param>
+        public static void LogCollection<T>(IEnumerable<T> collection, Func<T,string> stringConversion)
+        {
+            string ToDebug = "";
+            T[] arr = collection.ToArray();
+            for (int i = 0; i < collection.Count(); i++)
+            {
+                string comma = (i + 1 != collection.Count() ? ", " : "");
+                ToDebug += stringConversion(arr[i]) + comma;
+            }
             Debug.Log(ToDebug);
         }
     }
