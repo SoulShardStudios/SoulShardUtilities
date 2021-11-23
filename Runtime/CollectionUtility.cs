@@ -93,10 +93,11 @@ namespace SoulShard.Utils
         /// <param name="input">the input collection to cast</param>
         /// <returns>the casted collection</returns>
         public static _returnType[] CastCollectionValues<_returnType, _inputType>(_inputType[] @input)
+            where _inputType : IFormattable
         {
             _returnType[] @return = new _returnType[@input.Length];
             for (int i = 0; i < @input.Length; i++)
-                @return[i] = (_returnType)(object)@input[i];
+                TypeUtility.TryChangeTypeIFormattable(@input[i],out @return[i]);
             return @return;
         }
     }
