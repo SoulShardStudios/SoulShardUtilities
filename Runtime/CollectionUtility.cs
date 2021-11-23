@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -68,6 +69,21 @@ namespace SoulShard.Utils
                 if (!t.Equals(start))
                     return false;
             return true;
+        }
+        /// <summary>
+        /// generates a collection by inputting a collection's elements into a function and generating a new collection composed of the outputs.
+        /// </summary>
+        /// <typeparam name="_returnType">the return type of the function</typeparam>
+        /// <typeparam name="_inputType">the input type of the function</typeparam>
+        /// <param name="input">the input collection</param>
+        /// <param name="func">the function to apply to all elements of the input collection</param>
+        /// <returns>the newly generated collection</returns>
+        public static _returnType[] GenerateCollectionFromFunction<_returnType, _inputType>(_inputType[] @input, Func<_inputType,_returnType> func)
+        {
+            _returnType[] @return = new _returnType[@input.Length];
+            for (int i = 0; i < @input.Length; i++)
+                @return[i] = func(@input[i]);
+            return @return;
         }
     }
 }
