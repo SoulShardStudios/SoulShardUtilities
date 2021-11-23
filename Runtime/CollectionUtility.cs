@@ -85,5 +85,19 @@ namespace SoulShard.Utils
                 @return[i] = func(@input[i]);
             return @return;
         }
+        /// <summary>
+        /// casts the input collection to the type of the output collection
+        /// </summary>
+        /// <typeparam name="_returnType">the type to cast the input collection to</typeparam>
+        /// <typeparam name="_inputType">the input collection type to cast from</typeparam>
+        /// <param name="input">the input collection to cast</param>
+        /// <returns>the casted collection</returns>
+        public static _returnType[] CastCollectionValues<_returnType, _inputType>(_inputType[] @input)
+        {
+            _returnType[] @return = new _returnType[@input.Length];
+            for (int i = 0; i < @input.Length; i++)
+                @return[i] = (_returnType)(object)@input[i];
+            return @return;
+        }
     }
 }
