@@ -34,10 +34,6 @@ namespace SoulShard.Utils
         /// the transform parent of all new chunks
         /// </summary>
         public Transform chunkParent;
-        /// <summary>
-        /// when a new chunk is created any function assigned to this action will be called with the chunk type.
-        /// </summary>
-        public Action<_chunkType> newChunkCallback;
         #endregion
         /// <summary>
         /// pixels per unit that the chunks are using
@@ -93,11 +89,15 @@ namespace SoulShard.Utils
         /// adds a new chunk to the worldspace, controled by the chunkmap
         /// </summary>
         /// <param name="position">the position to add the new chunk to</param>
-        public void AddChunk(Vector2Int position)
+        /// <param name="callback"> additional processing that needs to be done after a chunk is added can be assigned to this callback</param>
+        public void AddChunk(Vector2Int position, Action<_chunkType> callback = null)
         {
+            if (chunks.ContainsKey(position))
+                return;
             GameObject g = MonoBehaviour.Instantiate(chunkPrefab, (Vector3)(position * (int)chunkSize + new Vector2(1, 1)) / PPU, Quaternion.identity, chunkParent);
             _chunkType chunk = g.GetComponent<_chunkType>();
             chunks.Add(position, chunk);
+            callback?.Invoke(chunk);
         }
         #endregion
     }
