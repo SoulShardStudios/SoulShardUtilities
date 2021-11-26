@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -14,14 +15,34 @@ namespace SoulShard.Utils
         /// the collection of chunks
         /// </summary>
         [HideInInspector] public Dictionary<Vector2Int, _chunkType> chunks = new Dictionary<Vector2Int, _chunkType>();
-        /// <summary>
-        /// pixels per unit that the chunks are using
-        /// </summary>
-        [HideInInspector] public int PPU = 1;
+        #region chunkSize
         /// <summary>
         /// the size of an individual chunk
         /// </summary>
         public uint chunkSize;
+        /// <summary>
+        /// the vector2int representation of the chunksize
+        /// </summary>
+        public Vector2Int chunkSizeV2I { get => new Vector2Int((int)chunkSize, (int)chunkSize); }
+        #endregion
+        #region new Chunk Vars
+        /// <summary>
+        /// the prefab to instantiate when a new chunk is created. must have the chunk type monobehavior attached
+        /// </summary>
+        public GameObject chunkPrefab;
+        /// <summary>
+        /// the transform parent of all new chunks
+        /// </summary>
+        public Transform chunkParent;
+        /// <summary>
+        /// when a new chunk is created any function assigned to this action will be called with the chunk type.
+        /// </summary>
+        public Action<_chunkType> newChunkCallback;
+        #endregion
+        /// <summary>
+        /// pixels per unit that the chunks are using
+        /// </summary>
+        [HideInInspector] public int PPU = 1;
         /// <summary>
         /// should Gizmos for thechunk borders be drawn?
         /// </summary>
@@ -30,10 +51,7 @@ namespace SoulShard.Utils
         /// the color for the chunk border gizmos
         /// </summary>
         public Color chunkBorderColor;
-        /// <summary>
-        /// the vector2int representation of the chunksize
-        /// </summary>
-        public Vector2Int chunkSizeV2I { get => new Vector2Int((int)chunkSize, (int)chunkSize); }
+
         #endregion
         #region Constructors
         public ChunkMapInt2D(Color chunkBorderColor, uint chunkSize = 1, bool drawChunkBorders = true)
@@ -70,6 +88,16 @@ namespace SoulShard.Utils
         {
             try { return chunks[position]; }
             catch (KeyNotFoundException) { return null; }
+        }
+        /// <summary>
+        /// adds a new chunk to the worldspace, controled by the chunkmap
+        /// </summary>
+        /// <param name="position">the position to add the new chunk to</param>
+        public void AddChunk(Vector2Int position)
+        {
+            GameObject g = MonoBehaviour.Instantiate(chunkPrefab, (Vector3)(position * (int)chunkSize + new Vector2(1, 1)) / PPU, Quaternion.identity, chunkParent);
+            _chunkType chunk = g.GetComponent<_chunkType>();
+            chunks.Add(position, chunk);
         }
         #endregion
     }
