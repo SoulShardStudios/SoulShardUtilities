@@ -7,8 +7,9 @@ namespace SoulShard.Utils
     /// allows for management and math related to an infinitely tiled 2d plane of chunks (as monobehaviors), with vector2Int used as the positioning method
     /// </summary>
     /// <typeparam name="_chunkType"> the monobehavior component type of the chunk </typeparam>
-    [System.Serializable]
-    public partial class ChunkMapInt2D<_chunkType> where _chunkType : MonoBehaviour
+    [Serializable]
+    public partial class ChunkMapInt2D<_chunkType>
+        where _chunkType : MonoBehaviour
     {
         #region Vars
         /// <summary>
@@ -94,7 +95,7 @@ namespace SoulShard.Utils
         {
             if (chunks.ContainsKey(position))
                 return;
-            GameObject g = MonoBehaviour.Instantiate(chunkPrefab, (Vector3)(position * (int)chunkSize + new Vector2(1, 1)) / PPU, Quaternion.identity, chunkParent);
+            GameObject g = GameObject.Instantiate(chunkPrefab, (Vector3)(position * (int)chunkSize + new Vector2(1, 1)) / PPU, Quaternion.identity, chunkParent);
             _chunkType chunk = g.GetComponent<_chunkType>();
             chunks.Add(position, chunk);
             callback?.Invoke(chunk);
