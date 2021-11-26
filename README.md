@@ -1,5 +1,11 @@
 # SoulShardUtilities
-A General Unity Utilities Package, just clone the repository into a unity project from the package manager to get tons of features
+A General Unity Utilities Package.
+
+Usage:
+ - go to your packages for your unity project
+ - copy this repositories HTTPS git clone link
+ - paste that link into unity
+ - use the package! all functionality is within the SoulShard namespace.
 
 Includes alot of functionality:
  - Various Vector Math Helper Functions, and General Math Utilities
