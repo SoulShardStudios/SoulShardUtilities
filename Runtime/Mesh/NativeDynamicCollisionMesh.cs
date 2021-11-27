@@ -17,8 +17,14 @@ namespace SoulShard.Utils
         /// the indicies of the mesh
         /// </summary>
         public NativeList<int> indicies;
-        int previousVertsLength;
-        bool allocated;
+        /// <summary>
+        /// the number of verticies in the previous set of added geometry
+        /// </summary>
+        public int previousVertsLength { get; private set; }
+        /// <summary>
+        /// indicates whether this object has allocated its memory or not
+        /// </summary>
+        public bool allocated { get; private set; }
         #endregion
         #region Management
         /// <summary>

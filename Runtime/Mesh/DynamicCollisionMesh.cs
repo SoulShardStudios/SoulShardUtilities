@@ -16,7 +16,10 @@ namespace SoulShard.Utils
         /// the indicies of the mesh
         /// </summary>
         public List<int> indicies = new List<int>(0);
-        int previousVertsLength = 0;
+        /// <summary>
+        /// the number of verticies in the previous set of added geometry
+        /// </summary>
+        public int previousVertsLength { get; private set; }
         /// <summary>
         /// add a piece of geometry to the mesh
         /// </summary>
