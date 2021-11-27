@@ -73,7 +73,17 @@ namespace SoulShard.Utils
         static Vector3[] GetQuadPositions(Vector3 size)
         {
             // if a is not zero, set it to either positive one or negative one. this is so the orientation is correct
-            Vector3Int orientation = VectorMath.VectorOperation(VectorMath.RoundVector(size), (int a) => a != 0 ? (a > 0 ? 1 : -1) : 0);
+            #region Orientation Calc
+            // I did it this way so that it could be native (for unity jobs)
+            // as some peices of code depend on all of this being native compatible
+            // I could have just used VectorMath.VectorOperation, but because of this design requirement we get some messy BS
+            // note: turn this into intNormalize in the future
+            Vector3 rs = VectorMath.RoundVector(size);
+            int x = rs.x != 0 ? (rs.x > 0 ? 1 : -1) : 0;
+            int y = rs.y != 0 ? (rs.y > 0 ? 1 : -1) : 0;
+            int z = rs.z != 0 ? (rs.z > 0 ? 1 : -1) : 0;
+            #endregion
+            Vector3Int orientation = new Vector3Int(x, y, z);
             Vector3Int absOrientation = VectorMath.AbsVector(orientation);
             size = VectorMath.MultiplyVector(size, orientation);
             if (absOrientation == VectorConstants.zyInt)
