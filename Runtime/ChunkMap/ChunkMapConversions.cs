@@ -35,7 +35,7 @@ namespace SoulShard.Utils
             public static Vector2Int GetOuterChunkPos(Vector2Int position, Vector2Int size) => 
                 VectorMath.RoundVector((Vector2)position / size);
             public static Vector2Int GetInnerChunkPos(Vector2Int position, Vector2Int size) => 
-                VectorMath.PositiveModVector(position + size / 2, size.x);
+                VectorMath.PositiveModVector(position, size.x);
             public static ChunkPosition GetChunkPos(Vector2Int position, Vector2Int size) => 
                 new ChunkPosition(GetOuterChunkPos(position, size), GetInnerChunkPos(position, size));
         }
