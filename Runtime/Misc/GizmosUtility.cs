@@ -16,12 +16,10 @@ namespace SoulShard.Utils
         {
             int scale = PPU;
             Rect r = rect;
-            Vector2 offset = -r.size / 2;
-
-            Vector2 start = (r.position + offset);
-            Vector2 up = (r.position + new Vector2(0, r.height) + offset);
-            Vector2 top = (r.position + r.size + offset);
-            Vector2 bottom = (r.position + new Vector2(r.width, 0) + offset);
+            Vector2 start = r.position;
+            Vector2 up = r.position + new Vector2(0, r.height);
+            Vector2 top = r.position + r.size;
+            Vector2 bottom = r.position + new Vector2(r.width, 0);
 
             Vector2[] positions = new Vector2[] { start, up, top, bottom };
             for (int i = 0; i < 4; i++)
