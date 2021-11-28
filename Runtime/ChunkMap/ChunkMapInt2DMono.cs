@@ -31,23 +31,20 @@ namespace SoulShard.Utils
         /// </summary>
         protected int PPU;
         /// <summary>
-        /// the callback for when a chunk is added, just ncase you want to do extra things when a chunk is added
+        /// Adds a chunk to the chunkmap
         /// </summary>
-        protected Action<T, Vector2Int> chunkAddCallback;
-        /// <summary>
-        /// adds a chunk to the chunkmap at the specified position
-        /// </summary>
-        /// <param name="chunkPosition"></param>
-        public virtual void AddChunk(Vector2Int chunkPosition)
+        /// <param name="chunkPosition">the chunk position to add the chunk at</param>
+        /// <returns>a reference to the newly created chunk</returns>
+        public virtual T AddChunk(Vector2Int chunkPosition)
         {
             if (_chunkmap.chunks.ContainsKey(chunkPosition))
-                return;
+                return null;
             Vector3 position = (Vector3)(chunkPosition * (int)_chunkmap.chunkSize + new Vector2(1, 1)) / PPU;
             GameObject G = Instantiate(_chunk, position, Quaternion.identity, _chunkTransformParent);
-            G.name = chunkName + chunkPosition.ToString();
             T chunk = G.GetComponent<T>();
+            G.name = chunkName + chunkPosition.ToString();
             _chunkmap.chunks.Add(chunkPosition, chunk);
-            chunkAddCallback?.Invoke(chunk, chunkPosition);
+            return chunk;
         }
     }
 }
