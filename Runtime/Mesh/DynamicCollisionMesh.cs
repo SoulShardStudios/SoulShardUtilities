@@ -17,10 +17,6 @@ namespace SoulShard.Utils
         /// </summary>
         public List<int> indicies = new List<int>(0);
         /// <summary>
-        /// the number of verticies in the previous set of added geometry
-        /// </summary>
-        public int previousVertsLength { get; private set; }
-        /// <summary>
         /// add a piece of geometry to the mesh
         /// </summary>
         /// <param name="geometry">the geometry to add</param>
@@ -34,8 +30,7 @@ namespace SoulShard.Utils
         public void AddGeometry(Vector3[] verticies, int[] indicies)
         {
             this.verticies.AddRange(verticies);
-            this.indicies.AddRange(MathUtility.AddToList(indicies, previousVertsLength + this.verticies.Count));
-            previousVertsLength = verticies.Length;
+            this.indicies.AddRange(MathUtility.AddToList(indicies, this.verticies.Count));
         }
         /// <summary>
         /// clears the mesh data
@@ -44,7 +39,6 @@ namespace SoulShard.Utils
         {
             verticies.Clear();
             indicies.Clear();
-            previousVertsLength = 0;
         }
         /// <summary>
         /// generates the mesh for use

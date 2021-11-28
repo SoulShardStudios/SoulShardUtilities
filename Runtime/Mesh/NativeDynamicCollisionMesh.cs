@@ -18,10 +18,6 @@ namespace SoulShard.Utils
         /// </summary>
         public NativeList<int> indicies;
         /// <summary>
-        /// the number of verticies in the previous set of added geometry
-        /// </summary>
-        public int previousVertsLength { get; private set; }
-        /// <summary>
         /// indicates whether this object has allocated its memory or not
         /// </summary>
         public bool allocated { get; private set; }
@@ -35,7 +31,6 @@ namespace SoulShard.Utils
         {
             verticies = new NativeList<Vector3>(0, allocation);
             indicies = new NativeList<int>(0, allocation);
-            previousVertsLength = 0;
             allocated = true;
         }
         /// <summary>
@@ -56,7 +51,6 @@ namespace SoulShard.Utils
         {
             verticies.Clear();
             indicies.Clear();
-            previousVertsLength = 0;
         }
         #endregion
         #region Adding
@@ -73,10 +67,9 @@ namespace SoulShard.Utils
         /// <param name="indicies">the indicies of the geometry</param>
         public void AddGeometry(Vector3[] verticies, int[] indicies)
         {
-            indicies = MathUtility.AddToList(indicies, previousVertsLength + this.verticies.Length);
+            indicies = MathUtility.AddToList(indicies, this.verticies.Length);
             JobUtility.AddToNativeList(this.verticies, verticies);
             JobUtility.AddToNativeList(this.indicies, indicies);
-            previousVertsLength = verticies.Length;
         }
         #endregion
         /// <summary>
