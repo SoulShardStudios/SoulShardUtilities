@@ -46,5 +46,14 @@ namespace SoulShard.Utils
             chunkmap.chunks.Add(chunkPosition, chunk);
             return chunk;
         }
+        /// <summary>
+        /// initializes some of the vars in this class
+        /// </summary>
+        /// <param name="PPU">the pixels per unit of the chunk map</param>
+        protected void Init(int PPU)
+        {
+            chunkmap.PPU = PPU;
+            this.PPU = PPU;
+        }
     }
 }
