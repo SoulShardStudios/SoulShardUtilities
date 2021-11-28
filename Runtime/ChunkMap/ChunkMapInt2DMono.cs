@@ -12,7 +12,7 @@ namespace SoulShard.Utils
         /// <summary>
         /// the chunkmap which manages a good portion of functionality, and stores all of the chunks
         /// </summary>
-        [SerializeField] protected ChunkMapInt2D<T> _chunkmap = new ChunkMapInt2D<T>();
+        [SerializeField] public ChunkMapInt2D<T> chunkmap = new ChunkMapInt2D<T>();
         /// <summary>
         /// the transform parent of the instantiated chunks
         /// </summary>
@@ -37,13 +37,13 @@ namespace SoulShard.Utils
         /// <returns>a reference to the newly created chunk</returns>
         public virtual T AddChunk(Vector2Int chunkPosition)
         {
-            if (_chunkmap.chunks.ContainsKey(chunkPosition))
+            if (chunkmap.chunks.ContainsKey(chunkPosition))
                 return null;
-            Vector3 position = (Vector3)(chunkPosition * (int)_chunkmap.chunkSize + new Vector2(1, 1)) / PPU;
+            Vector3 position = (Vector3)(chunkPosition * (int)chunkmap.chunkSize + new Vector2(1, 1)) / PPU;
             GameObject G = Instantiate(_chunk, position, Quaternion.identity, _chunkTransformParent);
             T chunk = G.GetComponent<T>();
             G.name = chunkName + chunkPosition.ToString();
-            _chunkmap.chunks.Add(chunkPosition, chunk);
+            chunkmap.chunks.Add(chunkPosition, chunk);
             return chunk;
         }
     }
