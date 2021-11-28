@@ -32,11 +32,11 @@ namespace SoulShard.Utils
         #endregion
         struct Conversions
         {
-            public static Vector2Int GetOuterChunkPos(Vector2Int position, Vector2Int size) => 
-                VectorMath.RoundVector((Vector2)position / size);
-            public static Vector2Int GetInnerChunkPos(Vector2Int position, Vector2Int size) => 
+            public static Vector2Int GetOuterChunkPos(Vector2Int position, Vector2Int size) =>
+                VectorMath.FloorVector((Vector2)position / size);
+            public static Vector2Int GetInnerChunkPos(Vector2Int position, Vector2Int size) =>
                 VectorMath.PositiveModVector(position, size.x);
-            public static ChunkPosition GetChunkPos(Vector2Int position, Vector2Int size) => 
+            public static ChunkPosition GetChunkPos(Vector2Int position, Vector2Int size) =>
                 new ChunkPosition(GetOuterChunkPos(position, size), GetInnerChunkPos(position, size));
         }
     }
