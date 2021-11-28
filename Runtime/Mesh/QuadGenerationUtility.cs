@@ -41,7 +41,7 @@ namespace SoulShard.Utils
             Vector3[] verts = GetQuadPositions(size);
             verts = VectorMath.TranslateVectorArray(verts, position);
             verts = VectorMath.MultiplyVectorArray(verts, scale);
-            return (verts, VectorConstants.QuadIndicies);
+            return (verts, VectorConstants.QuadIndicies());
         }
         static Vector3[] GetQuadPositions(Vector3 size)
         {
