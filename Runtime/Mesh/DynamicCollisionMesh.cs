@@ -44,6 +44,7 @@ namespace SoulShard.Utils
         {
             verticies.Clear();
             indicies.Clear();
+            previousVertsLength = 0;
         }
         /// <summary>
         /// generates the mesh for use
