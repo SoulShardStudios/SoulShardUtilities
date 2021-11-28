@@ -40,7 +40,7 @@ namespace SoulShard.Utils
             if (chunkmap.chunks.ContainsKey(chunkPosition))
                 return null;
             Vector3 position = (Vector3)(chunkPosition * (int)chunkmap.chunkSize + new Vector2(1, 1)) / PPU;
-            GameObject G = Instantiate(_chunk, position, Quaternion.identity, _chunkTransformParent);
+            GameObject G = Instantiate(_chunk, position, Quaternion.identity, _chunkTransformParent ?? transform);
             T chunk = G.GetComponent<T>();
             G.name = chunkName + chunkPosition.ToString();
             chunkmap.chunks.Add(chunkPosition, chunk);
