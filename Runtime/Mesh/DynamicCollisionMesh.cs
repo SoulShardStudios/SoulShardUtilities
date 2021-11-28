@@ -6,7 +6,7 @@ namespace SoulShard.Utils
     /// <summary>
     /// this is an object that allows collision mesh data to be pushed to it and then rendered into a final mesh.
     /// </summary>
-    public class DynamicCollisionMesh: IDynamicCollisionMesh
+    public class DynamicCollisionMesh
     {
         /// <summary>
         /// the verticies of the mesh

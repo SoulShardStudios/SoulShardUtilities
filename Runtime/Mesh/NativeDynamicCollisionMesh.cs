@@ -6,7 +6,7 @@ namespace SoulShard.Utils
     /// <summary>
     /// this is an object that allows collision mesh data to be pushed to it and then rendered into a final mesh.
     /// </summary>
-    public struct NativeDynamicCollisionMesh : IDynamicCollisionMesh
+    public struct NativeDynamicCollisionMesh
     {
         #region Vars
         /// <summary>
@@ -58,18 +58,19 @@ namespace SoulShard.Utils
         /// add a piece of geometry to the mesh
         /// </summary>
         /// <param name="geometry">the geometry to add</param>
-        public void AddGeometry((Vector3[], int[]) geometry) =>
+        public void AddGeometry((NativeArray<Vector3>, NativeArray<int>) geometry) =>
             AddGeometry(geometry.Item1, geometry.Item2);
         /// <summary>
         /// add a piece of geometry to the mesh
         /// </summary>
         /// <param name="verticies">the verticies of the geometry</param>
         /// <param name="indicies">the indicies of the geometry</param>
-        public void AddGeometry(Vector3[] verticies, int[] indicies)
+        public void AddGeometry(NativeArray<Vector3> verticies, NativeArray<int> indicies)
         {
-            indicies = MathUtility.AddToList(indicies, this.verticies.Length);
-            JobUtility.AddToNativeList(this.verticies, verticies);
-            JobUtility.AddToNativeList(this.indicies, indicies);
+            for (int i = 0; i < indicies.Length; i++)
+                indicies[i] += this.verticies.Length;
+            this.verticies.AddRange(verticies);
+            this.indicies.AddRange(indicies);
         }
         #endregion
         /// <summary>

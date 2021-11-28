@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 namespace SoulShard.Math
 {
     // this is just so that you can easily apply operations to an entire list without having to write a few lines of code each time
