@@ -7,32 +7,6 @@ namespace SoulShard.Utils
     /// </summary>
     public struct QuadGenerationUtility
     {
-        #region Multiple Quad Operations
-        // the reason the IDynamicCollisionMesh interface wasn't used to cut down on code size is
-        // because it would break with the Native version due to reference errors. should still be useful elsewhere
-        #region Native
-        /// <summary>
-        /// adds multiple scaled, sized, and positioned quads to a mesh
-        /// </summary>
-        /// <param name="mesh">the dynamic mesh to add these quads to</param>
-        /// <param name="positions">the positions of the quads to add</param>
-        /// <param name="scale">the scales of the quads to add</param>
-        /// <param name="size">the sizes of the quads to add</param>
-        public static void AddScaledQuadsToDynamicMesh(ref NativeDynamicCollisionMesh mesh, Vector2[] positions, Vector3 scale, Vector3 size) =>
-            AddScaledQuadsToDynamicMesh(ref mesh, positions, scale, CollectionUtility.GenerateNewArray(positions.Length, size));
-        /// <summary>
-        /// adds multiple scaled, sized, and positioned quads to a mesh
-        /// </summary>
-        /// <param name="mesh">the dynamic mesh to add these quads to</param>
-        /// <param name="positions">the positions of the quads to add</param>
-        /// <param name="scale">the scales of the quads to add</param>
-        /// <param name="size">the sizes of the quads to add</param>
-        public static void AddScaledQuadsToDynamicMesh(ref NativeDynamicCollisionMesh mesh, Vector2[] positions, Vector3 scale, Vector3[] size)
-        {
-            for (int i = 0; i < positions.Length; i++)
-                mesh.AddGeometry(GetQuad(positions[i], scale, size[i]));
-        }
-        #endregion
         #region Regular
         /// adds multiple scaled, sized, and positioned quads to a mesh
         /// </summary>
@@ -54,7 +28,6 @@ namespace SoulShard.Utils
             for (int i = 0; i < positions.Length; i++)
                 mesh.AddGeometry(GetQuad(positions[i], scale, size[i]));
         }
-        #endregion
         #endregion
         /// <summary>
         /// gets a single scaled, positioned, and sized quad
