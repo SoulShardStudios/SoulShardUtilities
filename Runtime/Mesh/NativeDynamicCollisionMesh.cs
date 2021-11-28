@@ -73,7 +73,7 @@ namespace SoulShard.Utils
         /// <param name="indicies">the indicies of the geometry</param>
         public void AddGeometry(Vector3[] verticies, int[] indicies)
         {
-            indicies = MathUtility.AddToList(indicies, previousVertsLength + this.indicies.Length);
+            indicies = MathUtility.AddToList(indicies, previousVertsLength + this.verticies.Length);
             JobUtility.AddToNativeList(this.verticies, verticies);
             JobUtility.AddToNativeList(this.indicies, indicies);
             previousVertsLength = verticies.Length;
