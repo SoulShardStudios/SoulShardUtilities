@@ -67,10 +67,11 @@ namespace SoulShard.Utils
         /// <param name="indicies">the indicies of the geometry</param>
         public void AddGeometry(NativeArray<Vector3> verticies, NativeArray<int> indicies)
         {
+            NativeArray<int> newIndicies = new NativeArray<int>(indicies, Allocator.Temp);
             for (int i = 0; i < indicies.Length; i++)
-                indicies[i] += this.verticies.Length;
+                newIndicies[i] += this.verticies.Length;
             this.verticies.AddRange(verticies);
-            this.indicies.AddRange(indicies);
+            this.indicies.AddRange(newIndicies);
         }
         #endregion
         /// <summary>
