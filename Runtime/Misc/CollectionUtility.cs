@@ -7,6 +7,53 @@ namespace SoulShard.Utils
     /// </summary>
     public struct CollectionUtility
     {
+        #region Other
+        /// <summary>
+        /// gets a specific component from every gameobject in the list, and returns a list of the components.
+        /// </summary>
+        /// <typeparam name="T">the component to get from every object</typeparam>
+        /// <param name="toGetComponentFrom">the array to get the components from</param>
+        /// <returns>the collection of monobehaviors</returns>
+        public static T[] GetComponentFromGameObjectList<T>(GameObject[] toGetComponentFrom) where T : MonoBehaviour
+        {
+            T[] @return = new T[toGetComponentFrom.Length];
+            for (int i = 0; i < toGetComponentFrom.Length; i++)
+                @return[i] = toGetComponentFrom[i].GetComponent<T>();
+            return @return;
+        }
+        /// <summary>
+        /// takes in a boolean list and checks if all the values are the same
+        /// </summary>
+        /// <typeparam name="T">the type of the collection</typeparam>
+        /// <param name="list">the collection to compare</param>
+        /// <returns>whether the list contains all of the same values</returns>
+        public static bool? ListIsRepeatedValues<T>(T[] list) where T : System.IEquatable<T>
+        {
+            if (list.Length == 0)
+                return null;
+            T start = list[0];
+            foreach (T t in list)
+                if (!t.Equals(start))
+                    return false;
+            return true;
+        }
+        #endregion
+        #region Collection Generation
+        /// <summary>
+        /// generates a collection by inputting a collection's elements into a function and generating a new collection composed of the outputs.
+        /// </summary>
+        /// <typeparam name="_returnType">the return type of the function</typeparam>
+        /// <typeparam name="_inputType">the input type of the function</typeparam>
+        /// <param name="input">the input collection</param>
+        /// <param name="func">the function to apply to all elements of the input collection</param>
+        /// <returns>the newly generated collection</returns>
+        public static _returnType[] GenerateCollectionFromFunction<_returnType, _inputType>(_inputType[] @input, Func<_inputType, _returnType> func)
+        {
+            _returnType[] @return = new _returnType[@input.Length];
+            for (int i = 0; i < @input.Length; i++)
+                @return[i] = func(@input[i]);
+            return @return;
+        }
         /// <summary>
         /// generates a new 2d array with a default value
         /// </summary>
@@ -41,49 +88,43 @@ namespace SoulShard.Utils
                 @return[i] = defaultValue;
             return @return;
         }
+        #endregion
+        #region Index Management Methods
         /// <summary>
-        /// gets a specific component from every gameobject in the list, and returns a list of the components.
+        /// checks whether an index exists within a collection
         /// </summary>
-        /// <typeparam name="T">the component to get from every object</typeparam>
-        /// <param name="toGetComponentFrom">the array to get the components from</param>
-        /// <returns>the collection of monobehaviors</returns>
-        public static T[] GetComponentFromGameObjectList<T>(GameObject[] toGetComponentFrom) where T : MonoBehaviour
-        {
-            T[] @return = new T[toGetComponentFrom.Length];
-            for (int i = 0; i < toGetComponentFrom.Length; i++)
-                @return[i] = toGetComponentFrom[i].GetComponent<T>();
-            return @return;
-        }
+        /// <param name="index">the index within the collection</param>
+        /// <param name="collectionSize">the size of the collection</param>
+        /// <returns></returns>
+        public static bool IndexExists(int index, int collectionSize) =>
+            index < collectionSize && index >= 0;
+
+        #region 2D flattened array helpers, ydominant
         /// <summary>
-        /// takes in a boolean list and checks if all the values are the same
+        /// gets the index within a flattened 2d array from a 2d position in that array
         /// </summary>
-        /// <typeparam name="T">the type of the collection</typeparam>
-        /// <param name="list">the collection to compare</param>
-        /// <returns>whether the list contains all of the same values</returns>
-        public static bool? ListIsRepeatedValues<T>(T[] list) where T: System.IEquatable<T>
-        {
-            if (list.Length == 0)
-                return null;
-            T start = list[0];
-            foreach (T t in list)
-                if (!t.Equals(start))
-                    return false;
-            return true;
-        }
+        /// <param name="pos"> the 2d position within the array</param>
+        /// <param name="collectionSize"> the size of the collection along the virtual x axis</param>
+        /// <returns>the index within the collection</returns>
+        public static int GetIndex(Vector2Int pos, int collectionSize) =>
+            pos.x + pos.y * collectionSize;
         /// <summary>
-        /// generates a collection by inputting a collection's elements into a function and generating a new collection composed of the outputs.
+        /// returns the 2d position from an index within the flattened 2d collection
         /// </summary>
-        /// <typeparam name="_returnType">the return type of the function</typeparam>
-        /// <typeparam name="_inputType">the input type of the function</typeparam>
-        /// <param name="input">the input collection</param>
-        /// <param name="func">the function to apply to all elements of the input collection</param>
-        /// <returns>the newly generated collection</returns>
-        public static _returnType[] GenerateCollectionFromFunction<_returnType, _inputType>(_inputType[] @input, Func<_inputType,_returnType> func)
-        {
-            _returnType[] @return = new _returnType[@input.Length];
-            for (int i = 0; i < @input.Length; i++)
-                @return[i] = func(@input[i]);
-            return @return;
-        }
+        /// <param name="index">the index within the collection</param>
+        /// <param name="collectionSize">the size of the collection along the virtual x axis</param>
+        /// <returns>the 2d position this index represents</returns>
+        public static Vector2Int GetPosition(int index, int collectionSize) =>
+            new Vector2Int(index % collectionSize, (int)Mathf.Floor(index / collectionSize));
+        /// <summary>
+        /// checks if a position exists within the 2d collection
+        /// </summary>
+        /// <param name="position">the position within the collection</param>
+        /// <param name="size">the size of the collection</param>
+        /// <returns></returns>
+        public static bool PositionExists(Vector2Int position, Vector2Int size) =>
+            position.x < size.x && position.y < size.y;
+        #endregion
+        #endregion
     }
 }
