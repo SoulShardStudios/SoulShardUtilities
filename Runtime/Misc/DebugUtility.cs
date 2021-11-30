@@ -78,7 +78,7 @@ namespace SoulShard.Utils
             for (int i = 0; i < collection.Count(); i++)
             {
                 string comma = (i + 1 != collection.Count() ? ", " : "");
-                ToDebug += arr[i].ToString() + comma;
+                ToDebug += arr[i]?.ToString() + comma;
             }
             Debug.Log(ToDebug);
         }
