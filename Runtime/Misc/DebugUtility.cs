@@ -68,6 +68,11 @@ namespace SoulShard.Utils
         /// <param name="collection">the collection to debug</param>
         public static void LogCollection<T>(IEnumerable<T> collection)
         {
+            if (collection == null)
+            {
+                Debug.Log(null);
+                return;
+            }
             string ToDebug = "";
             T[] arr = collection.ToArray();
             for (int i = 0; i < collection.Count(); i++)
@@ -84,6 +89,11 @@ namespace SoulShard.Utils
         /// <param name="collection">the collection to debug</param>
         public static void LogCollection<T>(IEnumerable<T> collection, Func<T,string> stringConversion)
         {
+            if (collection == null)
+            {
+                Debug.Log(null);
+                return;
+            }
             string ToDebug = "";
             T[] arr = collection.ToArray();
             for (int i = 0; i < collection.Count(); i++)
