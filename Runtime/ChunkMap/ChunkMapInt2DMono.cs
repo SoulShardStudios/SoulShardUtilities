@@ -33,9 +33,9 @@ namespace SoulShard.Utils
         { 
             set 
             {
-                value = value == 0 ? 1 : value;
-                chunkmap.PPU = value;
                 _ppu = value;
+                _ppu = _ppu == 0 ? 1 : _ppu;
+                chunkmap.PPU = _ppu;
             }
             private get => _ppu;
         }
