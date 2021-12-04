@@ -28,15 +28,16 @@ namespace SoulShard.Utils
         /// the pixels per unit of the environment. this is used for scaling based on pixels per unit for 2D games. 
         /// if you don't want to scale anything leave this at 1
         /// </summary>
+        int _ppu;
         public int PPU 
         { 
             set 
             {
                 value = value == 0 ? 1 : value;
                 chunkmap.PPU = value;
-                PPU = value;
+                _ppu = value;
             }
-            private get => PPU;
+            private get => _ppu;
         }
         /// <summary>
         /// Adds a chunk to the chunkmap
@@ -47,7 +48,7 @@ namespace SoulShard.Utils
         {
             if (chunkmap.chunks.ContainsKey(chunkPosition))
                 return null;
-            Vector3 position = (Vector3)(chunkPosition * (int)chunkmap.chunkSize + new Vector2(1, 1)) / PPU;
+            Vector3 position = (Vector3)(chunkPosition * (int)chunkmap.chunkSize + new Vector2(1, 1)) / _ppu;
             GameObject G = Instantiate(_chunk, position, Quaternion.identity, _chunkTransformParent);
             T chunk = G.GetComponent<T>();
             G.name = chunkName + chunkPosition.ToString();
