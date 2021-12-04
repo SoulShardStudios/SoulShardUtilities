@@ -50,7 +50,7 @@ namespace SoulShard.Utils
         /// initializes some of the vars in this class
         /// </summary>
         /// <param name="PPU">the pixels per unit of the chunk map</param>
-        protected void Init(int PPU)
+        public void Init(int PPU)
         {
             chunkmap.PPU = PPU;
             this.PPU = PPU;
