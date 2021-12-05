@@ -29,15 +29,15 @@ namespace SoulShard.Utils
         /// if you don't want to scale anything leave this at 1
         /// </summary>
         int _ppu;
-        public int PPU 
-        { 
-            set 
+        public int pixelsPerUnit
+        {
+            set
             {
                 _ppu = value;
                 _ppu = _ppu == 0 ? 1 : _ppu;
                 chunkmap.PPU = _ppu;
             }
-            private get => _ppu;
+            get => _ppu;
         }
         /// <summary>
         /// Adds a chunk to the chunkmap
