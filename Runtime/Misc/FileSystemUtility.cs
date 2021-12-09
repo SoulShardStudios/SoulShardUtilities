@@ -43,6 +43,21 @@ namespace SoulShard.Utils
                 _ => "",
             };
         }
+        /// <summary>
+        /// removes the file from a path. EX: C:/dev/test.txt becomes C:/dev
+        /// </summary>
+        /// <param name="path">the path to modify</param>
+        /// <param name="delim">the character separating directories EX: C:/dev/text.txt '/' is the delimiter</param>
+        /// <returns>the modified path</returns>
+        public static string RemoveFileFromPath(string path, char delim)
+        {
+            for (int i = path.Length - 1; i > -1; i--)
+            {
+                if (path[i] == delim)
+                    return path.Substring(0, i);
+            }
+            return path;
+        }
         #endregion
         #region DirectoryManagement
         /// <summary>
@@ -121,6 +136,39 @@ namespace SoulShard.Utils
             foreach (FileInfo file in di.GetFiles())
                 file.Delete();
         }
+        #region Copy
+        // thanks to https://code.4noobz.net/c-copy-a-folder-its-content-and-the-subfolders/
+        /// <summary>
+        /// copies all contents of the source directory to the target directory
+        /// </summary>
+        /// <param name="sourceDirectory">the directory to copy from</param>
+        /// <param name="targetDirectory">the directory to copy to</param>
+        public static void CopyAll(string sourceDirectory, string targetDirectory)
+        {
+            var diSource = new DirectoryInfo(sourceDirectory);
+            var diTarget = new DirectoryInfo(targetDirectory);
+            CopyAll(diSource, diTarget);
+        }
+        /// <summary>
+        /// copies all contents of the source directory to the target directory
+        /// </summary>
+        /// <param name="source">the directory to copy from</param>
+        /// <param name="target">the directory to copy to</param>
+        static void CopyAll(DirectoryInfo source, DirectoryInfo target)
+        {
+            Directory.CreateDirectory(target.FullName);
+            foreach (FileInfo fi in source.GetFiles())
+            {
+                fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+            }
+            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+            {
+                DirectoryInfo nextTargetSubDir =
+                    target.CreateSubdirectory(diSourceSubDir.Name);
+                CopyAll(diSourceSubDir, nextTargetSubDir);
+            }
+        }
+        #endregion
         #endregion
         #region FileManagement
         /// <summary>
