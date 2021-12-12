@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
+using UnityEngine;
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -26,14 +26,14 @@ namespace SoulShard.Utils
         /// </summary>
         /// <typeparam name="T">the type of the collection</typeparam>
         /// <param name="list">the collection to compare</param>
+        /// <param name="compareTo">the value to compare the collection to</param>
         /// <returns>whether the list contains all of the same values</returns>
-        public static bool? ListIsRepeatedValues<T>(T[] list) where T : System.IEquatable<T>
+        public static bool? CollectionIsEqualToValue<T>(T[] list, T compareTo) where T : IEquatable<T>
         {
             if (list.Length == 0)
                 return null;
-            T start = list[0];
             foreach (T t in list)
-                if (!t.Equals(start))
+                if (!t.Equals(compareTo))
                     return false;
             return true;
         }
