@@ -37,6 +37,16 @@ namespace SoulShard.Utils
                     @return++;
             return @return;
         }
+        /// <summary>
+        /// removes all content in the string past the size value.
+        /// </summary>
+        /// <param name="str">the string to clamp</param>
+        /// <param name="size">the size of the returned string</param>
+        /// <returns>the clamped string</returns>
+        public static string ClampStringSize(string str, int size)
+        {
+            size = str.Length >= size ? size : str.Length;
+            return str.Substring(0, size);
+        }
     }
-
 }
