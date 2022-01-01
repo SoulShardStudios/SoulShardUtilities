@@ -8,7 +8,7 @@ namespace SoulShard.Utils
     /// </summary>
     /// <typeparam name="_chunkType"> the monobehavior component type of the chunk </typeparam>
     [Serializable]
-    public partial class ChunkMapInt2D<_chunkType>
+    public partial class ChunkMapInt2D<_chunkType> where _chunkType: class
     {
         #region Vars
         /// <summary>

@@ -5,7 +5,7 @@ namespace SoulShard.Utils
     // allows conversion between world positions and chunk positions.
     // essentially you can split chunk positions into the position of the chunk itself and the position inside the chunk
     // inner is inside, outer is outside. you can convert between world and those two or do both at once.
-    public partial class ChunkMapInt2D<_chunkType> where _chunkType : MonoBehaviour
+    public partial class ChunkMapInt2D<_chunkType>
     {
         #region Single Item Public Getters
         /// <summary>
