@@ -66,6 +66,8 @@ namespace SoulShard.Utils
             chunkmap.chunks.Add(chunkPosition, chunk);
             return chunk;
         }
+        #region Gizmos
+        void OnDrawGizmos() => DrawGizmoBorders();
         /// <summary>
         /// draws boundaries on all the chunks for debugging
         /// </summary>
@@ -77,6 +79,6 @@ namespace SoulShard.Utils
             foreach (KeyValuePair<Vector2Int, T> k in chunkmap.chunks)
                 GizmosUtility.DrawRect(new Rect(Vector2.zero, chunkmap.chunkSizeV2I), chunkmap.PPU, k.Value.gameObject.transform.position);
         }
-
+        #endregion
     }
 }
