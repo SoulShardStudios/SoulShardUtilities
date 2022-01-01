@@ -9,7 +9,6 @@ namespace SoulShard.Utils
     /// <typeparam name="_chunkType"> the monobehavior component type of the chunk </typeparam>
     [Serializable]
     public partial class ChunkMapInt2D<_chunkType>
-        where _chunkType : MonoBehaviour
     {
         #region Vars
         /// <summary>
@@ -30,41 +29,10 @@ namespace SoulShard.Utils
         /// pixels per unit that the chunks are using
         /// </summary>
         [HideInInspector] public int PPU = 1;
-        /// <summary>
-        /// should Gizmos for thechunk borders be drawn?
-        /// </summary>
-        public bool drawChunkBorders;
-        /// <summary>
-        /// the color for the chunk border gizmos
-        /// </summary>
-        public Color chunkBorderColor;
-
         #endregion
-        #region Constructors
-        public ChunkMapInt2D(Color chunkBorderColor, uint chunkSize = 1, bool drawChunkBorders = true)
+        public ChunkMapInt2D(uint chunkSize = 1)
         {
             this.chunkSize = chunkSize;
-            this.chunkBorderColor = chunkBorderColor;
-            this.drawChunkBorders = drawChunkBorders;
-        }
-        public ChunkMapInt2D(uint chunkSize = 1, bool drawChunkBorders = true)
-        {
-            this.chunkSize = chunkSize;
-            chunkBorderColor = Color.white;
-            this.drawChunkBorders = drawChunkBorders;
-        }
-        #endregion
-        #region Funcs
-        /// <summary>
-        /// draws boundaries on all the chunks for debugging
-        /// </summary>
-        public void DrawGizmoBorders()
-        {
-            Gizmos.color = chunkBorderColor;
-            if (!drawChunkBorders)
-                return;
-            foreach (KeyValuePair<Vector2Int, _chunkType> k in chunks)
-                GizmosUtility.DrawRect(new Rect(Vector2.zero, chunkSizeV2I), PPU, k.Value.gameObject.transform.position);
         }
         /// <summary>
         /// gets a specific chunk. this is needed to make sure idiots don't cause a keynotfoundexception when acessing the dictionary
@@ -76,6 +44,5 @@ namespace SoulShard.Utils
             try { return chunks[position]; }
             catch (KeyNotFoundException) { return null; }
         }
-        #endregion
     }
 }

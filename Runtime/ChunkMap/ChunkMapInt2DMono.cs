@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -25,10 +26,19 @@ namespace SoulShard.Utils
         /// </summary>
         protected string chunkName;
         /// <summary>
+        /// should Gizmos for thechunk borders be drawn?
+        /// </summary>
+        public bool drawChunkBorders;
+        /// <summary>
+        /// the color for the chunk border gizmos
+        /// </summary>
+        public Color chunkBorderColor;
+        #region PPU
+        int _ppu;
+        /// <summary>
         /// the pixels per unit of the environment. this is used for scaling based on pixels per unit for 2D games. 
         /// if you don't want to scale anything leave this at 1
         /// </summary>
-        int _ppu;
         public int pixelsPerUnit
         {
             set
@@ -39,6 +49,7 @@ namespace SoulShard.Utils
             }
             get => _ppu;
         }
+        #endregion
         /// <summary>
         /// Adds a chunk to the chunkmap
         /// </summary>
@@ -55,5 +66,17 @@ namespace SoulShard.Utils
             chunkmap.chunks.Add(chunkPosition, chunk);
             return chunk;
         }
+        /// <summary>
+        /// draws boundaries on all the chunks for debugging
+        /// </summary>
+        public void DrawGizmoBorders()
+        {
+            Gizmos.color = chunkBorderColor;
+            if (!drawChunkBorders)
+                return;
+            foreach (KeyValuePair<Vector2Int, T> k in chunkmap.chunks)
+                GizmosUtility.DrawRect(new Rect(Vector2.zero, chunkmap.chunkSizeV2I), chunkmap.PPU, k.Value.gameObject.transform.position);
+        }
+
     }
 }

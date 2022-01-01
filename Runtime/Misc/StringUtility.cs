@@ -27,13 +27,13 @@ namespace SoulShard.Utils
         /// gets the number of characters in a string
         /// </summary>
         /// <param name="str">the string to analyze</param>
-        /// <param name="delim">the delimiter</param>
+        /// <param name="charToCount">the character to count in the string</param>
         /// <returns>the number of char occurences</returns>
-        public static int GetNumberOfCharsInStr(string str, char delim)
+        public static int GetNumberOfCharsInStr(string str, char charToCount)
         {
             int @return = 0;
             for (int i = 0; i < str.Length; i++)
-                if (str[i] == delim)
+                if (str[i] == charToCount)
                     @return++;
             return @return;
         }
