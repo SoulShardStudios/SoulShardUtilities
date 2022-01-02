@@ -8,6 +8,7 @@ Usage:
  - use the package! all functionality is within the SoulShard namespace.
 
 Includes alot of functionality:
+ - A better scene management utility
  - Various Vector Math Helper Functions, and General Math Utilities
  - A basic sound manager
  - General Timer Class
