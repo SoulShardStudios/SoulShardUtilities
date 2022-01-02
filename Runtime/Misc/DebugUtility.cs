@@ -73,14 +73,7 @@ namespace SoulShard.Utils
                 Debug.Log(null);
                 return;
             }
-            string ToDebug = "";
-            T[] arr = collection.ToArray();
-            for (int i = 0; i < collection.Count(); i++)
-            {
-                string comma = (i + 1 != collection.Count() ? ", " : "");
-                ToDebug += arr[i]?.ToString() + comma;
-            }
-            Debug.Log(ToDebug);
+            Debug.Log(StringUtility.BetterCollectionToString(collection));
         }
         /// <summary>
         /// Debugs the contents of a collection
@@ -94,14 +87,7 @@ namespace SoulShard.Utils
                 Debug.Log(null);
                 return;
             }
-            string ToDebug = "";
-            T[] arr = collection.ToArray();
-            for (int i = 0; i < collection.Count(); i++)
-            {
-                string comma = (i + 1 != collection.Count() ? ", " : "");
-                ToDebug += stringConversion(arr[i]) + comma;
-            }
-            Debug.Log(ToDebug);
+            Debug.Log(StringUtility.BetterCollectionToString(collection, stringConversion));
         }
     }
 }

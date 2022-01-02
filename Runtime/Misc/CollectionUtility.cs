@@ -1,5 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -125,6 +127,46 @@ namespace SoulShard.Utils
         public static bool PositionExists(Vector2Int position, Vector2Int size) =>
             position.x < size.x && position.y < size.y;
         #endregion
+        #endregion
+        #region Better To String
+        /// <summary>
+        /// converts the contents of a collection to a string, in a format where you can read the collection contents
+        /// </summary>
+        /// <typeparam name="T">the collection type</typeparam>
+        /// <param name="collection">the collection to convert</param>
+        /// <returns>the formatted string</returns>
+        public static string BetterCollectionToString<T>(IEnumerable<T> collection)
+        {
+            if (collection == null)
+                return null;
+            string @return = "";
+            T[] arr = collection.ToArray();
+            for (int i = 0; i < collection.Count(); i++)
+            {
+                string comma = (i + 1 != collection.Count() ? ", " : "");
+                @return += arr[i]?.ToString() + comma;
+            }
+            return @return;
+        }
+        /// <summary>
+        /// converts the contents of a collection to a string, in a format where you can read the collection contents
+        /// </summary>
+        /// <typeparam name="T">the collection type</typeparam>
+        /// <param name="collection">the collection to convert</param>
+        /// <returns>the formatted string</returns>
+        public static string BetterCollectionToString<T>(IEnumerable<T> collection, Func<T, string> stringConversion)
+        {
+            if (collection == null)
+                return null;
+            string @return = "";
+            T[] arr = collection.ToArray();
+            for (int i = 0; i < collection.Count(); i++)
+            {
+                string comma = (i + 1 != collection.Count() ? ", " : "");
+                @return += stringConversion(arr[i]) + comma;
+            }
+            return @return;
+        }
         #endregion
     }
 }
