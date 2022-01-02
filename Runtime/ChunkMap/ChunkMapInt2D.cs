@@ -93,6 +93,22 @@ namespace SoulShard.Utils
         /// <returns> the converted outer chunk positions </returns>
         public Vector2Int[] ConvertToOuterChunkPositionsJobUnique(Vector2Int[] positions) =>
             ChunkPositionJobs.ConvertToSingleChunkPositionsJob<ChunkPositionJobs.OuterChunkPositionConversionJob>(positions, chunkSizeV2I).Distinct().ToArray();
+        /// <summary>
+        /// converts an array of world positions to an array of chunk positions using unity jobs
+        /// </summary>
+        /// <param name="positions"> the positions to convert </param>
+        /// <returns> the converted chunk positions </returns>
+        public ChunkPosition[] ConvertToChunkPositionsJob(Vector2Int[] positions)
+        {
+            ChunkPosition[] @return = new ChunkPosition[positions.Length];
+            Unity.Collections.NativeArray<Vector2Int> n_positions = new Unity.Collections.NativeArray<Vector2Int>(positions, Unity.Collections.Allocator.TempJob);
+            Unity.Collections.NativeArray<ChunkPosition> n_inners = ChunkPositionJobs.StandardParallelChunkJob
+                <ChunkPositionJobs.ChunkPositionConversionJob, Unity.Collections.NativeArray<ChunkPosition>>(n_positions, chunkSizeV2I);
+            n_inners.CopyTo(@return);
+            n_inners.Dispose();
+            n_positions.Dispose();
+            return @return;
+        }
         #endregion
         #endregion
     }
