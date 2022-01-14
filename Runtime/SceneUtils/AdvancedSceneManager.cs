@@ -5,27 +5,23 @@ using System.Collections.Generic;
 using System.Linq;
 namespace SoulShard.Utils
 {
+    /// <summary>
+    /// An advanced scene management utility. handles more advanced functionality at the price of an always loaded master scene, that you must put this singleton into.
+    /// </summary>
     public class AdvancedSceneManager : MonoBehaviour
     {
         /// <summary>
         /// the singleton reference for this class. you should have this class in a separate, always loaded scene.
         /// </summary>
         public static AdvancedSceneManager Instance { get; private set; }
-        /// <summary>
-        /// scenes loaded when this object is enabled
-        /// </summary>
-        [SerializeField] string[] _loadOnEnable;
-        /// <summary>
-        /// scenes that will always be loaded
-        /// </summary>
-        [SerializeField] string[] _loadAlways;
+        [SerializeField] AdvancedSceneManagerProps props;
         void Awake()
         {
             Instance = this;
             SceneManager.sceneLoaded += OnLoad;
             SceneManager.sceneUnloaded += OnUnload;
-            Load(_loadAlways);
-            Load(_loadOnEnable);
+            Load(props.loadAlways);
+            Load(props.loadOnEnable);
         }
         #region Load
         /// <summary>
@@ -44,7 +40,7 @@ namespace SoulShard.Utils
         /// <param name="mode">the load scene mode</param>
         public void Load(string sceneName, LoadSceneMode mode = LoadSceneMode.Additive)
         {
-            if (!IsLoaded(sceneName))
+            if (!SceneUtility.IsLoaded(sceneName))
                 SceneManager.LoadScene(sceneName, mode);
         }
         #endregion
@@ -65,7 +61,7 @@ namespace SoulShard.Utils
         public void Unload(string sceneName)
         {
             if (!IsAlwaysLoadedScene(sceneName))
-                if (IsLoaded(sceneName))
+                if (SceneUtility.IsLoaded(sceneName))
                     SceneManager.UnloadSceneAsync(sceneName);
         }
         /// <summary>
@@ -125,7 +121,7 @@ namespace SoulShard.Utils
             var toCheck = isloaded ? toExecuteOnSceneLoaded : toExecuteOnSceneUnloaded;
             for (int i = 0; i < toCheck.Count; i++)
             {
-                if (IsLoaded(toCheck[i].Item1))
+                if (SceneUtility.IsLoaded(toCheck[i].Item1))
                 {
                     toCheck[i].Item2?.Invoke();
                     toCheck.RemoveAt(i);
@@ -133,38 +129,7 @@ namespace SoulShard.Utils
             }
         }
         #endregion
-        #region Is Loaded
-        /// <summary>
-        /// checks if the specified scene is loaded
-        /// </summary>
-        /// <param name="sceneName">the name of the scene to check</param>
-        /// <returns>whether the scene is loaded</returns>
-        public static bool IsLoaded(string sceneName)
-        {
-            for (int i = 0; i < SceneManager.sceneCount; i++)
-            {
-                Scene scene = SceneManager.GetSceneAt(i);
-                if (scene.name == sceneName)
-                    return true;
-            }
-            return false;
-        }
-        /// <summary>
-        /// checks if the collection of scenes is loaded
-        /// </summary>
-        /// <param name="sceneNames">the names of the scenes to check</param>
-        /// <returns>whether the collection of scenes is all loaded</returns>
-        public static bool IsLoaded(string[] sceneNames)
-        {
-            bool isLoaded = true;
-            foreach (string sceneName in sceneNames)
-                if (!IsLoaded(sceneName))
-                    isLoaded = false;
-            return isLoaded;
-        }
-        #endregion
         #region DependantScenes
-        [SerializeField] SceneToScene[] _loadWhileOtherIsLoaded;
         /// <summary>
         /// get all dependant scenes for a specfic scene
         /// </summary>
@@ -173,22 +138,22 @@ namespace SoulShard.Utils
         public string[] GetDependantScenes(string sceneName)
         {
             List<string> @return = new List<string>();
-            foreach (SceneToScene sts in _loadWhileOtherIsLoaded)
+            foreach (SceneToScene sts in props.loadWhileOtherIsLoaded)
             {
-                if (sts.OriginalScene == sceneName)
-                    @return.Add(sts.DependantScene);
+                if (sts.originalScene == sceneName)
+                    @return.Add(sts.dependantScene);
             }
             return @return.ToArray();
         }
         void CheckLoadWhileOtherIsActive()
         {
-            foreach (SceneToScene sts in _loadWhileOtherIsLoaded)
+            foreach (SceneToScene sts in props.loadWhileOtherIsLoaded)
             {
-                bool originalLoaded = IsLoaded(sts.OriginalScene);
+                bool originalLoaded = SceneUtility.IsLoaded(sts.originalScene);
                 if (originalLoaded)
-                    Load(sts.DependantScene);
+                    Load(sts.dependantScene);
                 else
-                    Unload(sts.DependantScene);
+                    Unload(sts.dependantScene);
             }
         }
         #endregion
@@ -198,13 +163,7 @@ namespace SoulShard.Utils
         /// </summary>
         /// <param name="sceneName">the name of the scene to check</param>
         /// <returns>whether the scene is always loaded</returns>
-        public bool IsAlwaysLoadedScene(string sceneName) => _loadAlways.Contains(sceneName);
+        public bool IsAlwaysLoadedScene(string sceneName) => props.loadAlways.Contains(sceneName);
         #endregion
-        [Serializable]
-        public struct SceneToScene
-        {
-            public string OriginalScene;
-            public string DependantScene;
-        }
     }
 }

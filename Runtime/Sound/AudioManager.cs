@@ -13,13 +13,13 @@ namespace SoulShard.Utils
         /// <summary>
         /// the singleton value for this class
         /// </summary>
-        public static AudioManager S { get; private set; }
+        public static AudioManager Instance { get; private set; }
         public SoundByte[] _sounds;
         #endregion
         #region Methods
         void Awake()
         {
-            S = this;
+            Instance = this;
             foreach (SoundByte S in _sounds)
                 InitializeAudioClip(S);
         }
