@@ -9,16 +9,17 @@ namespace SoulShard.Utils
     public class WorldRectFitToSprite : WorldRect
     {
         SpriteRenderer _renderer;
-        void OnEnable()
+        void Reset() => OnEnable();
+        void OnEnable() => Refresh();
+        /// <summary>
+        /// refrshes the bounds of the rect, and checks for a new sprite.
+        /// </summary>
+        public void Refresh()
         {
             _renderer = GetComponent<SpriteRenderer>();
-            Refresh();
+            bounds = new Rect(Vector2.zero, _renderer.sprite.rect.size);
         }
-        /// <summary>
-        /// call this method when the sprite is changed so the rect can update.
-        /// </summary>
-        public void Refresh() => bounds = new Rect(Vector2.zero, _renderer.sprite.rect.size);
-        void Reset() => OnEnable();
+
         /// <summary>
         /// the in world bounds of the rect
         /// </summary>
