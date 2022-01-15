@@ -419,7 +419,7 @@ namespace SoulShard.Math
         /// <param name="input">the input vector for the operation</param>
         /// <param name="modby">the value to modulo the vector by </param>
         /// <returns></returns>
-        public static Vector2 ModVector(Vector2 @input, int modby)
+        public static Vector2 ModVector(Vector2 @input, float modby)
         {
             float x = @input.x % modby;
             float y = @input.y % modby;
@@ -431,7 +431,7 @@ namespace SoulShard.Math
         /// <param name="input">the input vector for the operation</param>
         /// <param name="modby">the value to modulo the vector by </param>
         /// <returns></returns>
-        public static Vector3 ModVector(Vector3 @input, int modby)
+        public static Vector3 ModVector(Vector3 @input, float modby)
         {
             float x = @input.x % modby;
             float y = @input.y % modby;
@@ -444,7 +444,7 @@ namespace SoulShard.Math
         /// <param name="input">the input vector for the operation</param>
         /// <param name="modby">the value to modulo the vector by </param>
         /// <returns></returns>
-        public static Vector4 ModVector(Vector4 @input, int modby)
+        public static Vector4 ModVector(Vector4 @input, float modby)
         {
             float x = @input.x % modby;
             float y = @input.y % modby;
@@ -489,7 +489,7 @@ namespace SoulShard.Math
         /// <param name="input">the input vector for the operation</param>
         /// <param name="modby">the value to modulo the vector by </param>
         /// <returns></returns>
-        public static Vector2 PositiveModVector(Vector2 @input, int modby)
+        public static Vector2 PositiveModVector(Vector2 @input, float modby)
         {
             float x = MathUtility.PositiveMod(@input.x, modby);
             float y = MathUtility.PositiveMod(@input.y, modby);
@@ -501,7 +501,7 @@ namespace SoulShard.Math
         /// <param name="input">the input vector for the operation</param>
         /// <param name="modby">the value to modulo the vector by </param>
         /// <returns></returns>
-        public static Vector3 PositiveModVector(Vector3 @input, int modby)
+        public static Vector3 PositiveModVector(Vector3 @input, float modby)
         {
             float x = MathUtility.PositiveMod(@input.x, modby);
             float y = MathUtility.PositiveMod(@input.y, modby);
@@ -514,7 +514,7 @@ namespace SoulShard.Math
         /// <param name="input">the input vector for the operation</param>
         /// <param name="modby">the value to modulo the vector by </param>
         /// <returns></returns>
-        public static Vector4 PositiveModVector(Vector4 @input, int modby)
+        public static Vector4 PositiveModVector(Vector4 @input, float modby)
         {
             float x = MathUtility.PositiveMod(@input.x, modby);
             float y = MathUtility.PositiveMod(@input.y, modby);
