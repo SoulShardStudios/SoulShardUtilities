@@ -20,3 +20,4 @@ Includes alot of functionality:
  - More Debugging Methods
  - Dynamically Allocated Collision Meshes
  - with more being added and updated regularly!
+ - world scaled rects and rect ints (for custom AABB colliders, cheaper trigger detection, e.t.c.)
