@@ -22,6 +22,8 @@ namespace SoulShard.Animations
         {
             if (name == "")
                 return;
+            if (down != "")
+                return;
 
             // Cardinals.
             down = name + "Down";
