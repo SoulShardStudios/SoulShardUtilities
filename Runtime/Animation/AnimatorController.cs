@@ -1,13 +1,17 @@
 using UnityEngine;
-namespace SoulShard.Utils
+namespace SoulShard.Animations
 {
     /// <summary>
-    /// a simple animator controller, this allows for better 2D animation control.
+    /// A simple animator controller, this allows for better 2D animation control.
     /// </summary>
     public class AnimatorController : MonoBehaviour
     {
         [SerializeField] protected Animator _animator;
         string _currentState;
+        /// <summary>
+        /// Sets the current animation state to the state specified.
+        /// </summary>
+        /// <param name="state">The state to change to.</param>
         protected void ChangeAnimState(string state)
         {
             if (_currentState == state)
