@@ -14,6 +14,7 @@ namespace SoulShard.FileSystem
         /// <param name="path">the path to perform this operation with</param>
         public static void CreateDir(string path)
         {
+            path = PathUtility.ParsePath(path);
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
         }
@@ -23,6 +24,7 @@ namespace SoulShard.FileSystem
         /// <param name="path">the path to perform this operation with</param>
         public static void DeleteDir(string path)
         {
+            path = PathUtility.ParsePath(path);
             DirectoryInfo directory = new DirectoryInfo(path);
             directory.Delete();
         }
@@ -64,8 +66,9 @@ namespace SoulShard.FileSystem
         /// </summary>
         /// <param name="directory">the directory to search</param>
         /// <returns>the list of directories</returns>
-        public static string[] GetAllDirectoriesInDirectory(string directory)
+        public static string[] GetAllDirectories(string directory)
         {
+            directory = PathUtility.ParsePath(directory);
             List<string> @return = new List<string>();
             DirectoryInfo di = new DirectoryInfo(directory);
             foreach (DirectoryInfo dir in di.GetDirectories())
@@ -79,6 +82,7 @@ namespace SoulShard.FileSystem
         /// <returns>an array of file paths</returns>
         public static string[] GetAllFilePathsInDirectory(string directory)
         {
+            directory = PathUtility.ParsePath(directory);
             List<string> paths = new List<string>(0);
             if (!Directory.Exists(directory))
                 return null;
@@ -93,15 +97,15 @@ namespace SoulShard.FileSystem
         /// <returns> an array of file names</returns>
         public static string[] GetAllFileNamesInDirectory(string directory)
         {
+            directory = PathUtility.ParsePath(directory);
             string[] paths = GetAllFilePathsInDirectory(directory);
             if (paths == null)
                 return null;
             string[] names = new string[paths.Length];
             for (int i = 0; i < paths.Length; i++)
-                names[i] = FileUtility.GetFileName(paths[i]);
+                names[i] = FileUtility.GetName(paths[i]);
             return names;
         }
-
         #endregion
         #region Copy
         // thanks to https://code.4noobz.net/c-copy-a-folder-its-content-and-the-subfolders/
@@ -112,6 +116,8 @@ namespace SoulShard.FileSystem
         /// <param name="targetDirectory">the directory to copy to</param>
         public static void CopyDirectory(string sourceDirectory, string targetDirectory)
         {
+            sourceDirectory = PathUtility.ParsePath(sourceDirectory);
+            targetDirectory = PathUtility.ParsePath(targetDirectory);
             var diSource = new DirectoryInfo(sourceDirectory);
             var diTarget = new DirectoryInfo(targetDirectory);
             CopyAll(diSource, diTarget);

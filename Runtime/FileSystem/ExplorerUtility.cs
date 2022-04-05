@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace SoulShard.FileSystem
 {
     /// <summary>

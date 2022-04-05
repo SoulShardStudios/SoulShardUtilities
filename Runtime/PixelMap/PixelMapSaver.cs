@@ -68,7 +68,7 @@ namespace SoulShard.PixelMaps
             {
                 byte[] pngBytes = k.Value.texture.EncodeToPNG();
                 string filename = k.Value.gameObject.name + ".png";
-                FileUtility.MakeFile(path + filename, pngBytes);
+                FileUtility.Make(path + filename, pngBytes);
             }
         }
         /// <summary>
@@ -92,7 +92,7 @@ namespace SoulShard.PixelMaps
             // Filters contents for images.
             List<string> images = new List<string>(0);
             for (int i = 0; i < items.Length; i++)
-                if (FileUtility.GetFileExt(items[i]) == ".png")
+                if (FileUtility.GetExt(items[i]) == ".png")
                     images.Add(items[i]);
             if (images.Count == 0)
                 return;

@@ -8,17 +8,24 @@ namespace SoulShard.FileSystem
     {
         #region Single Make and Delete
         /// <summary>
-        /// makes a file at the given path with the given bytes
+        /// Makes a file at the given path with the given bytes.
         /// </summary>
         /// <param name="path">the path to perform this operation with</param>
         /// <param name="bytes">the bytes to write to the file</param>
-        public static void MakeFile(string path, byte[] bytes) => File.WriteAllBytes(path, bytes);
+        public static void Make(string path, byte[] bytes) => File.WriteAllBytes(PathUtility.ParsePath(path), bytes);
+        /// <summary>
+        /// Makes a file with the given text.
+        /// </summary>
+        /// <param name="path">The path of the file.</param>
+        /// <param name="text">The text of the file.</param>
+        public static void Make(string path, string text) => File.WriteAllText(PathUtility.ParsePath(path), text);
         /// <summary>
         /// deletes a file at a given path
         /// </summary>
         /// <param name="path">the path to perform this operation on</param>
-        public static void DeleteFile(string path)
+        public static void Delete(string path)
         {
+            path = PathUtility.ParsePath(path);
             FileInfo file = new FileInfo(path);
             file.Delete();
         }
@@ -29,26 +36,39 @@ namespace SoulShard.FileSystem
         /// </summary>
         /// <param name="path">the path to perform this operation with</param>
         /// <returns>the name of the file</returns>
-        public static string GetFileName(string path) => Path.GetFileName(path);
+        public static string GetName(string path) => Path.GetFileName(path);
         /// <summary>
         /// gets the file extension in a given path 
         /// </summary>
         /// <param name="path">the path to perform this operation with</param>
         /// <returns>the file extension</returns>
-        public static string GetFileExt(string path)
+        public static string GetExt(string path)
         {
+            path = PathUtility.ParsePath(path);
             FileInfo fi = new FileInfo(path);
             return fi.Extension;
         }
         /// <summary>
-        /// checks if a file at the given path is readonly
+        /// Checks if a file at the given path is readonly
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public static bool FileIsReadonly(string path)
+        /// <param name="path">The path to check.</param>
+        /// <returns>Whether the file is readonly.</returns>
+        public static bool IsReadonly(string path)
         {
+            path = PathUtility.ParsePath(path);
             FileInfo fi = new FileInfo(path);
             return fi.IsReadOnly;
+        }
+        /// <summary>
+        /// Checks if the file at the given path exists.
+        /// </summary>
+        /// <param name="path">The path to check.</param>
+        /// <returns>Whether the file exists.</returns>
+        public static bool Exists(string path)
+        {
+            path = PathUtility.ParsePath(path);
+            FileInfo fi = new FileInfo(path);
+            return fi.Exists;
         }
         #endregion
     }
