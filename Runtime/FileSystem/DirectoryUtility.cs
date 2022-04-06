@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace SoulShard.FileSystem
 {
     /// <summary>
-    /// contains multiple functions related to managing directories
+    /// Contains multiple functions related to managing directories.
     /// </summary>
     public static class DirectoryUtility
     {
@@ -140,5 +140,15 @@ namespace SoulShard.FileSystem
             }
         }
         #endregion
+        /// <summary>
+        /// Whether a directory exists.
+        /// </summary>
+        /// <param name="directory">The directory to check.</param>
+        /// <returns>Whether the directory exists.</returns>
+        public static bool Exists(string directory)
+        {
+            directory = PathUtility.ParsePath(directory);
+            return Directory.Exists(directory);
+        }
     }
 }

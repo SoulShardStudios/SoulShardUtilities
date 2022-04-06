@@ -13,6 +13,7 @@ namespace SoulShard.FileSystem
         /// <param name="path">the path to open file explorer at</param>
         public static void OpenFileExplorerAtPath(string path)
         {
+            path = PathUtility.ParsePath(path);
             path = path.Replace("/", @"\");
             System.Diagnostics.Process.Start(path);
         }
