@@ -1,21 +1,25 @@
 using UnityEngine;
-/// <summary>
-/// something classes that are initialized once, or initialized externally can inherit from.
-/// </summary>
-public class SingleInitMono : MonoBehaviour
+namespace SoulShard.Utils
 {
     /// <summary>
-    /// whether the Monobehavior has been initialized.
+    /// something classes that are initialized once, or initialized externally can inherit from.
     /// </summary>
-    [HideInInspector] public bool initialized;
-    /// <summary>
-    /// whether this Monobehavior is initialized externally
-    /// </summary>
-    public bool initializedExternally;
-    protected virtual void OnEnable()
+    public class SingleInitMono : MonoBehaviour
     {
-        if (!initializedExternally)
-            Init();
+        /// <summary>
+        /// whether the Monobehavior has been initialized.
+        /// </summary>
+        [HideInInspector] public bool initialized;
+        /// <summary>
+        /// whether this Monobehavior is initialized externally
+        /// </summary>
+        public bool initializedExternally;
+        protected virtual void OnEnable()
+        {
+            if (!initializedExternally)
+                Init();
+        }
+        public virtual void Init() { }
     }
-    public virtual void Init() { }
+
 }

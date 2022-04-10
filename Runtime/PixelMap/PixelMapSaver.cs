@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using SoulShard.Math;
 using SoulShard.FileSystem;
+using SoulShard.Utils;
 namespace SoulShard.PixelMaps
 {
     /// <summary>
