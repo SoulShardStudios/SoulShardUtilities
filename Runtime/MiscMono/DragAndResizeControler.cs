@@ -34,7 +34,6 @@ namespace SoulShard.Utils
         #region Movement
         Vector2 _dragOrigin;
         [SerializeField] int _dragButton;
-        [SerializeField] float _dragSpeed;
         void ProcessMovement()
         {
             Vector2 difference = new Vector2();
