@@ -150,7 +150,7 @@ namespace SoulShard.Utils
             foreach (SceneToScene sts in props.loadWhileOtherIsLoaded)
             {
                 if (SceneUtility.IsLoaded(sts.dependantScene))
-                    return;
+                    continue;
                 if (SceneUtility.IsLoaded(sts.originalScene))
                     Load(sts.dependantScene);
                 else
