@@ -12,7 +12,7 @@ namespace SoulShard.FileSystem
         /// creates a directory
         /// </summary>
         /// <param name="path">the path to perform this operation with</param>
-        public static void CreateDir(string path)
+        public static void Create(string path)
         {
             path = PathUtility.ParsePath(path);
             if (!Directory.Exists(path))
@@ -22,9 +22,10 @@ namespace SoulShard.FileSystem
         /// deletes a folder at a given path
         /// </summary>
         /// <param name="path">the path to perform this operation with</param>
-        public static void DeleteDir(string path)
+        public static void Delete(string path)
         {
             path = PathUtility.ParsePath(path);
+            DeleteAllContents(path);
             DirectoryInfo directory = new DirectoryInfo(path);
             directory.Delete();
         }
@@ -34,17 +35,19 @@ namespace SoulShard.FileSystem
         /// deletes all contents (files and folders from a given directory
         /// </summary>
         /// <param name="path">the path to perform this operation with</param>
-        public static void DeleteAllContentsInDirectory(string path)
+        public static void DeleteAllContents(string path)
         {
-            DeleteAllFilesInDirectory(path);
-            DeleteAllFoldersInDirectory(path);
+            path = PathUtility.ParsePath(path);
+            DeleteAllFiles(path);
+            DeleteAllFolders(path);
         }
         /// <summary>
         /// deletes all folders from a given directory
         /// </summary>
         /// <param name="path">the path to perform this operation with</param>
-        public static void DeleteAllFoldersInDirectory(string path)
+        public static void DeleteAllFolders(string path)
         {
+            path = PathUtility.ParsePath(path);
             DirectoryInfo di = new DirectoryInfo(path);
             foreach (DirectoryInfo dir in di.GetDirectories())
                 dir.Delete(true);
@@ -52,10 +55,11 @@ namespace SoulShard.FileSystem
         /// <summary>
         /// deletes all files in a given directory
         /// </summary>
-        /// <param name="directory">the directory to perform this operation on</param>
-        public static void DeleteAllFilesInDirectory(string directory)
+        /// <param name="path">the directory to perform this operation on</param>
+        public static void DeleteAllFiles(string path)
         {
-            DirectoryInfo di = new DirectoryInfo(directory);
+            path = PathUtility.ParsePath(path);
+            DirectoryInfo di = new DirectoryInfo(path);
             foreach (FileInfo file in di.GetFiles())
                 file.Delete();
         }
@@ -64,13 +68,13 @@ namespace SoulShard.FileSystem
         /// <summary>
         /// gets the paths of all directories within this directory
         /// </summary>
-        /// <param name="directory">the directory to search</param>
+        /// <param name="path">the directory to search</param>
         /// <returns>the list of directories</returns>
-        public static string[] GetAllDirectories(string directory)
+        public static string[] GetAllDirectories(string path)
         {
-            directory = PathUtility.ParsePath(directory);
+            path = PathUtility.ParsePath(path);
             List<string> @return = new List<string>();
-            DirectoryInfo di = new DirectoryInfo(directory);
+            DirectoryInfo di = new DirectoryInfo(path);
             foreach (DirectoryInfo dir in di.GetDirectories())
                 @return.Add(dir.FullName);
             return @return.ToArray();
@@ -78,27 +82,27 @@ namespace SoulShard.FileSystem
         /// <summary>
         /// gets all file paths in a given directory
         /// </summary>
-        /// <param name="directory"></param>
+        /// <param name="path"></param>
         /// <returns>an array of file paths</returns>
-        public static string[] GetAllFilePathsInDirectory(string directory)
+        public static string[] GetAllFilePaths(string path)
         {
-            directory = PathUtility.ParsePath(directory);
+            path = PathUtility.ParsePath(path);
             List<string> paths = new List<string>(0);
-            if (!Directory.Exists(directory))
+            if (!Directory.Exists(path))
                 return null;
-            foreach (var path in Directory.GetFiles(directory))
-                paths.Add(path);
+            foreach (var filePath in Directory.GetFiles(path))
+                paths.Add(filePath);
             return paths.ToArray();
         }
         /// <summary>
         /// gets all file names in a given directory
         /// </summary>
-        /// <param name="directory">the directory to perform this operation with</param>
+        /// <param name="path">the directory to perform this operation with</param>
         /// <returns> an array of file names</returns>
-        public static string[] GetAllFileNamesInDirectory(string directory)
+        public static string[] GetAllFileNames(string path)
         {
-            directory = PathUtility.ParsePath(directory);
-            string[] paths = GetAllFilePathsInDirectory(directory);
+            path = PathUtility.ParsePath(path);
+            string[] paths = GetAllFilePaths(path);
             if (paths == null)
                 return null;
             string[] names = new string[paths.Length];
@@ -112,14 +116,14 @@ namespace SoulShard.FileSystem
         /// <summary>
         /// copies all contents of the source directory to the target directory
         /// </summary>
-        /// <param name="sourceDirectory">the directory to copy from</param>
-        /// <param name="targetDirectory">the directory to copy to</param>
-        public static void CopyDirectory(string sourceDirectory, string targetDirectory)
+        /// <param name="source">the directory to copy from</param>
+        /// <param name="target">the directory to copy to</param>
+        public static void Copy(string source, string target)
         {
-            sourceDirectory = PathUtility.ParsePath(sourceDirectory);
-            targetDirectory = PathUtility.ParsePath(targetDirectory);
-            var diSource = new DirectoryInfo(sourceDirectory);
-            var diTarget = new DirectoryInfo(targetDirectory);
+            source = PathUtility.ParsePath(source);
+            target = PathUtility.ParsePath(target);
+            var diSource = new DirectoryInfo(source);
+            var diTarget = new DirectoryInfo(target);
             CopyAll(diSource, diTarget);
         }
         /// <summary>

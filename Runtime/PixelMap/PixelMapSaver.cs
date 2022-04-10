@@ -57,11 +57,11 @@ namespace SoulShard.PixelMaps
                 return;
 
             // make sure the directory exists
-            DirectoryUtility.CreateDir(path);
+            DirectoryUtility.Create(path);
 
             // Delete all of its contents, as we have new contents to give it.
             // Difference analysis could be done, but this was easier :)
-            DirectoryUtility.DeleteAllContentsInDirectory(path);
+            DirectoryUtility.DeleteAllContents(path);
 
             // Encodes all chunks as png and makes the files.
             foreach (KeyValuePair<Vector2Int, PixelChunk> k in _map.chunkmap.chunks)
@@ -85,7 +85,7 @@ namespace SoulShard.PixelMaps
                 return;
 
             // Get all files.
-            string[] items = DirectoryUtility.GetAllFilePathsInDirectory(path);
+            string[] items = DirectoryUtility.GetAllFilePaths(path);
             if (items == null)
                 return;
 

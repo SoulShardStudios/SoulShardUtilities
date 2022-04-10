@@ -1,8 +1,8 @@
 {
   "name": "com.soulshardstudios.soulshardutilities",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "displayName": "SoulShardUtilities",
-  "description": "A collection of usefull project independant functions and constants",
+  "description": "A collection of usefull project independant functions, constants, and utilities.",
   "unity": "2019.1",
   "unityRelease": "0b5",
   "documentationUrl": "",
@@ -23,5 +23,6 @@
   "author": {
     "name": "SoulShardStudios",
     "email": "SoulShardStudios@gmail.com"
-  }
+  },
+  "type": "library"
 }
