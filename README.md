@@ -22,6 +22,6 @@ Includes alot of functionality:
 - Array Helpers (conversions, generation, e.t.c.)
 - More Debugging Methods
 - Dynamically Allocated Collision Meshes
-- with more being added and updated regularly!
 - world scaled rects and rect ints (for custom AABB colliders, cheaper trigger detection, e.t.c.)
 - PixelMap: an infinitely tileable, editable image, with a bunch of customization.
+- with more being added and updated regularly!
