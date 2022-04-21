@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
-using SoulShard.Math;
 using SoulShard.FileSystem;
 using SoulShard.Utils;
 namespace SoulShard.PixelMaps
@@ -50,65 +48,14 @@ namespace SoulShard.PixelMaps
         /// <summary>
         /// Save the pixel maps data.
         /// </summary>
-        public void SaveData()
-        {
-            // Get Path.
-            string path = GetPath();
-            if (path == null)
-                return;
-
-            // make sure the directory exists
-            DirectoryUtility.Create(path);
-
-            // Delete all of its contents, as we have new contents to give it.
-            // Difference analysis could be done, but this was easier :)
-            DirectoryUtility.DeleteAllContents(path);
-
-            // Encodes all chunks as png and makes the files.
-            foreach (KeyValuePair<Vector2Int, PixelChunk> k in _map.chunkmap.chunks)
-            {
-                byte[] pngBytes = k.Value.texture.EncodeToPNG();
-                string filename = k.Value.gameObject.name + ".png";
-                FileUtility.Make(path + filename, pngBytes);
-            }
-        }
+        public void SaveData() => PixelMapSerializationUtility.SerializeData(GetPath(), _map);
         /// <summary>
         /// Load the pixel maps data.
         /// </summary>
         public void LoadData()
         {
-            // Totally resets the map.
             _map.HardReset();
-
-            // Get path.
-            string path = GetPath();
-            if (path == null)
-                return;
-
-            // Get all files.
-            string[] items = DirectoryUtility.GetAllFilePaths(path);
-            if (items == null)
-                return;
-
-            // Filters contents for images.
-            List<string> images = new List<string>(0);
-            for (int i = 0; i < items.Length; i++)
-                if (FileUtility.GetExt(items[i]) == ".png")
-                    images.Add(items[i]);
-            if (images.Count == 0)
-                return;
-
-            // Maps the chunks to their positions in world space based off their file name
-            Dictionary<Vector2Int, Texture2D> chunkPositionToTexture = new Dictionary<Vector2Int, Texture2D>();
-            for (int i = 0; i < images.Count; i++)
-                chunkPositionToTexture.Add(VectorParser.ParseVector2IntFromString(images[i]), AssetUtility.LoadTexture2D(images[i], TextureFormat.RGBA32, false));
-            
-            // Uses the map to initialize the chunks.
-            foreach (KeyValuePair<Vector2Int, Texture2D> k in chunkPositionToTexture)
-            {
-                k.Value.name = k.Key.ToString();
-                _map.AddChunk(k.Key, k.Value);
-            }
+            PixelMapSerializationUtility.LoadPixelMapData(GetPath(), _map);
         }
     }
 }

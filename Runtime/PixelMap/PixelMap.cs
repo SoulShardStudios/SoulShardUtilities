@@ -162,6 +162,7 @@ namespace SoulShard.PixelMaps
         /// <param name="changeCallback">Whether this should trigger the change callback.</param>
         /// <returns>A reference to the recently added chunk.</returns>
         public virtual PixelChunk AddChunk(Vector2Int chunkPosition, bool changeCallback = true) => AddChunk(chunkPosition, _emptyTexture, changeCallback);
+
         /// <summary>
         /// Adds a chunk to the map at a given position.
         /// </summary>
@@ -179,6 +180,7 @@ namespace SoulShard.PixelMaps
                 MapChangeCallbackForChunkTextureModification(chunkPosition, tex);
             return chunk;
         }
+
         /// <summary>
         /// Set the texture at any existing chunk.
         /// </summary>
@@ -192,6 +194,7 @@ namespace SoulShard.PixelMaps
             chunkmap.GetChunk(chunkPosition).SetTexture(tex);
             MapChangeCallbackForChunkTextureModification(chunkPosition, tex);
         }
+
         /// <summary>
         /// Get a reference to the texture at any given chunk position.
         /// </summary>
@@ -199,6 +202,7 @@ namespace SoulShard.PixelMaps
         /// <returns>A reference to that chunks texture.</returns>
         public virtual Texture2D GetChunkTexture(Vector2Int chunkPosition) =>
             chunkmap?.GetChunk(chunkPosition)?.texture;
+
         /// <summary>
         /// When an entire chunk texture is edited, not the inner pixels, this manages the callback for those changes.
         /// </summary>
@@ -212,6 +216,7 @@ namespace SoulShard.PixelMaps
             Pixels.Item1 = VectorMath.TranslateVectorArray(Pixels.Item1, chunkPosition * (int)chunkmap.chunkSize);
             mapChangeCallback?.Invoke(Pixels.Item1, Pixels.Item2, this);
         }
+
         /// <summary>
         /// Apply the texture changes at any given chunk.
         /// This is usually done automatically, but if you are managing texture
@@ -224,6 +229,20 @@ namespace SoulShard.PixelMaps
             AddChunk(chunkPosition);
             PixelChunk chunk = chunkmap.GetChunk(chunkPosition);
             chunk?.texture.Apply();
+        }
+
+        /// <summary>
+        /// For each Vector2Int to Texture pairing,
+        /// the chunk at that position with that texture.
+        /// </summary>
+        /// <param name="data">The data to apply to this map.</param>
+        public virtual void ApplyData(Dictionary<Vector2Int, Texture2D> data)
+        {
+            foreach (KeyValuePair<Vector2Int, Texture2D> k in data)
+            {
+                k.Value.name = k.Key.ToString();
+                AddChunk(k.Key, k.Value);
+            }
         }
         #endregion
     }
