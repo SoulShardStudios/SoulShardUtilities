@@ -31,6 +31,7 @@ namespace SoulShard.PixelMaps
                 FileUtility.Make(path + filename, pngBytes);
             }
         }
+
         /// <summary>
         /// Given a path to some serialized pixel map data this will fetch and deserialize all of that information.
         /// </summary>
@@ -60,6 +61,12 @@ namespace SoulShard.PixelMaps
                 chunkPositionToTexture.Add(VectorParser.ParseVector2IntFromString(images[i]), AssetUtility.LoadTexture2D(images[i], TextureFormat.RGBA32, false));
             return chunkPositionToTexture;
         }
+
+        /// <summary>
+        /// For the given pixel map, take the pixel map data at path, and apply it to the pixelmap.
+        /// </summary>
+        /// <param name="path">The location of the path of the serialized pixelmap.</param>
+        /// <param name="map">The map to apply this data to.</param>
         public static void LoadPixelMapData(string path, PixelMap map) => map.ApplyData(DeserializePixelMapData(path));
     }
 }
