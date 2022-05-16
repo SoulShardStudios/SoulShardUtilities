@@ -2,11 +2,13 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace SoulShard.Utils
 {
     public static class DebugUtility
     {
         public const string Units = "In Miliseconds";
+
         /// <summary>
         /// gets the difference between two points in time in Milliseconds
         /// </summary>
@@ -14,6 +16,7 @@ namespace SoulShard.Utils
         /// <param name="b">starting time</param>
         /// <returns>the difference in milliseconds</returns>
         public static float GetDiffInMS(float a, float b) => Mathf.Abs(a - b) * 1000f;
+
         public static float SpeedTest(Action a)
         {
             float _start = Time.realtimeSinceStartup;
@@ -21,6 +24,7 @@ namespace SoulShard.Utils
             float _end = Time.realtimeSinceStartup;
             return GetDiffInMS(_start, _end);
         }
+
         /// <summary>
         /// debugs the completion time and operation name for the given task
         /// </summary>
@@ -48,19 +52,25 @@ namespace SoulShard.Utils
             }
             return diffs;
         }
+
         /// <summary>
         /// debugs the completion times for a list of actions
-        /// </summary>
+        /// /// </summary>
         /// <param name="actions">the list tasks to test for</param>
         /// <param name="taskNames">the names of the tasks</param>
         /// <param name="testName">the name of the entire test</param>
-        public static void SpeedTestDebug(Action[] actions, string[] taskNames = null, string? testName = null)
+        public static void SpeedTestDebug(
+            Action[] actions,
+            string[] taskNames = null,
+            string? testName = null
+        )
         {
             float[] speedTestResults = SpeedTest(actions);
             Debug.Log(testName != null ? testName : "Test");
             for (int i = 0; i < speedTestResults.Length; i++)
                 Debug.Log((taskNames?[i] ?? i.ToString(), Units, speedTestResults[i]));
         }
+
         /// <summary>
         /// Debugs the contents of a collection
         /// </summary>
@@ -75,12 +85,16 @@ namespace SoulShard.Utils
             }
             Debug.Log(CollectionUtility.BetterCollectionToString(collection));
         }
+
         /// <summary>
         /// Debugs the contents of a collection
         /// </summary>
         /// <typeparam name="T">the collection type</typeparam>
         /// <param name="collection">the collection to debug</param>
-        public static void LogCollection<T>(IEnumerable<T> collection, Func<T,string> stringConversion)
+        public static void LogCollection<T>(
+            IEnumerable<T> collection,
+            Func<T, string> stringConversion
+        )
         {
             if (collection == null)
             {

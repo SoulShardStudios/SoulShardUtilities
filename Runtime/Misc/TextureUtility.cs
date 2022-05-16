@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -12,7 +13,12 @@ namespace SoulShard.Utils
         /// <param name="tex">the texture to modify the properties of</param>
         /// <param name="format">the new format for the texture</param>
         /// <param name="mipChain">the new mipchain value for the texture</param>
-        public static void ConvertTexture2DFormat(ref Texture2D tex, TextureFormat format, bool mipChain) => tex = ConvertTexture2DFormat(tex, format, mipChain);
+        public static void ConvertTexture2DFormat(
+            ref Texture2D tex,
+            TextureFormat format,
+            bool mipChain
+        ) => tex = ConvertTexture2DFormat(tex, format, mipChain);
+
         /// <summary>
         /// converts the format of a Texture2D
         /// </summary>
@@ -20,7 +26,11 @@ namespace SoulShard.Utils
         /// <param name="format">the new format for the texture</param>
         /// <param name="mipChain">the new mipchain value for the texture</param>
         /// <returns>the edited texture</returns>
-        public static Texture2D ConvertTexture2DFormat(Texture2D tex, TextureFormat format, bool mipChain)
+        public static Texture2D ConvertTexture2DFormat(
+            Texture2D tex,
+            TextureFormat format,
+            bool mipChain
+        )
         {
             //Create new empty Texture
             Texture2D @return = new Texture2D(tex.width, tex.height, format, mipChain);
@@ -30,6 +40,7 @@ namespace SoulShard.Utils
             @return.Apply();
             return @return;
         }
+
         /// <summary>
         /// generates a completely empty texture according to the color specified
         /// </summary>
@@ -38,14 +49,25 @@ namespace SoulShard.Utils
         /// <param name="format">the format of the new texture</param>
         /// <param name="mipChain">the mipchain value of the new texture</param>
         /// <returns>the new empty texture</returns>
-        public static Texture2D GenerateEmptyTexture(int size, Color color, TextureFormat format = TextureFormat.RGBA32, bool mipChain = true)
+        public static Texture2D GenerateEmptyTexture(
+            int size,
+            Color color,
+            TextureFormat format = TextureFormat.RGBA32,
+            bool mipChain = true
+        )
         {
             Texture2D @return = new Texture2D(size, size, format, mipChain);
-            @return.SetPixels(0, 0, size, size,
-                CollectionUtility.GenerateNewArray(size * size, color));
+            @return.SetPixels(
+                0,
+                0,
+                size,
+                size,
+                CollectionUtility.GenerateNewArray(size * size, color)
+            );
             @return.Apply();
             return @return;
         }
+
         /// <summary>
         /// gets the proper texture2d from a spritesheet or regular sprites
         /// </summary>
@@ -55,8 +77,16 @@ namespace SoulShard.Utils
         {
             if (Sprite != null)
             {
-                var @return = new Texture2D((int)Sprite.textureRect.width, (int)Sprite.textureRect.height);
-                var pixels = Sprite.texture.GetPixels((int)Sprite.textureRect.x, (int)Sprite.textureRect.y, (int)Sprite.textureRect.width, (int)Sprite.textureRect.height);
+                var @return = new Texture2D(
+                    (int)Sprite.textureRect.width,
+                    (int)Sprite.textureRect.height
+                );
+                var pixels = Sprite.texture.GetPixels(
+                    (int)Sprite.textureRect.x,
+                    (int)Sprite.textureRect.y,
+                    (int)Sprite.textureRect.width,
+                    (int)Sprite.textureRect.height
+                );
                 @return.SetPixels(pixels);
                 @return.Apply();
                 @return.name = Sprite.name;

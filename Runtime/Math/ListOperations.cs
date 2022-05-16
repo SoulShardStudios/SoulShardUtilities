@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+
 namespace SoulShard.Math
 {
     // this is just so that you can easily apply operations to an entire list without having to write a few lines of code each time
@@ -19,6 +20,7 @@ namespace SoulShard.Math
                 arr[i] += amount;
             return arr;
         }
+
         /// <summary>
         /// subtracts a value to an entire list
         /// </summary>
@@ -31,6 +33,7 @@ namespace SoulShard.Math
                 arr[i] -= amount;
             return arr;
         }
+
         /// <summary>
         /// multiplies a value to an entire list
         /// </summary>
@@ -43,6 +46,7 @@ namespace SoulShard.Math
                 arr[i] *= amount;
             return arr;
         }
+
         /// <summary>
         /// divides a value to an entire list
         /// </summary>
@@ -55,6 +59,7 @@ namespace SoulShard.Math
                 arr[i] /= amount;
             return arr;
         }
+
         /// <summary>
         /// applies a given operation to all values in a list
         /// </summary>
@@ -62,7 +67,11 @@ namespace SoulShard.Math
         /// <param name="amount">the amount given to the operation</param>
         /// <param name="operator">the operation</param>
         /// <returns>the modified collection</returns>
-        public static int[] ApplyOperationToList(int[] arr, int amount, Func<int, int, int> @operator)
+        public static int[] ApplyOperationToList(
+            int[] arr,
+            int amount,
+            Func<int, int, int> @operator
+        )
         {
             for (int i = 0; i < arr.Length; i++)
                 arr[i] = @operator(arr[i], amount);
@@ -82,6 +91,7 @@ namespace SoulShard.Math
                 arr[i] += amount;
             return arr;
         }
+
         /// <summary>
         /// subtracts a value to an entire list
         /// </summary>
@@ -94,6 +104,7 @@ namespace SoulShard.Math
                 arr[i] -= amount;
             return arr;
         }
+
         /// <summary>
         /// multiplies a value to an entire list
         /// </summary>
@@ -106,6 +117,7 @@ namespace SoulShard.Math
                 arr[i] *= amount;
             return arr;
         }
+
         /// <summary>
         /// divides a value to an entire list
         /// </summary>
@@ -118,6 +130,7 @@ namespace SoulShard.Math
                 arr[i] /= amount;
             return arr;
         }
+
         /// <summary>
         /// applies a given operation to all values in a list
         /// </summary>
@@ -125,10 +138,14 @@ namespace SoulShard.Math
         /// <param name="amount">the amount given to the operation</param>
         /// <param name="operator">the operation</param>
         /// <returns>the modified collection</returns>
-        public static float[] ApplyOperationToList(float[] arr, float amount, Func<float,float,float> @operator)
+        public static float[] ApplyOperationToList(
+            float[] arr,
+            float amount,
+            Func<float, float, float> @operator
+        )
         {
             for (int i = 0; i < arr.Length; i++)
-                arr[i] = @operator(arr[i],amount);
+                arr[i] = @operator(arr[i], amount);
             return arr;
         }
         #endregion

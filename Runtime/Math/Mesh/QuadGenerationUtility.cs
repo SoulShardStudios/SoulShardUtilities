@@ -1,6 +1,7 @@
 using UnityEngine;
 using SoulShard.Math;
 using Unity.Collections;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -17,13 +18,19 @@ namespace SoulShard.Utils
         /// <param name="size">the size of the quad</param>
         /// <param name="allocation">the allocation for the native arrays</param>
         /// <returns>the generated quad</returns>
-        public static NativeArray<Vector3> GetNativeQuad(Vector2 position, Vector3 scale, Vector3 size, Allocator allocation)
+        public static NativeArray<Vector3> GetNativeQuad(
+            Vector2 position,
+            Vector3 scale,
+            Vector3 size,
+            Allocator allocation
+        )
         {
             NativeArray<Vector3> verts = GetNativeQuadPositions(size, allocation);
             for (int i = 0; i < verts.Length; i++)
                 verts[i] = VectorMath.MultiplyVector(verts[i] + (Vector3)position, scale);
             return verts;
         }
+
         static NativeArray<Vector3> GetNativeQuadPositions(Vector3 size, Allocator allocation)
         {
             (Vector3Int, Vector3) @params = GetOrientationAndAdjustedSize(size);
@@ -69,22 +76,41 @@ namespace SoulShard.Utils
             verts = VectorMath.MultiplyVectorArray(verts, scale);
             return (verts, VectorConstants.QuadIndicies());
         }
+
         static Vector3[] GetQuadPositions(Vector3 size)
         {
-            (Vector3Int,Vector3) @params = GetOrientationAndAdjustedSize(size);
+            (Vector3Int, Vector3) @params = GetOrientationAndAdjustedSize(size);
             Vector3Int absOrientation = @params.Item1;
             size = @params.Item2;
             if (absOrientation == VectorConstants.zyInt)
-                return new Vector3[] { new Vector3(0, 0, size.z), new Vector3(0, size.y, size.z), Vector3.zero, new Vector3(0, size.y, 0) };
+                return new Vector3[]
+                {
+                    new Vector3(0, 0, size.z),
+                    new Vector3(0, size.y, size.z),
+                    Vector3.zero,
+                    new Vector3(0, size.y, 0)
+                };
             if (absOrientation == VectorConstants.zxInt)
-                return new Vector3[] { new Vector3(0, 0, size.z), new Vector3(size.x, 0, size.z), Vector3.zero, new Vector3(size.x, 0, 0) };
+                return new Vector3[]
+                {
+                    new Vector3(0, 0, size.z),
+                    new Vector3(size.x, 0, size.z),
+                    Vector3.zero,
+                    new Vector3(size.x, 0, 0)
+                };
             if (absOrientation == VectorConstants.yxInt)
-                return new Vector3[] { new Vector3(0, size.y, 0), new Vector3(size.x, size.y, 0), Vector3.zero, new Vector3(size.x, 0, 0) };
+                return new Vector3[]
+                {
+                    new Vector3(0, size.y, 0),
+                    new Vector3(size.x, size.y, 0),
+                    Vector3.zero,
+                    new Vector3(size.x, 0, 0)
+                };
             return null;
         }
         #endregion
 
-        static (Vector3Int,Vector3) GetOrientationAndAdjustedSize(Vector3 size)
+        static (Vector3Int, Vector3) GetOrientationAndAdjustedSize(Vector3 size)
         {
             // if a is not zero, set it to either positive one or negative one. this is so the orientation is correct
             #region Orientation Calc

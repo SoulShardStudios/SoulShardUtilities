@@ -1,5 +1,6 @@
 using UnityEngine;
 using SoulShard.Math;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -9,8 +10,10 @@ namespace SoulShard.Utils
     {
         public static Vector2Int GetOuterChunkPos(Vector2Int position, Vector2Int size) =>
             VectorMath.FloorVector((Vector2)position / size);
+
         public static Vector2Int GetInnerChunkPos(Vector2Int position, Vector2Int size) =>
             VectorMath.PositiveModVector(position, size.x);
+
         public static ChunkPosition GetChunkPos(Vector2Int position, Vector2Int size) =>
             new ChunkPosition(GetOuterChunkPos(position, size), GetInnerChunkPos(position, size));
     }

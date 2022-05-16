@@ -1,0 +1,22 @@
+{
+    "name": "SoulShard.PixelMap",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6555a624b5585ea4cba9cea41d98bfd4",
+        "GUID:1b28749ed95a7764689d6f11cbae9f58",
+        "GUID:09b8d01a88f6fc2428e2c783d2431a85",
+        "GUID:8dbe0a64940faed42bb7005b414749df",
+        "GUID:2665a8d13d1b3f18800f46e256720795",
+        "GUID:e0cd26848372d4e5c891c569017e11f1",
+        "GUID:6ca081c0695ec8146818339932296f9f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

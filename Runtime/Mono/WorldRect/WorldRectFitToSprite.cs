@@ -1,5 +1,6 @@
 using UnityEngine;
 using SoulShard.Math;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -9,8 +10,11 @@ namespace SoulShard.Utils
     public class WorldRectFitToSprite : WorldRect
     {
         SpriteRenderer _renderer;
+
         void Reset() => OnEnable();
+
         void OnEnable() => Refresh();
+
         /// <summary>
         /// refrshes the bounds of the rect, and checks for a new sprite.
         /// </summary>
@@ -28,8 +32,11 @@ namespace SoulShard.Utils
         {
             Rect translatedBounds = bounds;
             Vector2 absscale = VectorMath.AbsVector(transform.localScale);
-            translatedBounds.position += (Vector2)transform.position - (_renderer.sprite.pivot / _renderer.sprite.pixelsPerUnit * absscale);
-            translatedBounds.size = translatedBounds.size / _renderer.sprite.pixelsPerUnit * absscale;
+            translatedBounds.position +=
+                (Vector2)transform.position
+                - (_renderer.sprite.pivot / _renderer.sprite.pixelsPerUnit * absscale);
+            translatedBounds.size =
+                translatedBounds.size / _renderer.sprite.pixelsPerUnit * absscale;
             return translatedBounds;
         }
     }

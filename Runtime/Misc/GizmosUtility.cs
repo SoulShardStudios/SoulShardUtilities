@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -30,6 +31,7 @@ namespace SoulShard.Utils
             Gizmos.DrawLine(positions[2], positions[3]);
             Gizmos.DrawLine(positions[3], positions[0]);
         }
+
         /// <summary>
         /// draws a rect with some given parameters with unity gizmos
         /// </summary>

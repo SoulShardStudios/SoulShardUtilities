@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -7,9 +8,11 @@ namespace SoulShard.Utils
     [System.Serializable]
     public class Sound
     {
-        [Range(0f, 1f)] public float Volume;
-        [Range(.1f, 3f)] public float Pitch;
+        [Range(0f, 1f)]
+        public float Volume;
+
+        [Range(.1f, 3f)]
+        public float Pitch;
         public AudioClip audio;
     }
-
 }

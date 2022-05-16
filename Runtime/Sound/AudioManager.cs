@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -9,7 +10,9 @@ namespace SoulShard.Utils
     public class AudioManager : MonoBehaviour
     {
         #region Vars
-        [SerializeField] AudioMixerGroup _mixer;
+        [SerializeField]
+        AudioMixerGroup _mixer;
+
         /// <summary>
         /// the singleton value for this class
         /// </summary>
@@ -23,6 +26,7 @@ namespace SoulShard.Utils
             foreach (SoundByte S in _sounds)
                 InitializeAudioClip(S);
         }
+
         /// <summary>
         /// converts a name to a given SoundByte stored in the AudioManagers
         /// </summary>
@@ -37,6 +41,7 @@ namespace SoulShard.Utils
                     return S;
             return null;
         }
+
         #region AudioClip Management Methods
         void InitializeAudioClip(SoundByte sound)
         {
@@ -50,6 +55,7 @@ namespace SoulShard.Utils
             if (sound.PlayOnAwake)
                 sound.Source.Play();
         }
+
         void RandomizeAudioClip(SoundByte sound)
         {
             if (sound == null)
@@ -70,16 +76,19 @@ namespace SoulShard.Utils
             RandomizeAudioClip(sound);
             sound?.Source.Play();
         }
+
         /// <summary>
         /// stop playing a specific sound if its currently playing
         /// </summary>
         /// <param name="sound">the SoundByte to stop playing</param>
         public void StopSound(SoundByte sound) => sound?.Source.Stop();
+
         /// <summary>
         /// stop playing a specific sound if its currently playing
         /// </summary>
         /// <param name="SoundName">the name of the sound to stop playing</param>
         public void StopSound(string SoundName) => StopSound(ConvertSoundNameToSound(SoundName));
+
         /// <summary>
         /// Play a specific sound
         /// </summary>

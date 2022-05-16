@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace SoulShard.Animations
 {
     /// <summary>
@@ -6,8 +7,10 @@ namespace SoulShard.Animations
     /// </summary>
     public class AnimatorController : MonoBehaviour
     {
-        [SerializeField] protected Animator _animator;
+        [SerializeField]
+        protected Animator _animator;
         string _currentState;
+
         /// <summary>
         /// Sets the current animation state to the state specified.
         /// </summary>

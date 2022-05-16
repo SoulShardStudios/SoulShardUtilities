@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Collections;
 using SoulShard.Math;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -13,10 +14,12 @@ namespace SoulShard.Utils
         /// the verticies of the mesh
         /// </summary>
         public NativeList<Vector3> verticies;
+
         /// <summary>
         /// the indicies of the mesh
         /// </summary>
         public NativeList<int> indicies;
+
         /// <summary>
         /// indicates whether this object has allocated its memory or not
         /// </summary>
@@ -33,6 +36,7 @@ namespace SoulShard.Utils
             indicies = new NativeList<int>(0, allocation);
             allocated = true;
         }
+
         /// <summary>
         /// disposes all native collections inside of the DynamicMesh. (MUST CALL AFTER YOU'VE GENERATED AND ARE DONE WITH THE MESH)
         /// </summary>
@@ -44,6 +48,7 @@ namespace SoulShard.Utils
             indicies.Dispose();
             allocated = false;
         }
+
         /// <summary>
         /// clears the mesh data
         /// </summary>
@@ -60,6 +65,7 @@ namespace SoulShard.Utils
         /// <param name="geometry">the geometry to add</param>
         public void AddGeometry((NativeArray<Vector3>, NativeArray<int>) geometry) =>
             AddGeometry(geometry.Item1, geometry.Item2);
+
         /// <summary>
         /// add a piece of geometry to the mesh
         /// </summary>

@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -9,17 +10,20 @@ namespace SoulShard.Utils
         /// <summary>
         /// whether the Monobehavior has been initialized.
         /// </summary>
-        [HideInInspector] public bool initialized;
+        [HideInInspector]
+        public bool initialized;
+
         /// <summary>
         /// whether this Monobehavior is initialized externally
         /// </summary>
         public bool initializedExternally;
+
         protected virtual void OnEnable()
         {
             if (!initializedExternally)
                 Init();
         }
+
         public virtual void Init() { }
     }
-
 }

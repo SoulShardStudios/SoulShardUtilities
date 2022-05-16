@@ -6,7 +6,6 @@ namespace SoulShard.Animations
     /// </summary>
     public struct AnimDirections
     {
-
         // Cardinals.
         public string down;
         public string up;
@@ -18,6 +17,7 @@ namespace SoulShard.Animations
         public string upLeft;
         public string downRight;
         public string upRight;
+
         public void ApplyNameToAll(string name)
         {
             if (name == "")

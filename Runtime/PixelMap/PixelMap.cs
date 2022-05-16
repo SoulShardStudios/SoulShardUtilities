@@ -16,33 +16,45 @@ namespace SoulShard.PixelMaps
         /// <summary>
         /// Whether this pixelmap should send updates via mapChangeCallback when it is updated.
         /// </summary>
-        [SerializeField] bool shouldCallbackChanges;
+        [SerializeField]
+        bool shouldCallbackChanges;
+
         /// <summary>
         /// The callback for when this is edited.
         /// </summary>
         public Action<Vector2Int[], Color[], PixelMap> mapChangeCallback;
+
         /// <summary>
         /// The callback for when the whole map is cleared.
         /// </summary>
         public Action mapClearCallback;
+
         #region Chunk Vars
         /// <summary>
         /// The transparency of the map.
         /// </summary>
         [Header(header: "chunk size MUST be an odd number")]
-        [Range(0, 1)] [SerializeField] float _transparency = 1;
+        [Range(0, 1)]
+        [SerializeField]
+        float _transparency = 1;
+
         /// <summary>
         /// The sorting layer of the map.
         /// </summary>
-        [SerializeField] string _sortLayer;
+        [SerializeField]
+        string _sortLayer;
+
         /// <summary>
         /// The sorting order of the map.
         /// </summary>
-        [SerializeField] int _sortOrder;
+        [SerializeField]
+        int _sortOrder;
+
         /// <summary>
         /// The empty color of this map.
         /// </summary>
         public Color emptyPixelColor;
+
         /// <summary>
         /// The empty texture that gets copied to new chunks.
         /// </summary>
@@ -53,7 +65,12 @@ namespace SoulShard.PixelMaps
         /// <summary>
         /// Init the empty texture on enable.
         /// </summary>
-        protected virtual void OnEnable() => _emptyTexture = TextureUtility.GenerateEmptyTexture((int)chunkmap.chunkSize, emptyPixelColor, mipChain: false);
+        protected virtual void OnEnable() =>
+            _emptyTexture = TextureUtility.GenerateEmptyTexture(
+                (int)chunkmap.chunkSize,
+                emptyPixelColor,
+                mipChain: false
+            );
         #endregion
         #region Getters And Setters
         /// <summary>
@@ -74,16 +91,22 @@ namespace SoulShard.PixelMaps
             if (apply)
                 chunk?.texture.Apply();
         }
+
         /// <summary>
         /// Sets all given pixel positions to this color.
         /// </summary>
         /// <param name="color">The color to set all positions to.</param>
         /// <param name="positions">The pixel positions to edit.</param>
-        public virtual void SetPixels(Color color, Vector2Int[] positions) 
+        public virtual void SetPixels(Color color, Vector2Int[] positions)
         {
-            mapChangeCallback?.Invoke(positions, CollectionUtility.GenerateNewArray(positions.Length,color), this);
+            mapChangeCallback?.Invoke(
+                positions,
+                CollectionUtility.GenerateNewArray(positions.Length, color),
+                this
+            );
             Jobs.EditJobScedule<Color32, Jobs.SetPixelsJobSingleColor>(positions, color, this);
         }
+
         /// <summary>
         /// Sets a group of pixels.
         /// </summary>
@@ -92,10 +115,14 @@ namespace SoulShard.PixelMaps
         public virtual void SetPixels(Color[] colors, Vector2Int[] positions)
         {
             mapChangeCallback?.Invoke(positions, colors, this);
-            NativeArray<Color32> n_colors = new NativeArray<Color32>(_ColorUtility.ConvertColorArrToColor32Arr(colors), Allocator.TempJob);
+            NativeArray<Color32> n_colors = new NativeArray<Color32>(
+                _ColorUtility.ConvertColorArrToColor32Arr(colors),
+                Allocator.TempJob
+            );
             Jobs.EditJobScedule<NativeArray<Color32>, Jobs.SetPixelsJob>(positions, n_colors, this);
             n_colors.Dispose();
         }
+
         /// <summary>
         /// Gets the color of a given pixel.
         /// </summary>
@@ -109,6 +136,7 @@ namespace SoulShard.PixelMaps
             PixelChunk chunk = chunkmap.chunks[chunkmap.GetOuterChunkPos(position)];
             return chunk.texture.GetPixel(innerChunkPos.x, innerChunkPos.y);
         }
+
         /// <summary>
         /// Gets the colors of all pixels at a given position.
         /// </summary>
@@ -116,7 +144,10 @@ namespace SoulShard.PixelMaps
         /// <returns>The color of the pixels.</returns>
         public virtual Color[] GetPixels(Vector2Int[] positions)
         {
-            NativeArray<Color32> n_colors = new NativeArray<Color32>(positions.Length, Allocator.TempJob);
+            NativeArray<Color32> n_colors = new NativeArray<Color32>(
+                positions.Length,
+                Allocator.TempJob
+            );
             for (int i = 0; i < n_colors.Length; i++)
                 n_colors[i] = emptyPixelColor;
             Jobs.EditJobScedule<NativeArray<Color32>, Jobs.GetPixelsJob>(positions, n_colors, this);
@@ -143,6 +174,7 @@ namespace SoulShard.PixelMaps
                 MapChangeCallbackForChunkTextureModification(k.Key, k.Value.texture);
             }
         }
+
         /// <summary>
         /// Totally deletes all chunks.
         /// </summary>
@@ -161,7 +193,8 @@ namespace SoulShard.PixelMaps
         /// <param name="chunkPosition">The position of the new chunk.</param>
         /// <param name="changeCallback">Whether this should trigger the change callback.</param>
         /// <returns>A reference to the recently added chunk.</returns>
-        public virtual PixelChunk AddChunk(Vector2Int chunkPosition, bool changeCallback = true) => AddChunk(chunkPosition, _emptyTexture, changeCallback);
+        public virtual PixelChunk AddChunk(Vector2Int chunkPosition, bool changeCallback = true) =>
+            AddChunk(chunkPosition, _emptyTexture, changeCallback);
 
         /// <summary>
         /// Adds a chunk to the map at a given position.
@@ -170,12 +203,23 @@ namespace SoulShard.PixelMaps
         /// <param name="tex">The texture to initialize this chunk with.</param>
         /// <param name="changeCallback">Whether this should trigger the change callback.</param>
         /// <returns>A reference to the recently added chunk.</returns>
-        public virtual PixelChunk AddChunk(Vector2Int chunkPosition, Texture2D tex, bool changeCallback = true)
+        public virtual PixelChunk AddChunk(
+            Vector2Int chunkPosition,
+            Texture2D tex,
+            bool changeCallback = true
+        )
         {
             PixelChunk chunk = base.AddChunk(chunkPosition);
             if (chunk == null)
                 return null;
-            chunk.Init(chunkmap.chunkSize, _sortLayer, _sortOrder, _transparency, tex, pixelsPerUnit);
+            chunk.Init(
+                chunkmap.chunkSize,
+                _sortLayer,
+                _sortOrder,
+                _transparency,
+                tex,
+                pixelsPerUnit
+            );
             if (changeCallback)
                 MapChangeCallbackForChunkTextureModification(chunkPosition, tex);
             return chunk;
@@ -208,12 +252,21 @@ namespace SoulShard.PixelMaps
         /// </summary>
         /// <param name="chunkPosition">The position of the chunk the changes occured to.</param>
         /// <param name="texture">The new texture this chunk received.</param>
-        public void MapChangeCallbackForChunkTextureModification(Vector2Int chunkPosition, Texture2D texture)
+        public void MapChangeCallbackForChunkTextureModification(
+            Vector2Int chunkPosition,
+            Texture2D texture
+        )
         {
             if (!shouldCallbackChanges)
                 return;
-            (Vector2Int[], Color[]) Pixels = PixelConversionUtility.GetPixelsFromTexture2D(texture, emptyPixelColor);
-            Pixels.Item1 = VectorMath.TranslateVectorArray(Pixels.Item1, chunkPosition * (int)chunkmap.chunkSize);
+            (Vector2Int[], Color[]) Pixels = PixelConversionUtility.GetPixelsFromTexture2D(
+                texture,
+                emptyPixelColor
+            );
+            Pixels.Item1 = VectorMath.TranslateVectorArray(
+                Pixels.Item1,
+                chunkPosition * (int)chunkmap.chunkSize
+            );
             mapChangeCallback?.Invoke(Pixels.Item1, Pixels.Item2, this);
         }
 

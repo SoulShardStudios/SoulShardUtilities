@@ -1,4 +1,5 @@
 using System;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -12,6 +13,7 @@ namespace SoulShard.Utils
         /// <param name="str">the string to reverse</param>
         /// <returns>the reversed string</returns>
         public static string ReverseString(ref string str) => str = ReverseString(str);
+
         /// <summary>
         /// reverses a string. hahaha becomes ahahah
         /// </summary>
@@ -23,8 +25,9 @@ namespace SoulShard.Utils
             Array.Reverse(chararr);
             return new string(chararr);
         }
+
         /// <summary>
-        /// gets the number of characters in a string
+        /// gets the number of character occurences in a string
         /// </summary>
         /// <param name="str">the string to analyze</param>
         /// <param name="charToCount">the character to count in the string</param>
@@ -37,6 +40,7 @@ namespace SoulShard.Utils
                     @return++;
             return @return;
         }
+
         /// <summary>
         /// removes all content in the string past the size value.
         /// </summary>

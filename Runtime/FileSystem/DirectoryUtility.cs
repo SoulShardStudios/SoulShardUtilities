@@ -1,5 +1,6 @@
 using System.IO;
 using System.Collections.Generic;
+
 namespace SoulShard.FileSystem
 {
     /// <summary>
@@ -18,6 +19,7 @@ namespace SoulShard.FileSystem
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
         }
+
         /// <summary>
         /// deletes a folder at a given path
         /// </summary>
@@ -41,6 +43,7 @@ namespace SoulShard.FileSystem
             DeleteAllFiles(path);
             DeleteAllFolders(path);
         }
+
         /// <summary>
         /// deletes all folders from a given directory
         /// </summary>
@@ -52,6 +55,7 @@ namespace SoulShard.FileSystem
             foreach (DirectoryInfo dir in di.GetDirectories())
                 dir.Delete(true);
         }
+
         /// <summary>
         /// deletes all files in a given directory
         /// </summary>
@@ -79,6 +83,7 @@ namespace SoulShard.FileSystem
                 @return.Add(dir.FullName);
             return @return.ToArray();
         }
+
         /// <summary>
         /// gets all file paths in a given directory
         /// </summary>
@@ -94,6 +99,7 @@ namespace SoulShard.FileSystem
                 paths.Add(filePath);
             return paths.ToArray();
         }
+
         /// <summary>
         /// gets all file names in a given directory
         /// </summary>
@@ -126,6 +132,7 @@ namespace SoulShard.FileSystem
             var diTarget = new DirectoryInfo(target);
             CopyAll(diSource, diTarget);
         }
+
         /// <summary>
         /// copies all contents of the source directory to the target directory
         /// </summary>
@@ -138,8 +145,7 @@ namespace SoulShard.FileSystem
                 fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
             foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
             {
-                DirectoryInfo nextTargetSubDir =
-                    target.CreateSubdirectory(diSourceSubDir.Name);
+                DirectoryInfo nextTargetSubDir = target.CreateSubdirectory(diSourceSubDir.Name);
                 CopyAll(diSourceSubDir, nextTargetSubDir);
             }
         }

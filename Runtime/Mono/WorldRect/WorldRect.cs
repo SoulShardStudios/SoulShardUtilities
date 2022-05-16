@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -11,6 +12,7 @@ namespace SoulShard.Utils
         /// the virtual rect that gets translated to its world position
         /// </summary>
         public Rect bounds;
+
         /// <summary>
         /// the in world bounds of the rect
         /// </summary>
@@ -19,10 +21,12 @@ namespace SoulShard.Utils
         {
             Rect translatedBounds = bounds;
             Vector2 absscale = Math.VectorMath.AbsVector(transform.localScale);
-            translatedBounds.position += (Vector2)transform.position - translatedBounds.size / 2 * absscale;
+            translatedBounds.position +=
+                (Vector2)transform.position - translatedBounds.size / 2 * absscale;
             translatedBounds.size *= absscale;
             return translatedBounds;
         }
+
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.green;

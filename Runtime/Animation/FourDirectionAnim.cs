@@ -12,10 +12,12 @@ namespace SoulShard.Animations
         /// Applies a name to all animations, with the name of the direction appended afterwards.
         /// </summary>
         public string name;
+
         /// <summary>
         /// Set the names of the animations you want to use exactly with this.
         /// </summary>
         public AnimDirections animDirs;
+
         /// <summary>
         /// Gets the animation name for the specified direction.
         /// </summary>
@@ -27,7 +29,13 @@ namespace SoulShard.Animations
             if (direction == Vector2.zero)
                 return animDirs.down;
             else
-                return direction.y == 0 ? direction.x > 0 ? animDirs.right : animDirs.left : direction.y > 0 ? animDirs.up : animDirs.down;
+                return direction.y == 0
+                  ? direction.x > 0
+                      ? animDirs.right
+                      : animDirs.left
+                  : direction.y > 0
+                      ? animDirs.up
+                      : animDirs.down;
         }
     }
 }

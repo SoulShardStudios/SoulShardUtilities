@@ -18,6 +18,7 @@ namespace SoulShard.Math
                 mod += (int)m;
             return (uint)mod;
         }
+
         /// <summary>
         /// function for computing positive modulus
         /// </summary>
@@ -31,6 +32,7 @@ namespace SoulShard.Math
                 mod += m;
             return mod;
         }
+
         /// <summary>
         /// function for computing positive modulus
         /// </summary>

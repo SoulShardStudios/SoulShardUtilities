@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -8,10 +9,13 @@ namespace SoulShard.Utils
     {
         #region Management
         public static DragAndResizeControler Instance { get; private set; }
+
         /// <summary>
         /// The camera to process the movement of based on the mouse position.
         /// </summary>
-        [SerializeField] Camera _camera;
+        [SerializeField]
+        Camera _camera;
+
         void Update()
         {
             ProcessZoom();
@@ -19,7 +23,11 @@ namespace SoulShard.Utils
         }
         #endregion
         #region Zoom
-        [SerializeField] float _zoomSpeed, _minZoom, _maxZoom;
+        [SerializeField]
+        float _zoomSpeed,
+            _minZoom,
+            _maxZoom;
+
         void ProcessZoom()
         {
             float scrollDelta = Input.mouseScrollDelta.y * -1;
@@ -33,7 +41,10 @@ namespace SoulShard.Utils
         #endregion
         #region Movement
         Vector2 _dragOrigin;
-        [SerializeField] int _dragButton;
+
+        [SerializeField]
+        int _dragButton;
+
         void ProcessMovement()
         {
             Vector2 difference = new Vector2();

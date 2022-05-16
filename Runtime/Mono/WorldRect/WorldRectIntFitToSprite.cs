@@ -1,7 +1,9 @@
 using UnityEngine;
+
 namespace SoulShard.Utils
 {
     using Math;
+
     /// <summary>
     /// fits a world rect int to a sprite
     /// </summary>
@@ -9,7 +11,9 @@ namespace SoulShard.Utils
     public class WorldRectIntFitToSprite : WorldRectInt
     {
         SpriteRenderer _renderer;
+
         private void OnEnable() => Refresh();
+
         /// <summary>
         /// refrshes the bounds of the rect, and checks for a new sprite.
         /// </summary>

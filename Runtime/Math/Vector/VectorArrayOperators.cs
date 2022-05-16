@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+
 namespace SoulShard.Math
 {
     public partial struct VectorMath
@@ -11,7 +12,10 @@ namespace SoulShard.Math
         /// <param name="toBeTranslated">the array to be translated</param>
         /// <param name="translateBy">the value to translate by</param>
         /// <returns>the translated array</returns>
-        public static Vector2Int[] TranslateVectorArray(Vector2Int[] toBeTranslated, Vector2Int translateBy)
+        public static Vector2Int[] TranslateVectorArray(
+            Vector2Int[] toBeTranslated,
+            Vector2Int translateBy
+        )
         {
             Vector2Int[] @return = new Vector2Int[toBeTranslated.Length];
             if (toBeTranslated == null)
@@ -20,13 +24,17 @@ namespace SoulShard.Math
                 @return[i] = toBeTranslated[i] + translateBy;
             return @return;
         }
+
         /// <summary>
         /// translates every vector in an array by the given vector
         /// </summary>
         /// <param name="toBeTranslated">the array to be translated</param>
         /// <param name="translateBy">the value to translate by</param>
         /// <returns>the translated array</returns>
-        public static Vector3Int[] TranslateVectorArray(Vector3Int[] toBeTranslated, Vector3Int translateBy)
+        public static Vector3Int[] TranslateVectorArray(
+            Vector3Int[] toBeTranslated,
+            Vector3Int translateBy
+        )
         {
             Vector3Int[] @return = new Vector3Int[toBeTranslated.Length];
             if (toBeTranslated == null)
@@ -35,6 +43,7 @@ namespace SoulShard.Math
                 @return[i] = toBeTranslated[i] + translateBy;
             return @return;
         }
+
         /// <summary>
         /// translates every vector in an array by the given vector
         /// </summary>
@@ -50,6 +59,7 @@ namespace SoulShard.Math
                 @return[i] = toBeTranslated[i] + translateBy;
             return @return;
         }
+
         /// <summary>
         /// translates every vector in an array by the given vector
         /// </summary>
@@ -65,6 +75,7 @@ namespace SoulShard.Math
                 @return[i] = toBeTranslated[i] + translateBy;
             return @return;
         }
+
         /// <summary>
         /// translates every vector in an array by the given vector
         /// </summary>
@@ -97,6 +108,7 @@ namespace SoulShard.Math
             hash.CopyTo(@return);
             return @return;
         }
+
         /// <summary>
         /// translates a collection of vectors to every point in the array
         /// </summary>
@@ -120,7 +132,10 @@ namespace SoulShard.Math
         /// <param name="toBeMultiplied">the array to be multiplied</param>
         /// <param name="multiplyBy">the value to be multiplied</param>
         /// <returns>the multiplied array</returns>
-        public static Vector2Int[] MultiplyVectorArray(Vector2Int[] toBeMultiplied, Vector2Int multiplyBy)
+        public static Vector2Int[] MultiplyVectorArray(
+            Vector2Int[] toBeMultiplied,
+            Vector2Int multiplyBy
+        )
         {
             Vector2Int[] @return = new Vector2Int[toBeMultiplied.Length];
             if (toBeMultiplied == null)
@@ -129,13 +144,17 @@ namespace SoulShard.Math
                 @return[i] = toBeMultiplied[i] * multiplyBy;
             return @return;
         }
+
         /// <summary>
         /// multiplies every vector in a vector array
         /// </summary>
         /// <param name="toBeMultiplied">the array to be multiplied</param>
         /// <param name="multiplyBy">the value to be multiplied</param>
         /// <returns>the multiplied array</returns>
-        public static Vector3Int[] MultiplyVectorArray(Vector3Int[] toBeMultiplied, Vector3Int multiplyBy)
+        public static Vector3Int[] MultiplyVectorArray(
+            Vector3Int[] toBeMultiplied,
+            Vector3Int multiplyBy
+        )
         {
             Vector3Int[] @return = new Vector3Int[toBeMultiplied.Length];
             if (toBeMultiplied == null)
@@ -144,6 +163,7 @@ namespace SoulShard.Math
                 @return[i] = toBeMultiplied[i] * multiplyBy;
             return @return;
         }
+
         /// <summary>
         /// multiplies every vector in a vector array
         /// </summary>
@@ -159,6 +179,7 @@ namespace SoulShard.Math
                 @return[i] = toBeMultiplied[i] * multiplyBy;
             return @return;
         }
+
         /// <summary>
         /// multiplies every vector in a vector array
         /// </summary>
@@ -174,6 +195,7 @@ namespace SoulShard.Math
                 @return[i] = MultiplyVector(toBeMultiplied[i], multiplyBy);
             return @return;
         }
+
         /// <summary>
         /// multiplies every vector in a vector array
         /// </summary>
@@ -206,6 +228,7 @@ namespace SoulShard.Math
                 @return[i] = DivideVector(toBeDivided[i], divideBy);
             return @return;
         }
+
         /// <summary>
         /// divides every vector in a vector array
         /// </summary>
@@ -221,6 +244,7 @@ namespace SoulShard.Math
                 @return[i] = DivideVector(toBeDivided[i], divideBy);
             return @return;
         }
+
         /// <summary>
         /// divides every vector in a vector array
         /// </summary>
@@ -236,6 +260,7 @@ namespace SoulShard.Math
                 @return[i] = toBeDivided[i] / divideBy;
             return @return;
         }
+
         /// <summary>
         /// divides every vector in a vector array
         /// </summary>
@@ -251,6 +276,7 @@ namespace SoulShard.Math
                 @return[i] = DivideVector(toBeDivided[i], divideBy);
             return @return;
         }
+
         /// <summary>
         /// divides every vector in a vector array
         /// </summary>

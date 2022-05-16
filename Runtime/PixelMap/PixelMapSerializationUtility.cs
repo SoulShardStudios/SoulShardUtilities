@@ -2,6 +2,7 @@ using UnityEngine;
 using SoulShard.FileSystem;
 using System.Collections.Generic;
 using SoulShard.Math;
+
 namespace SoulShard.PixelMaps
 {
     public static class PixelMapSerializationUtility
@@ -56,9 +57,13 @@ namespace SoulShard.PixelMaps
                 return null;
 
             // Maps the chunks to their positions in world space based off their file name
-            Dictionary<Vector2Int, Texture2D> chunkPositionToTexture = new Dictionary<Vector2Int, Texture2D>();
+            Dictionary<Vector2Int, Texture2D> chunkPositionToTexture =
+                new Dictionary<Vector2Int, Texture2D>();
             for (int i = 0; i < images.Count; i++)
-                chunkPositionToTexture.Add(VectorParser.ParseVector2IntFromString(images[i]), AssetUtility.LoadTexture2D(images[i], TextureFormat.RGBA32, false));
+                chunkPositionToTexture.Add(
+                    VectorParser.ParseVector2IntFromString(images[i]),
+                    AssetUtility.LoadTexture2D(images[i], TextureFormat.RGBA32, false)
+                );
             return chunkPositionToTexture;
         }
 
@@ -67,6 +72,7 @@ namespace SoulShard.PixelMaps
         /// </summary>
         /// <param name="path">The location of the path of the serialized pixelmap.</param>
         /// <param name="map">The map to apply this data to.</param>
-        public static void LoadPixelMapData(string path, PixelMap map) => map.ApplyData(DeserializePixelMapData(path));
+        public static void LoadPixelMapData(string path, PixelMap map) =>
+            map.ApplyData(DeserializePixelMapData(path));
     }
 }
