@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -13,6 +14,7 @@ namespace SoulShard.Utils
         /// <param name="oldColors">the array of colors to convert from</param>
         public static void ConvertColorArrToColor32Arr(ref Color32[] colors, Color[] oldColors) =>
             colors = ConvertColorArrToColor32Arr(oldColors);
+
         /// <summary>
         /// converts a color array to a color32 array
         /// </summary>
@@ -25,6 +27,7 @@ namespace SoulShard.Utils
                 @return[i] = colors[i];
             return @return;
         }
+
         /// <summary>
         /// converts a color32 array to a color array
         /// </summary>
@@ -32,6 +35,7 @@ namespace SoulShard.Utils
         /// <param name="oldColors">he array of color32s to convert from</param>
         public static void ConvertColor32ArrToColorArr(ref Color[] colors, Color32[] oldColors) =>
             colors = ConvertColor32ArrToColorArr(oldColors);
+
         /// <summary>
         /// converts a color32 array to a color array
         /// </summary>

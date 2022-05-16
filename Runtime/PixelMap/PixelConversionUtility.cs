@@ -5,6 +5,7 @@ using Unity.Burst;
 using System.Collections.Generic;
 using SoulShard.Utils;
 using System.Linq;
+
 /// <summary>
 /// Converts a texture into pixel format (position,color)
 /// its much less compressed, but it needs to be uncompressed
@@ -26,8 +27,10 @@ public static class PixelConversionUtility
     /// <param name="tex2D">The texture2d to convert.</param>
     /// <param name="clearColor">color that should be filtered out of the output, as its considered clear. </param>
     /// <returns>The pixel output.</returns>
-    public static (Vector2Int[], Color[]) GetPixelsFromTexture2D(Texture2D tex2D, Color clearColor) =>
-        GetPixelsFromTexture2D(tex2D, new Color[] { clearColor });
+    public static (Vector2Int[], Color[]) GetPixelsFromTexture2D(
+        Texture2D tex2D,
+        Color clearColor
+    ) => GetPixelsFromTexture2D(tex2D, new Color[] { clearColor });
 
     /// <summary>
     /// Converts the given texture2d to pixel format.
@@ -35,12 +38,15 @@ public static class PixelConversionUtility
     /// <param name="tex2D">The texture2d to convert.</param>
     /// <param name="clearColors">colors that should be filtered out of the output, as they are "clear". </param>
     /// <returns>The pixel output.</returns>
-    public static (Vector2Int[], Color[]) GetPixelsFromTexture2D(Texture2D tex2D, Color[] clearColors)
+    public static (Vector2Int[], Color[]) GetPixelsFromTexture2D(
+        Texture2D tex2D,
+        Color[] clearColors
+    )
     {
         NativeArray<Color32> n_tex = tex2D.GetRawTextureData<Color32>();
         List<Color> colors = new List<Color>(0);
         List<Vector2Int> positions = new List<Vector2Int>(0);
-        for ( int i = 0; i < n_tex.Length; i++)
+        for (int i = 0; i < n_tex.Length; i++)
         {
             if (_ColorUtility.ConvertColorArrToColor32Arr(clearColors).Contains(n_tex[i]))
                 continue;
@@ -49,8 +55,6 @@ public static class PixelConversionUtility
         }
         return (positions.ToArray(), colors.ToArray());
     }
-
-    
 }
 
 // this was a jobs accelerated version that worked but was unstable, and you really don't need the extra performance

@@ -1,4 +1,5 @@
 using UnityEngine.SceneManagement;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -22,6 +23,7 @@ namespace SoulShard.Utils
             }
             return false;
         }
+
         /// <summary>
         /// checks if the collection of scenes is loaded
         /// </summary>

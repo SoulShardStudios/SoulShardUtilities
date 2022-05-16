@@ -2,7 +2,8 @@
     "name": "SoulShardUtilities.EditModeTests",
     "rootNamespace": "",
     "references": [
-        "SoulShardUtilities.Runtime"
+        "SoulShardUtilities.Runtime",
+        "SoulShard.Inventory"
     ],
     "includePlatforms": [
         "Editor"

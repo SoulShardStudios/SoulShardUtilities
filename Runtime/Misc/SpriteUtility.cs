@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -12,7 +13,16 @@ namespace SoulShard.Utils
         /// <param name="S">the sprite to modify the pivot of</param>
         /// <param name="Pivot">the pivot to set the sprite to</param>
         /// <returns>the modified sprite</returns>
-        public static Sprite SetPivot(Sprite S, Vector2 Pivot) { return Sprite.Create(S.texture, new Rect(0, 0, S.texture.width, S.texture.height), Pivot, 1); }
+        public static Sprite SetPivot(Sprite S, Vector2 Pivot)
+        {
+            return Sprite.Create(
+                S.texture,
+                new Rect(0, 0, S.texture.width, S.texture.height),
+                Pivot,
+                1
+            );
+        }
+
         /// <summary>
         /// gets the current sprite, and sets the pivot to the height of the pixel closest to the bottom of the image
         /// </summary>

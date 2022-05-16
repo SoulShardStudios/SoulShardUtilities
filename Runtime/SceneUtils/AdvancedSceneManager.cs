@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -14,7 +15,10 @@ namespace SoulShard.Utils
         /// the singleton reference for this class. you should have this class in a separate, always loaded scene.
         /// </summary>
         public static AdvancedSceneManager Instance { get; private set; }
-        [SerializeField] AdvancedSceneManagerProps props;
+
+        [SerializeField]
+        AdvancedSceneManagerProps props;
+
         void Awake()
         {
             Instance = this;
@@ -23,6 +27,7 @@ namespace SoulShard.Utils
             Load(props.loadAlways);
             Load(props.loadOnEnable);
         }
+
         #region Load
         /// <summary>
         /// loads a collection of scenes
@@ -33,6 +38,7 @@ namespace SoulShard.Utils
             for (int i = 0; i < sceneNames.Length; i++)
                 Load(sceneNames[i], LoadSceneMode.Additive);
         }
+
         /// <summary>
         /// loads a specific scene
         /// </summary>
@@ -54,6 +60,7 @@ namespace SoulShard.Utils
             for (int i = 0; i < sceneNames.Length; i++)
                 Unload(sceneNames[i]);
         }
+
         /// <summary>
         /// unloads a specific scene
         /// </summary>
@@ -64,6 +71,7 @@ namespace SoulShard.Utils
                 if (SceneUtility.IsLoaded(sceneName))
                     SceneManager.UnloadSceneAsync(sceneName);
         }
+
         /// <summary>
         /// unloads all scenes (barring all always active scenes)
         /// </summary>
@@ -79,6 +87,7 @@ namespace SoulShard.Utils
             CheckLoadWhileOtherIsActive();
             UpdateSceneChangeCallbacks(true);
         }
+
         void OnUnload(Scene scene)
         {
             CheckLoadWhileOtherIsActive();
@@ -88,6 +97,7 @@ namespace SoulShard.Utils
         #region Scene State Change Callback
         List<(string[], Action)> toExecuteOnSceneLoaded = new List<(string[], Action)>();
         List<(string[], Action)> toExecuteOnSceneUnloaded = new List<(string[], Action)>();
+
         /// <summary>
         /// add a callback for when a specific scene is done loading
         /// </summary>
@@ -95,6 +105,7 @@ namespace SoulShard.Utils
         /// <param name="toPerform">the callback to perform when this event is triggered</param>
         public void AddSceneLoadedCallback(string sceneName, Action toPerform) =>
             toExecuteOnSceneLoaded.Add((new string[1] { sceneName }, toPerform));
+
         /// <summary>
         /// add a callback for when a specific scene is done unloading
         /// </summary>
@@ -102,6 +113,7 @@ namespace SoulShard.Utils
         /// <param name="toPerform">the callback to perform when this event is triggered</param>
         public void AddSceneUnloadedCallback(string sceneName, Action toPerform) =>
             toExecuteOnSceneUnloaded.Add((new string[1] { sceneName }, toPerform));
+
         /// <summary>
         /// add a callback for if any one of the scenes is loaded
         /// </summary>
@@ -109,6 +121,7 @@ namespace SoulShard.Utils
         /// <param name="toPerform">the action to perform when this event is triggered</param>
         public void AddSceneLoadedCallback(string[] sceneNames, Action toPerform) =>
             toExecuteOnSceneLoaded.Add((sceneNames, toPerform));
+
         /// <summary>
         /// add a callback for if any one of the scenes is unloaded
         /// </summary>
@@ -116,6 +129,7 @@ namespace SoulShard.Utils
         /// <param name="toPerform">the action to perform when this event is triggered</param>
         public void AddSceneUnloadedCallback(string[] sceneNames, Action toPerform) =>
             toExecuteOnSceneUnloaded.Add((sceneNames, toPerform));
+
         void UpdateSceneChangeCallbacks(bool isloaded)
         {
             var toCheck = isloaded ? toExecuteOnSceneLoaded : toExecuteOnSceneUnloaded;
@@ -145,6 +159,7 @@ namespace SoulShard.Utils
             }
             return @return.ToArray();
         }
+
         void CheckLoadWhileOtherIsActive()
         {
             foreach (SceneToScene sts in props.loadWhileOtherIsLoaded)

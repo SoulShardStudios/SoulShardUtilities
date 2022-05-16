@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+
 namespace SoulShard.Math
 {
     /// <summary>
@@ -18,12 +19,17 @@ namespace SoulShard.Math
         /// <param name="operateWith">the value to apply the operation with</param>
         /// <param name="operation">the operation to apply</param>
         /// <returns>the modified vector</returns>
-        public static Vector2Int VectorOperation(Vector2Int @input, Vector2Int operateWith, Func<int, int, int> operation)
+        public static Vector2Int VectorOperation(
+            Vector2Int @input,
+            Vector2Int operateWith,
+            Func<int, int, int> operation
+        )
         {
             int x = operation(@input.x, operateWith.x);
             int y = operation(@input.y, operateWith.y);
             return new Vector2Int(x, y);
         }
+
         /// <summary>
         /// Applies an operation to all components of a vector
         /// </summary>
@@ -31,7 +37,11 @@ namespace SoulShard.Math
         /// <param name="operateWith">the value to apply the operation with</param>
         /// <param name="operation">the operation to apply</param>
         /// <returns>the modified vector</returns>
-        public static Vector3Int VectorOperation(Vector3Int @input, Vector3Int operateWith, Func<int, int, int> operation)
+        public static Vector3Int VectorOperation(
+            Vector3Int @input,
+            Vector3Int operateWith,
+            Func<int, int, int> operation
+        )
         {
             int x = operation(@input.x, operateWith.x);
             int y = operation(@input.y, operateWith.y);
@@ -47,12 +57,17 @@ namespace SoulShard.Math
         /// <param name="operateWith">the value to apply the operation with</param>
         /// <param name="operation">the operation to apply</param>
         /// <returns>the modified vector</returns>
-        public static Vector2 VectorOperation(Vector2 @input, Vector2 operateWith, Func<float, float, float> operation)
+        public static Vector2 VectorOperation(
+            Vector2 @input,
+            Vector2 operateWith,
+            Func<float, float, float> operation
+        )
         {
             float x = operation(@input.x, operateWith.x);
             float y = operation(@input.y, operateWith.y);
             return new Vector2(x, y);
         }
+
         /// <summary>
         /// Applies an operation to all components of a vector
         /// </summary>
@@ -60,13 +75,18 @@ namespace SoulShard.Math
         /// <param name="operateWith">the value to apply the operation with</param>
         /// <param name="operation">the operation to apply</param>
         /// <returns>the modified vector</returns>
-        public static Vector3 VectorOperation(Vector3 @input, Vector3 operateWith, Func<float, float, float> operation)
+        public static Vector3 VectorOperation(
+            Vector3 @input,
+            Vector3 operateWith,
+            Func<float, float, float> operation
+        )
         {
             float x = operation(@input.x, operateWith.x);
             float y = operation(@input.y, operateWith.y);
             float z = operation(@input.z, operateWith.z);
             return new Vector3(x, y, z);
         }
+
         /// <summary>
         /// Applies an operation to all components of a vector
         /// </summary>
@@ -74,7 +94,11 @@ namespace SoulShard.Math
         /// <param name="operateWith">the value to apply the operation with</param>
         /// <param name="operation">the operation to apply</param>
         /// <returns>the modified vector</returns>
-        public static Vector4 VectorOperation(Vector4 @input, Vector4 operateWith, Func<float, float, float> operation)
+        public static Vector4 VectorOperation(
+            Vector4 @input,
+            Vector4 operateWith,
+            Func<float, float, float> operation
+        )
         {
             float x = operation(@input.x, operateWith.x);
             float y = operation(@input.y, operateWith.y);
@@ -98,6 +122,7 @@ namespace SoulShard.Math
             int y = operation(@input.y);
             return new Vector2Int(x, y);
         }
+
         /// <summary>
         /// Applies an operation to all components of a vector
         /// </summary>
@@ -125,6 +150,7 @@ namespace SoulShard.Math
             float y = operation(@input.y);
             return new Vector2(x, y);
         }
+
         /// <summary>
         /// Applies an operation to all components of a vector
         /// </summary>
@@ -138,6 +164,7 @@ namespace SoulShard.Math
             float z = operation(@input.z);
             return new Vector3(x, y, z);
         }
+
         /// <summary>
         /// Applies an operation to all components of a vector
         /// </summary>
@@ -158,7 +185,7 @@ namespace SoulShard.Math
         #region Clamp
         #region Floats
         /// <summary>
-        /// applys mathf.Clamp() to all components of the desired vector 
+        /// applys mathf.Clamp() to all components of the desired vector
         /// </summary>
         /// <param name="input"> the input vector for the operation</param>
         /// <param name="min">the minimum value allowed for all components of the vector</param>
@@ -170,8 +197,9 @@ namespace SoulShard.Math
             float y = Mathf.Clamp(@input.y, min.y, max.y);
             return new Vector2(x, y);
         }
+
         /// <summary>
-        /// applys mathf.Clamp() to all components of the desired vector 
+        /// applys mathf.Clamp() to all components of the desired vector
         /// </summary>
         /// <param name="input"> the input vector for the operation</param>
         /// <param name="min">the minimum value allowed for all components of the vector</param>
@@ -184,8 +212,9 @@ namespace SoulShard.Math
             float z = Mathf.Clamp(@input.z, min.z, max.z);
             return new Vector3(x, y, z);
         }
+
         /// <summary>
-        /// applys mathf.Clamp() to all components of the desired vector 
+        /// applys mathf.Clamp() to all components of the desired vector
         /// </summary>
         /// <param name="input"> the input vector for the operation</param>
         /// <param name="min">the minimum value allowed for all components of the vector</param>
@@ -202,7 +231,7 @@ namespace SoulShard.Math
         #endregion
         #region Ints
         /// <summary>
-        /// applys mathf.Clamp() to all components of the desired vector 
+        /// applys mathf.Clamp() to all components of the desired vector
         /// </summary>
         /// <param name="input"> the input vector for the operation</param>
         /// <param name="min">the minimum value allowed for all components of the vector</param>
@@ -214,8 +243,9 @@ namespace SoulShard.Math
             int y = Mathf.Clamp(@input.y, min.y, max.y);
             return new Vector2Int(x, y);
         }
+
         /// <summary>
-        /// applys mathf.Clamp() to all components of the desired vector 
+        /// applys mathf.Clamp() to all components of the desired vector
         /// </summary>
         /// <param name="input"> the input vector for the operation</param>
         /// <param name="min">the minimum value allowed for all components of the vector</param>
@@ -243,6 +273,7 @@ namespace SoulShard.Math
             int y = Mathf.RoundToInt(@input.y);
             return new Vector2Int(x, y);
         }
+
         /// <summary>
         /// applies Mathf.Round() to all components of the desired vector
         /// </summary>
@@ -255,6 +286,7 @@ namespace SoulShard.Math
             int z = Mathf.RoundToInt(@input.z);
             return new Vector3Int(x, y, z);
         }
+
         /// <summary>
         /// applies Mathf.Round() to all components of the desired vector
         /// </summary>
@@ -281,6 +313,7 @@ namespace SoulShard.Math
             int y = Mathf.CeilToInt(@input.y);
             return new Vector2Int(x, y);
         }
+
         /// <summary>
         /// applies Mathf.Ceil() to all components of the desired vector
         /// </summary>
@@ -293,6 +326,7 @@ namespace SoulShard.Math
             int z = Mathf.CeilToInt(@input.z);
             return new Vector3Int(x, y, z);
         }
+
         /// <summary>
         /// applies Mathf.Ceil() to all components of the desired vector
         /// </summary>
@@ -319,6 +353,7 @@ namespace SoulShard.Math
             int y = Mathf.FloorToInt(@input.y);
             return new Vector2Int(x, y);
         }
+
         /// <summary>
         /// applies Mathf.Floor() to all components of the desired vector
         /// </summary>
@@ -331,6 +366,7 @@ namespace SoulShard.Math
             int z = Mathf.FloorToInt(@input.z);
             return new Vector3Int(x, y, z);
         }
+
         /// <summary>
         /// applies Mathf.Floor() to all components of the desired vector
         /// </summary>
@@ -359,6 +395,7 @@ namespace SoulShard.Math
             float y = Mathf.Abs(@input.y);
             return new Vector2(x, y);
         }
+
         /// <summary>
         /// applies Mathf.Abs() to all components of the desired vector
         /// </summary>
@@ -371,6 +408,7 @@ namespace SoulShard.Math
             float z = Mathf.Abs(@input.z);
             return new Vector3(x, y, z);
         }
+
         /// <summary>
         /// applies Mathf.Abs() to all components of the desired vector
         /// </summary>
@@ -397,7 +435,8 @@ namespace SoulShard.Math
             int y = Mathf.Abs(@input.y);
             return new Vector2Int(x, y);
         }
-                /// <summary>
+
+        /// <summary>
         /// applies Mathf.Abs() to all components of the desired vector
         /// </summary>
         /// <param name="input">the input vector for the operation</param>
@@ -425,6 +464,7 @@ namespace SoulShard.Math
             float y = @input.y % modby;
             return new Vector2(x, y);
         }
+
         /// <summary>
         /// applies the modulo operator on all components of a vector
         /// </summary>
@@ -438,6 +478,7 @@ namespace SoulShard.Math
             float z = @input.z % modby;
             return new Vector3(x, y, z);
         }
+
         /// <summary>
         /// applies the modulo operator on all components of a vector
         /// </summary>
@@ -466,7 +507,8 @@ namespace SoulShard.Math
             int y = @input.y % modby;
             return new Vector2Int(x, y);
         }
-                /// <summary>
+
+        /// <summary>
         /// applies the modulo operator on all components of a vector
         /// </summary>
         /// <param name="input">the input vector for the operation</param>
@@ -495,6 +537,7 @@ namespace SoulShard.Math
             float y = MathUtility.PositiveMod(@input.y, modby);
             return new Vector2(x, y);
         }
+
         /// <summary>
         /// applies the positive modulo operator on all components of a vector
         /// </summary>
@@ -508,6 +551,7 @@ namespace SoulShard.Math
             float z = MathUtility.PositiveMod(@input.z, modby);
             return new Vector3(x, y, z);
         }
+
         /// <summary>
         /// applies the positive modulo operator on all components of a vector
         /// </summary>
@@ -536,6 +580,7 @@ namespace SoulShard.Math
             int y = MathUtility.PositiveMod(@input.y, modby);
             return new Vector2Int(x, y);
         }
+
         /// <summary>
         /// applies the positive modulo operator on all components of a vector
         /// </summary>
@@ -566,6 +611,7 @@ namespace SoulShard.Math
             float z = @input.z * multiplyBy.z;
             return new Vector3(x, y, z);
         }
+
         /// <summary>
         /// unity doesn't support this basic operation on this type for some reason, this is a non-native stand in
         /// </summary>
@@ -594,6 +640,7 @@ namespace SoulShard.Math
             int y = @input.y / divideBy.y;
             return new Vector2Int(x, y);
         }
+
         /// <summary>
         /// unity doesn't support this basic operation on this type for some reason, this is a non-native stand in
         /// </summary>
@@ -607,6 +654,7 @@ namespace SoulShard.Math
             int z = @input.z / divideBy.z;
             return new Vector3Int(x, y, z);
         }
+
         /// <summary>
         /// unity doesn't support this basic operation on this type for some reason, this is a non-native stand in
         /// </summary>
@@ -620,6 +668,7 @@ namespace SoulShard.Math
             float z = @input.z / divideBy.z;
             return new Vector3(x, y, z);
         }
+
         /// <summary>
         /// unity doesn't support this basic operation on this type for some reason, this is a non-native stand in
         /// </summary>
@@ -645,8 +694,16 @@ namespace SoulShard.Math
         /// <returns></returns>
         public static BoundsInt CreateBoundsInt(Vector3Int start, Vector3Int end)
         {
-            Vector3Int realStart = new Vector3Int(start.x < end.x ? start.x : end.x, start.y < end.y ? start.y : end.y, 0);
-            Vector3Int realEnd = new Vector3Int(start.x > end.x ? start.x : end.x, start.y > end.y ? start.y : end.y, 0);
+            Vector3Int realStart = new Vector3Int(
+                start.x < end.x ? start.x : end.x,
+                start.y < end.y ? start.y : end.y,
+                0
+            );
+            Vector3Int realEnd = new Vector3Int(
+                start.x > end.x ? start.x : end.x,
+                start.y > end.y ? start.y : end.y,
+                0
+            );
             Vector3Int size = realEnd - realStart + new Vector3Int(0, 0, 1);
             return new BoundsInt(realStart, size);
         }

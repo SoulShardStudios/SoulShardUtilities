@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace SoulShard.Math
 {
     public partial struct VectorMath
@@ -8,29 +9,29 @@ namespace SoulShard.Math
         /// </summary>
         /// <param name="value">The value to initialize all of the vector components with</param>
         /// <returns>A new vector</returns>
-        public static Vector2 ConstructVector2(float value) =>
-            new Vector2(value, value);
+        public static Vector2 ConstructVector2(float value) => new Vector2(value, value);
+
         /// <summary>
         /// A non native constructor for vectors
         /// </summary>
         /// <param name="value">The value to initialize all of the vector components with</param>
         /// <returns>A new vector</returns>
-        public static Vector2Int ConstructVector2(int value) =>
-            new Vector2Int(value, value);
+        public static Vector2Int ConstructVector2(int value) => new Vector2Int(value, value);
+
         /// <summary>
         /// A non native constructor for vectors
         /// </summary>
         /// <param name="value">The value to initialize all of the vector components with</param>
         /// <returns>A new vector</returns>
-        public static Vector3 ConstructVector3(float value) =>
-            new Vector3(value, value, value);
+        public static Vector3 ConstructVector3(float value) => new Vector3(value, value, value);
+
         /// <summary>
         /// A non native constructor for vectors
         /// </summary>
         /// <param name="value">The value to initialize all of the vector components with</param>
         /// <returns>A new vector</returns>
-        public static Vector3Int ConstructVector3(int value) =>
-            new Vector3Int(value, value, value);
+        public static Vector3Int ConstructVector3(int value) => new Vector3Int(value, value, value);
+
         /// <summary>
         /// A non native constructor for vectors
         /// </summary>

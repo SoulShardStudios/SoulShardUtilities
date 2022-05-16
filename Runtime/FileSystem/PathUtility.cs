@@ -1,5 +1,6 @@
 using UnityEngine;
 using SoulShard.Utils;
+
 namespace SoulShard.FileSystem
 {
     /// <summary>
@@ -20,10 +21,12 @@ namespace SoulShard.FileSystem
             {
                 if (path[i] != '>')
                     continue;
-                return GetUnityPathFromString(path.Substring(1, i - 1)) + path.Substring(i + 1, path.Length - (i + 1));
+                return GetUnityPathFromString(path.Substring(1, i - 1))
+                    + path.Substring(i + 1, path.Length - (i + 1));
             }
             return "";
         }
+
         /// <summary>
         /// the actual conversions from unity path name to unity path
         /// </summary>
@@ -41,6 +44,7 @@ namespace SoulShard.FileSystem
                 _ => "",
             };
         }
+
         /// <summary>
         /// removes the file from a path. EX: C:/dev/test.txt becomes C:/dev
         /// </summary>
@@ -56,6 +60,7 @@ namespace SoulShard.FileSystem
             }
             return path;
         }
+
         /// <summary>
         /// gets an element of a path. EX: C:/builds/test0, this function allows you to isolate whats at the end of the path, the middle, e.t.c.
         /// </summary>
@@ -71,7 +76,11 @@ namespace SoulShard.FileSystem
             if (numberOfElements < index)
                 return null;
             int currentIndex = 0;
-            for (int i = dir ? 0 : path.Length - 1; dir ? i < path.Length : i > -1; i += dir ? 1 : -1)
+            for (
+                int i = dir ? 0 : path.Length - 1;
+                dir ? i < path.Length : i > -1;
+                i += dir ? 1 : -1
+            )
             {
                 if (path[i] == delim)
                 {

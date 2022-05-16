@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace SoulShard.Math
 {
     /// <summary>
@@ -20,6 +21,7 @@ namespace SoulShard.Math
             }
             return str.Substring(sliceIndicies[0] + 1, sliceIndicies[1] - sliceIndicies[0] - 1);
         }
+
         #region Parse Functions
         /// <summary>
         /// Parses a string so that it may be converted to the desired vector.
@@ -32,6 +34,7 @@ namespace SoulShard.Math
             string[] temp = GetVectorInnerString(str).Split(',');
             return new Vector2Int(int.Parse(temp[0]), int.Parse(temp[1]));
         }
+
         /// <summary>
         /// Parses a string so that it may be converted to the desired vector.
         /// format: (x,y,e.t.c.)
@@ -43,6 +46,7 @@ namespace SoulShard.Math
             string[] temp = GetVectorInnerString(str).Split(',');
             return new Vector2(float.Parse(temp[0]), float.Parse(temp[1]));
         }
+
         /// <summary>
         /// Parses a string so that it may be converted to the desired vector.
         /// format: (x,y,e.t.c.)
@@ -54,6 +58,7 @@ namespace SoulShard.Math
             string[] temp = GetVectorInnerString(str).Split(',');
             return new Vector3Int(int.Parse(temp[0]), int.Parse(temp[1]), int.Parse(temp[2]));
         }
+
         /// <summary>
         /// Parses a string so that it may be converted to the desired vector.
         /// format: (x,y,e.t.c.)
@@ -65,6 +70,7 @@ namespace SoulShard.Math
             string[] temp = GetVectorInnerString(str).Split(',');
             return new Vector3(float.Parse(temp[0]), float.Parse(temp[1]), float.Parse(temp[2]));
         }
+
         /// <summary>
         /// Parses a string so that it may be converted to the desired vector.
         /// format: (x,y,e.t.c.)
@@ -74,7 +80,12 @@ namespace SoulShard.Math
         public static Vector4 ParseVector4FromString(string str)
         {
             string[] temp = GetVectorInnerString(str).Split(',');
-            return new Vector4(float.Parse(temp[0]), float.Parse(temp[1]), float.Parse(temp[2]), float.Parse(temp[3]));
+            return new Vector4(
+                float.Parse(temp[0]),
+                float.Parse(temp[1]),
+                float.Parse(temp[2]),
+                float.Parse(temp[3])
+            );
         }
         #endregion
     }

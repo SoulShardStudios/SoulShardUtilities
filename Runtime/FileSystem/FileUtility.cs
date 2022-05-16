@@ -1,4 +1,5 @@
 using System.IO;
+
 namespace SoulShard.FileSystem
 {
     /// <summary>
@@ -12,13 +13,17 @@ namespace SoulShard.FileSystem
         /// </summary>
         /// <param name="path">the path to perform this operation with</param>
         /// <param name="bytes">the bytes to write to the file</param>
-        public static void Make(string path, byte[] bytes) => File.WriteAllBytes(PathUtility.ParsePath(path), bytes);
+        public static void Make(string path, byte[] bytes) =>
+            File.WriteAllBytes(PathUtility.ParsePath(path), bytes);
+
         /// <summary>
         /// Makes a file with the given text.
         /// </summary>
         /// <param name="path">The path of the file.</param>
         /// <param name="text">The text of the file.</param>
-        public static void Make(string path, string text) => File.WriteAllText(PathUtility.ParsePath(path), text);
+        public static void Make(string path, string text) =>
+            File.WriteAllText(PathUtility.ParsePath(path), text);
+
         /// <summary>
         /// deletes a file at a given path
         /// </summary>
@@ -37,8 +42,9 @@ namespace SoulShard.FileSystem
         /// <param name="path">the path to perform this operation with</param>
         /// <returns>the name of the file</returns>
         public static string GetName(string path) => Path.GetFileName(path);
+
         /// <summary>
-        /// gets the file extension in a given path 
+        /// gets the file extension in a given path
         /// </summary>
         /// <param name="path">the path to perform this operation with</param>
         /// <returns>the file extension</returns>
@@ -48,6 +54,7 @@ namespace SoulShard.FileSystem
             FileInfo fi = new FileInfo(path);
             return fi.Extension;
         }
+
         /// <summary>
         /// Checks if a file at the given path is readonly
         /// </summary>
@@ -59,6 +66,7 @@ namespace SoulShard.FileSystem
             FileInfo fi = new FileInfo(path);
             return fi.IsReadOnly;
         }
+
         /// <summary>
         /// Checks if the file at the given path exists.
         /// </summary>

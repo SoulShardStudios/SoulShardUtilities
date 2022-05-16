@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using SoulShard.Math;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -12,16 +13,19 @@ namespace SoulShard.Utils
         /// the verticies of the mesh
         /// </summary>
         public List<Vector3> verticies = new List<Vector3>(0);
+
         /// <summary>
         /// the indicies of the mesh
         /// </summary>
         public List<int> indicies = new List<int>(0);
+
         /// <summary>
         /// add a piece of geometry to the mesh
         /// </summary>
         /// <param name="geometry">the geometry to add</param>
         public void AddGeometry((Vector3[], int[]) geometry) =>
             AddGeometry(geometry.Item1, geometry.Item2);
+
         /// <summary>
         /// add a piece of geometry to the mesh
         /// </summary>
@@ -32,6 +36,7 @@ namespace SoulShard.Utils
             this.verticies.AddRange(verticies);
             this.indicies.AddRange(MathUtility.AddToList(indicies, this.verticies.Count));
         }
+
         /// <summary>
         /// clears the mesh data
         /// </summary>
@@ -40,6 +45,7 @@ namespace SoulShard.Utils
             verticies.Clear();
             indicies.Clear();
         }
+
         /// <summary>
         /// generates the mesh for use
         /// </summary>

@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -7,7 +8,9 @@ namespace SoulShard.Utils
     /// </summary>
     public class DirectionalMovementControler : MonoBehaviour
     {
-        [SerializeField] float speed;
+        [SerializeField]
+        float speed;
+
         private void Update()
         {
             transform.position += speed * (Vector3)GetMovementVector() * Time.deltaTime;

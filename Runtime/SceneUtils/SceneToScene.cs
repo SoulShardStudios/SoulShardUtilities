@@ -1,4 +1,5 @@
 using System;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -11,6 +12,7 @@ namespace SoulShard.Utils
         /// the original scene to track if its loaded
         /// </summary>
         public string originalScene;
+
         /// <summary>
         /// the dependant scene to load and unload when the original's state changes.
         /// </summary>

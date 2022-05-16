@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
+
 namespace SoulShard.Utils
 {
     /// <summary>
@@ -16,13 +17,15 @@ namespace SoulShard.Utils
         /// <typeparam name="T">the component to get from every object</typeparam>
         /// <param name="toGetComponentFrom">the array to get the components from</param>
         /// <returns>the collection of monobehaviors</returns>
-        public static T[] GetComponentFromGameObjectList<T>(GameObject[] toGetComponentFrom) where T : MonoBehaviour
+        public static T[] GetComponentFromGameObjectList<T>(GameObject[] toGetComponentFrom)
+            where T : MonoBehaviour
         {
             T[] @return = new T[toGetComponentFrom.Length];
             for (int i = 0; i < toGetComponentFrom.Length; i++)
                 @return[i] = toGetComponentFrom[i].GetComponent<T>();
             return @return;
         }
+
         /// <summary>
         /// takes in a boolean list and checks if all the values are the same
         /// </summary>
@@ -30,7 +33,8 @@ namespace SoulShard.Utils
         /// <param name="list">the collection to compare</param>
         /// <param name="compareTo">the value to compare the collection to</param>
         /// <returns>whether the list contains all of the same values</returns>
-        public static bool? CollectionIsEqualToValue<T>(T[] list, T compareTo) where T : IEquatable<T>
+        public static bool? CollectionIsEqualToValue<T>(T[] list, T compareTo)
+            where T : IEquatable<T>
         {
             if (list.Length == 0)
                 return null;
@@ -49,13 +53,17 @@ namespace SoulShard.Utils
         /// <param name="input">the input collection</param>
         /// <param name="func">the function to apply to all elements of the input collection</param>
         /// <returns>the newly generated collection</returns>
-        public static _returnType[] GenerateCollectionFromFunction<_returnType, _inputType>(_inputType[] @input, Func<_inputType, _returnType> func)
+        public static _returnType[] GenerateCollectionFromFunction<_returnType, _inputType>(
+            _inputType[] @input,
+            Func<_inputType, _returnType> func
+        )
         {
             _returnType[] @return = new _returnType[@input.Length];
             for (int i = 0; i < @input.Length; i++)
                 @return[i] = func(@input[i]);
             return @return;
         }
+
         /// <summary>
         /// generates a new 2d array with a default value
         /// </summary>
@@ -64,7 +72,8 @@ namespace SoulShard.Utils
         /// <param name="yLength">the y length of the array</param>
         /// <param name="defaultValue">the default value for the array</param>
         /// <returns>the new collection</returns>
-        public static T[,] GenerateNew2dArray<T>(int xLength, int yLength, T defaultValue) where T : new()
+        public static T[,] GenerateNew2dArray<T>(int xLength, int yLength, T defaultValue)
+            where T : new()
         {
             T[,] @return = new T[xLength, yLength];
             if (defaultValue == null)
@@ -76,6 +85,7 @@ namespace SoulShard.Utils
             }
             return @return;
         }
+
         /// <summary>
         /// generates a new array with a default value
         /// </summary>
@@ -110,6 +120,7 @@ namespace SoulShard.Utils
         /// <returns>the index within the collection</returns>
         public static int GetIndex(Vector2Int pos, int collectionSize) =>
             pos.x + pos.y * collectionSize;
+
         /// <summary>
         /// returns the 2d position from an index within the flattened 2d collection
         /// </summary>
@@ -118,6 +129,7 @@ namespace SoulShard.Utils
         /// <returns>the 2d position this index represents</returns>
         public static Vector2Int GetPosition(int index, int collectionSize) =>
             new Vector2Int(index % collectionSize, (int)Mathf.Floor(index / collectionSize));
+
         /// <summary>
         /// checks if a position exists within the 2d collection
         /// </summary>
@@ -148,13 +160,17 @@ namespace SoulShard.Utils
             }
             return @return;
         }
+
         /// <summary>
         /// converts the contents of a collection to a string, in a format where you can read the collection contents
         /// </summary>
         /// <typeparam name="T">the collection type</typeparam>
         /// <param name="collection">the collection to convert</param>
         /// <returns>the formatted string</returns>
-        public static string BetterCollectionToString<T>(IEnumerable<T> collection, Func<T, string> stringConversion)
+        public static string BetterCollectionToString<T>(
+            IEnumerable<T> collection,
+            Func<T, string> stringConversion
+        )
         {
             if (collection == null)
                 return null;
