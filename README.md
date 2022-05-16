@@ -25,3 +25,9 @@ Includes alot of functionality:
 - world scaled rects and rect ints (for custom AABB colliders, cheaper trigger detection, e.t.c.)
 - PixelMap: an infinitely tileable, editable image, with a bunch of customization.
 - with more being added and updated regularly!
+
+WARNING: This is still a PREVIEW PACKAGE, use caution when using this in your projects until this repo goes to 1.0.0, at least.
+Breaking changes WILL BE MADE up to 1.0.0, so any dependant code will probably break if it is not actively maintained.
+
+Pull requests, Feature requests, Issues, e.t.c. are welcome, since this is mostly a one man project
+I would recommend contributing rather than demanding.
