@@ -1,8 +1,5 @@
-namespace SoulShard.Inventory
+namespace SoulShard.InventorySystem
 {
-    /// <summary>
-    /// Methods and properties required to be implemented for a base item to be a part of the built in inventory system.
-    /// </summary>
     public interface IBaseItem
     {
         /// <summary>

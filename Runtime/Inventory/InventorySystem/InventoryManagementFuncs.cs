@@ -1,4 +1,4 @@
-namespace SoulShard.Inventory
+namespace SoulShard.InventorySystem
 {
     public static class InventoryManagementUtilities
     {
@@ -9,19 +9,17 @@ namespace SoulShard.Inventory
             where _BaseItem : class, IBaseItem
             where _Slot : class, ISlot<_BaseItem>, new()
         {
-            if (other == null)
-                return other;
-            if (other.item == null)
+            if (other.isEmpty)
                 return other;
             if (inventory.capacity == 0)
                 return other;
 
             for (int i = 0; i < inventory.slots.Length; i++)
             {
-                if (inventory.slots[i].itemInstance.item == null)
+                if (inventory.slots[i].isEmpty)
                 {
                     inventory.slots[i].itemInstance = other;
-                    return null;
+                    return new ItemInstance<_BaseItem>();
                 }
             }
             return other;
@@ -34,9 +32,7 @@ namespace SoulShard.Inventory
             where _BaseItem : class, IBaseItem
             where _Slot : class, ISlot<_BaseItem>, new()
         {
-            if (other == null)
-                return other;
-            if (other.item == null)
+            if (other.isEmpty)
                 return other;
             if (inventory.capacity == 0)
                 return other;
@@ -48,21 +44,29 @@ namespace SoulShard.Inventory
 
             for (int i = 0; i < inventory.slots.Length; i++)
             {
-                ItemInstance<_BaseItem> current = inventory.slots[i].itemInstance;
-                if (current.item.name == other.item.name)
+                if (inventory.slots[i].itemInstance.isEmpty)
+                    continue;
+                if (inventory.slots[i].itemInstance.item.name == other.item.name)
                 {
-                    if (current.amount == maxStack)
+                    if (inventory.slots[i].itemInstance.amount == maxStack)
                         continue;
-                    if (current.amount + other.amount < maxStack)
+                    if (inventory.slots[i].itemInstance.amount + other.amount < maxStack)
                     {
-                        current.amount += other.amount;
-                        return null;
+                        ItemInstance<_BaseItem> newItem = inventory.slots[i].itemInstance;
+                        newItem.amount += other.amount;
+                        inventory.slots[i].itemInstance = newItem;
+                        return new ItemInstance<_BaseItem>();
                     }
 
-                    other.amount -= maxStack - current.amount;
-                    current.amount = maxStack;
+                    other.amount -= maxStack - inventory.slots[i].itemInstance.amount;
+                    ItemInstance<_BaseItem> newItem2 = inventory.slots[i].itemInstance;
+                    newItem2.amount = maxStack;
+                    inventory.slots[i].itemInstance = newItem2;
                 }
             }
+
+            if (other.amount > 0)
+                return AddUnstackableItemToInventory(inventory, other);
 
             return other;
         }
@@ -74,6 +78,11 @@ namespace SoulShard.Inventory
             where _BaseItem : class, IBaseItem
             where _Slot : class, ISlot<_BaseItem>, new()
         {
+            if (other.isEmpty)
+                return other;
+            if (inventory.capacity == 0)
+                return other;
+
             if (!other.item.isStackable)
                 return AddUnstackableItemToInventory(inventory, other);
             return AddStackableItemToInventory(inventory, other);
@@ -87,22 +96,21 @@ namespace SoulShard.Inventory
             where _BaseItem : class, IBaseItem
             where _Slot : class, ISlot<_BaseItem>, new()
         {
-            if (other == null)
+            if (other.isEmpty)
                 return false;
-            if (other.item == null)
+            if (inventory.capacity == 0)
                 return false;
-
-            if (other.amount > 0)
-                foreach (_Slot s in inventory.slots)
-                    if (s.itemInstance != null && s.itemInstance.item != null)
-                        if (s.itemInstance.item.name == other.item.name)
-                            if (s.itemInstance.item.isStackable)
-                            {
-                                if (s.itemInstance.amount == other.amount)
-                                    return true;
-                            }
-                            else
+            foreach (_Slot s in inventory.slots)
+                if (!s.isEmpty)
+                    if (s.itemInstance.item.name == other.item.name)
+                        if (s.itemInstance.item.isStackable)
+                        {
+                            if (s.itemInstance.amount == other.amount)
                                 return true;
+                        }
+                        else
+                            return true;
+
             return false;
         }
     }

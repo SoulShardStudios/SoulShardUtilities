@@ -1,4 +1,4 @@
-namespace SoulShard.Inventory
+namespace SoulShard.InventorySystem
 {
     public interface IInventory<_BaseItem, _Slot>
         where _BaseItem : class, IBaseItem
