@@ -4,11 +4,13 @@ namespace SoulShard.InventorySystem
     /// The basic item slot manager.
     /// </summary>
     /// <typeparam name="_BaseItem">The base item type this slot stores.</typeparam>
-    public class Slot<_BaseItem> : ISlot<_BaseItem> where _BaseItem : class, IBaseItem
+    public class Slot<_BaseItem, _ItemInstance> : ISlot<_BaseItem, _ItemInstance> 
+        where _BaseItem : class, IBaseItem 
+        where _ItemInstance: struct, IItemInstance<_BaseItem>
     {
-        ItemInstance<_BaseItem> item;
-
-        public ItemInstance<_BaseItem> itemInstance
+        _ItemInstance item;
+        public System.Action<_ItemInstance> onItemModified { get; set; }
+        public _ItemInstance itemInstance
         {
             get => item;
             set
@@ -18,23 +20,21 @@ namespace SoulShard.InventorySystem
             }
         }
 
-        public System.Action<ItemInstance<_BaseItem>> onItemModified { get; set; }
+        public Slot(_ItemInstance item) => itemInstance = item;
 
-        public Slot(ItemInstance<_BaseItem> item) => itemInstance = item;
-
-        public Slot() => itemInstance = new ItemInstance<_BaseItem>();
+        public Slot() => itemInstance = new _ItemInstance();
 
         public bool isEmpty
         {
             get => item.item == null;
         }
 
-        public virtual ItemInstance<_BaseItem> Transfer(
-            ItemInstance<_BaseItem> other,
+        public virtual _ItemInstance Transfer(
+            _ItemInstance other,
             string button = ""
         )
         {
-            ItemInstance<_BaseItem> originalItem = itemInstance;
+            _ItemInstance originalItem = itemInstance;
             itemInstance = other;
             onItemModified?.Invoke(itemInstance);
             return originalItem;

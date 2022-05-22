@@ -8,7 +8,7 @@ namespace SoulShard.Tests.InventorySystem
         [Test]
         public void TestSlotTransfer()
         {
-            Slot<BaseItem> slot = new Slot<BaseItem>(new ItemInstance<BaseItem>(Helpers.salt, 12));
+            Slot<BaseItem, ItemInstance<BaseItem>> slot = new Slot<BaseItem, ItemInstance<BaseItem>>(new ItemInstance<BaseItem>(Helpers.salt, 12));
             var res = slot.Transfer(new ItemInstance<BaseItem>(Helpers.AXE));
             Assert.AreEqual(res.amount, 12);
             Assert.AreEqual(res.item.name, Helpers.salt.name);
@@ -20,7 +20,7 @@ namespace SoulShard.Tests.InventorySystem
         public void TestOnItemModifed()
         {
             ItemInstance<BaseItem> res = new ItemInstance<BaseItem>();
-            Slot<BaseItem> slot = new Slot<BaseItem>(new ItemInstance<BaseItem>(Helpers.salt, 12));
+            Slot<BaseItem, ItemInstance<BaseItem>> slot = new Slot<BaseItem, ItemInstance<BaseItem>>(new ItemInstance<BaseItem>(Helpers.salt, 12));
             slot.onItemModified = (ItemInstance<BaseItem> item) => res = item;
             var testTransfer = new ItemInstance<BaseItem>(Helpers.AXE);
 
