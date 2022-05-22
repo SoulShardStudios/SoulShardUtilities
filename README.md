@@ -8,9 +8,11 @@ Usage:
 - copy this repositories HTTPS git clone link
 - paste that link into unity
 - use the package! all functionality is within the SoulShard namespace.
+- Extra tip: use the [UPM git extension](https://github.com/mob-sakai/UpmGitExtension) to easily update to the latest version of the package.
 
 Includes alot of functionality:
 
+- Completely generic inventory system.
 - A better scene management utility
 - Various Vector Math Helper Functions, and General Math Utilities
 - A basic sound manager
