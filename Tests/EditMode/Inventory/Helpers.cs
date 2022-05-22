@@ -17,13 +17,13 @@ namespace SoulShard.Tests.InventorySystem
             isStackable: true
         );
 
-        public static Inventory<BaseItem, Slot<BaseItem>> GetFullInventory() =>
-            new Inventory<BaseItem, Slot<BaseItem>>(
+        public static Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>> GetFullInventory() =>
+            new Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>(
                 new ItemInstance<BaseItem>[1] { new ItemInstance<BaseItem>(witchesBrew) }
             );
 
-        public static Inventory<BaseItem, Slot<BaseItem>> GetHoleyInventory() =>
-            new Inventory<BaseItem, Slot<BaseItem>>(
+        public static Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>> GetHoleyInventory() =>
+            new Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>(
                 new ItemInstance<BaseItem>[10]
                 {
                     new ItemInstance<BaseItem>(salt, 69),
@@ -40,19 +40,19 @@ namespace SoulShard.Tests.InventorySystem
             );
 
         public static System.Func<
-            Inventory<BaseItem, Slot<BaseItem>>,
+            Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>,
             ItemInstance<BaseItem>,
             ItemInstance<BaseItem>
         >[] addItemFuncs() =>
             new System.Func<
-                Inventory<BaseItem, Slot<BaseItem>>,
+                Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>,
                 ItemInstance<BaseItem>,
                 ItemInstance<BaseItem>
             >[3]
             {
-                InventoryManagementUtilities.AddItemToInventory,
-                InventoryManagementUtilities.AddStackableItemToInventory,
-                InventoryManagementUtilities.AddUnstackableItemToInventory
+                InventoryManagementUtilities.AddItemToInventory<BaseItem,Slot<BaseItem, ItemInstance<BaseItem>>,ItemInstance<BaseItem>,Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>,
+                InventoryManagementUtilities.AddStackableItemToInventory<BaseItem,Slot<BaseItem, ItemInstance<BaseItem>>,ItemInstance<BaseItem>,Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>,
+                InventoryManagementUtilities.AddUnstackableItemToInventory<BaseItem,Slot<BaseItem, ItemInstance<BaseItem>>,ItemInstance<BaseItem>,Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>
             };
     }
 }

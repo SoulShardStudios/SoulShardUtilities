@@ -21,15 +21,15 @@ namespace SoulShard.Tests.InventorySystem
         public void TestAddUnstackableToInventory()
         {
             var inven = Helpers.GetHoleyInventory();
-            InventoryManagementUtilities.AddUnstackableItemToInventory(
+            InventoryManagementUtilities.AddUnstackableItemToInventory< BaseItem,Slot<BaseItem, ItemInstance<BaseItem>>,ItemInstance<BaseItem>,Inventory<BaseItem,Slot<BaseItem,ItemInstance<BaseItem>>,ItemInstance<BaseItem>>> (
                 inven,
                 new ItemInstance<BaseItem>(Helpers.witchesBrew)
             );
-            InventoryManagementUtilities.AddUnstackableItemToInventory(
+            InventoryManagementUtilities.AddUnstackableItemToInventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>, Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>(
                 inven,
                 new ItemInstance<BaseItem>(Helpers.AXE)
             );
-            InventoryManagementUtilities.AddUnstackableItemToInventory(
+            InventoryManagementUtilities.AddUnstackableItemToInventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>, Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>(
                 inven,
                 new ItemInstance<BaseItem>(Helpers.AXE)
             );
@@ -42,13 +42,13 @@ namespace SoulShard.Tests.InventorySystem
         public void TestAddStackableItemToInventory()
         {
             var inven = Helpers.GetHoleyInventory();
-            InventoryManagementUtilities.AddStackableItemToInventory(
+            InventoryManagementUtilities.AddStackableItemToInventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>, Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>(
                 inven,
                 new ItemInstance<BaseItem>(Helpers.salt, 10)
             );
             Assert.AreEqual(inven.slots[0].itemInstance.amount, 79);
             Assert.AreEqual(inven.slots[0].itemInstance.item.name, Helpers.salt.name);
-            InventoryManagementUtilities.AddStackableItemToInventory(
+            InventoryManagementUtilities.AddStackableItemToInventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>, Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>(
                 inven,
                 new ItemInstance<BaseItem>(Helpers.salt, 30)
             );
@@ -63,28 +63,28 @@ namespace SoulShard.Tests.InventorySystem
         {
             var inven = Helpers.GetHoleyInventory();
             Assert.AreEqual(
-                InventoryManagementUtilities.ContainsItem(
+                InventoryManagementUtilities.ContainsItem<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>, Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>(
                     inven,
                     new ItemInstance<BaseItem>(Helpers.salt, 69)
                 ),
                 true
             );
             Assert.AreEqual(
-                InventoryManagementUtilities.ContainsItem(
+                InventoryManagementUtilities.ContainsItem<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>, Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>(
                     inven,
                     new ItemInstance<BaseItem>(Helpers.salt, 39)
                 ),
                 false
             );
             Assert.AreEqual(
-                InventoryManagementUtilities.ContainsItem(
+                InventoryManagementUtilities.ContainsItem<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>, Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>(
                     inven,
                     new ItemInstance<BaseItem>(Helpers.AXE, 0)
                 ),
                 false
             );
             Assert.AreEqual(
-                InventoryManagementUtilities.ContainsItem(
+                InventoryManagementUtilities.ContainsItem<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>, Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>(
                     inven,
                     new ItemInstance<BaseItem>(Helpers.witchesBrew, 0)
                 ),

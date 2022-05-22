@@ -5,38 +5,31 @@ namespace SoulShard.InventorySystem
     /// </summary>
     /// <typeparam name="_BaseItem">The "item prefab" to use as the base for this instance.</typeparam>
     [System.Serializable]
-    public struct ItemInstance<_BaseItem> where _BaseItem : class, IBaseItem
+    public struct ItemInstance<_BaseItem>: IItemInstance<_BaseItem> where _BaseItem : class, IBaseItem
     {
-        /// <summary>
-        /// The Base item this pointeritem is instanced off of.
-        /// </summary>
-        public _BaseItem item;
-
-        /// <summary>
-        /// The quantity of this item.
-        /// </summary>
-        public uint amount;
-
-        /// <summary>
-        /// Is this an empty item instance?
-        /// </summary>
+        _BaseItem _item;
+        uint _amount;
         public bool isEmpty
         {
             get => item == null;
         }
+        public _BaseItem item { get => _item; set => _item = value; }
+        public uint amount { get => _amount; set => _amount = value; }
 
         #region Constructors
         public ItemInstance(_BaseItem item = null, uint amount = 0)
         {
-            this.item = item;
-            this.amount = amount;
+            _item = item;
+            _amount = amount;
         }
 
         public ItemInstance(ItemInstance<_BaseItem> I)
         {
-            item = I.item;
-            amount = I.amount;
+            _item = I.item;
+            _amount = I.amount;
         }
+        public ItemInstance<_BaseItem> Make(ItemInstance<_BaseItem> I) => new ItemInstance<_BaseItem>(I);
+        public ItemInstance<_BaseItem> Make(_BaseItem item = null, uint amount = 0) => new ItemInstance<_BaseItem>(item, amount);
         #endregion
     }
 }

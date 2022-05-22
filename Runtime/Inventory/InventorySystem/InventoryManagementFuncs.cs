@@ -1,13 +1,15 @@
 namespace SoulShard.InventorySystem
 {
-    public static class InventoryManagementUtilities
+    public struct InventoryManagementUtilities
     {
-        public static ItemInstance<_BaseItem> AddUnstackableItemToInventory<_BaseItem, _Slot>(
-            Inventory<_BaseItem, _Slot> inventory,
-            ItemInstance<_BaseItem> other
+        public static _ItemInstance AddUnstackableItemToInventory<_BaseItem, _Slot, _ItemInstance, _Inventory>(
+            _Inventory inventory,
+            _ItemInstance other
         )
             where _BaseItem : class, IBaseItem
-            where _Slot : class, ISlot<_BaseItem>, new()
+            where _ItemInstance : struct, IItemInstance<_BaseItem>
+            where _Slot : class, ISlot<_BaseItem, _ItemInstance>, new()
+            where _Inventory: class, IInventory<_BaseItem,_Slot,_ItemInstance>
         {
             if (other.isEmpty)
                 return other;
@@ -19,18 +21,20 @@ namespace SoulShard.InventorySystem
                 if (inventory.slots[i].isEmpty)
                 {
                     inventory.slots[i].itemInstance = other;
-                    return new ItemInstance<_BaseItem>();
+                    return new _ItemInstance();
                 }
             }
             return other;
         }
 
-        public static ItemInstance<_BaseItem> AddStackableItemToInventory<_BaseItem, _Slot>(
-            Inventory<_BaseItem, _Slot> inventory,
-            ItemInstance<_BaseItem> other
+        public static _ItemInstance AddStackableItemToInventory<_BaseItem, _Slot, _ItemInstance, _Inventory>(
+            _Inventory inventory,
+            _ItemInstance other
         )
             where _BaseItem : class, IBaseItem
-            where _Slot : class, ISlot<_BaseItem>, new()
+            where _ItemInstance : struct, IItemInstance<_BaseItem>
+            where _Slot : class, ISlot<_BaseItem, _ItemInstance>, new()
+            where _Inventory : class, IInventory<_BaseItem, _Slot, _ItemInstance>
         {
             if (other.isEmpty)
                 return other;
@@ -40,7 +44,7 @@ namespace SoulShard.InventorySystem
             uint maxStack = other.item.maxStackAmount;
 
             if (other.amount == maxStack)
-                return AddUnstackableItemToInventory(inventory, other);
+                return AddUnstackableItemToInventory<_BaseItem,_Slot,_ItemInstance,_Inventory>(inventory, other);
 
             for (int i = 0; i < inventory.slots.Length; i++)
             {
@@ -52,31 +56,33 @@ namespace SoulShard.InventorySystem
                         continue;
                     if (inventory.slots[i].itemInstance.amount + other.amount < maxStack)
                     {
-                        ItemInstance<_BaseItem> newItem = inventory.slots[i].itemInstance;
+                        _ItemInstance newItem = inventory.slots[i].itemInstance;
                         newItem.amount += other.amount;
                         inventory.slots[i].itemInstance = newItem;
-                        return new ItemInstance<_BaseItem>();
+                        return new _ItemInstance();
                     }
 
                     other.amount -= maxStack - inventory.slots[i].itemInstance.amount;
-                    ItemInstance<_BaseItem> newItem2 = inventory.slots[i].itemInstance;
+                    _ItemInstance newItem2 = inventory.slots[i].itemInstance;
                     newItem2.amount = maxStack;
                     inventory.slots[i].itemInstance = newItem2;
                 }
             }
 
             if (other.amount > 0)
-                return AddUnstackableItemToInventory(inventory, other);
+                return AddUnstackableItemToInventory<_BaseItem, _Slot, _ItemInstance, _Inventory>(inventory, other);
 
             return other;
         }
 
-        public static ItemInstance<_BaseItem> AddItemToInventory<_BaseItem, _Slot>(
-            Inventory<_BaseItem, _Slot> inventory,
-            ItemInstance<_BaseItem> other
+        public static _ItemInstance AddItemToInventory<_BaseItem, _Slot, _ItemInstance, _Inventory>(
+            _Inventory inventory,
+            _ItemInstance other
         )
             where _BaseItem : class, IBaseItem
-            where _Slot : class, ISlot<_BaseItem>, new()
+            where _ItemInstance : struct, IItemInstance<_BaseItem>
+            where _Slot : class, ISlot<_BaseItem, _ItemInstance>, new()
+            where _Inventory : class, IInventory<_BaseItem, _Slot, _ItemInstance>
         {
             if (other.isEmpty)
                 return other;
@@ -84,17 +90,19 @@ namespace SoulShard.InventorySystem
                 return other;
 
             if (!other.item.isStackable)
-                return AddUnstackableItemToInventory(inventory, other);
-            return AddStackableItemToInventory(inventory, other);
+                return AddUnstackableItemToInventory<_BaseItem, _Slot, _ItemInstance, _Inventory>(inventory, other);
+            return AddStackableItemToInventory<_BaseItem, _Slot, _ItemInstance, _Inventory>(inventory, other);
         }
 
         // checks if the inventory contains a specific item
-        public static bool ContainsItem<_BaseItem, _Slot>(
-            Inventory<_BaseItem, _Slot> inventory,
-            ItemInstance<_BaseItem> other
+        public static bool ContainsItem<_BaseItem, _Slot, _ItemInstance, _Inventory>(
+            _Inventory inventory,
+            _ItemInstance other
         )
             where _BaseItem : class, IBaseItem
-            where _Slot : class, ISlot<_BaseItem>, new()
+            where _ItemInstance : struct, IItemInstance<_BaseItem>
+            where _Slot : class, ISlot<_BaseItem, _ItemInstance>, new()
+            where _Inventory : class, IInventory<_BaseItem, _Slot, _ItemInstance>
         {
             if (other.isEmpty)
                 return false;
