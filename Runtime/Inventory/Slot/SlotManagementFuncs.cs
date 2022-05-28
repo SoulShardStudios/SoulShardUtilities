@@ -62,18 +62,22 @@ namespace SoulShard.InventorySystem
             where _BaseItem : class, IBaseItem
             where _ItemInstance : struct, IItemInstance<_BaseItem>
         {
+            if (current.isEmpty)
+                return Swap<_BaseItem, _ItemInstance>(current, other);
+            if (!other.isEmpty ? current.item != other.item : false)
+                return Swap<_BaseItem, _ItemInstance>(current, other);
             if (!current.item.isStackable)
                 return Swap<_BaseItem, _ItemInstance>(current, other);
             if (current.amount < 2)
                 return Swap<_BaseItem, _ItemInstance>(current, other);
 
-            uint halfStack = (uint)Math.Ceiling((float)current.amount / 2);
+            uint halfStack = (uint)Math.Floor((float)current.amount / 2);
             return (
                 new _ItemInstance() { item = current.item, amount = halfStack },
                 new _ItemInstance()
                 {
                     item = current.item,
-                    amount = other.amount + halfStack + current.amount % 2
+                    amount = other.amount + halfStack + (current.amount % 2)
                 }
             );
         }
@@ -85,16 +89,25 @@ namespace SoulShard.InventorySystem
             where _BaseItem : class, IBaseItem
             where _ItemInstance : struct, IItemInstance<_BaseItem>
         {
+            if (other.isEmpty)
+                return Swap<_BaseItem, _ItemInstance>(current, other);
             if (!other.item.isStackable)
                 return Swap<_BaseItem, _ItemInstance>(current, other);
             if (other.amount < 2)
-                return Swap<_BaseItem, _ItemInstance>(current, other);
+                return (
+                    new _ItemInstance()
+                    {
+                        item = other.item,
+                        amount = current.amount + other.amount
+                    },
+                    new _ItemInstance()
+                );
             if (current.isEmpty)
                 return (
                     new _ItemInstance() { item = other.item, amount = 1 },
                     new _ItemInstance() { item = other.item, amount = other.amount - 1 }
                 );
-            if (current.item != current.item)
+            if (current.item != other.item)
                 return Swap<_BaseItem, _ItemInstance>(current, other);
             if (current.amount == current.item.maxStackAmount)
                 return Swap<_BaseItem, _ItemInstance>(current, other);
