@@ -34,10 +34,9 @@ namespace SoulShard.InventorySystem
             string button = ""
         )
         {
-            _ItemInstance originalItem = itemInstance;
-            itemInstance = other;
-            onItemModified?.Invoke(itemInstance);
-            return originalItem;
+            var items = SlotManagementFuncs.Swap<_BaseItem, _ItemInstance>(itemInstance, other);
+            itemInstance = items.Item1;
+            return items.Item2;
         }
     }
 }

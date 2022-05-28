@@ -5,7 +5,8 @@ namespace SoulShard.InventorySystem
     /// </summary>
     /// <typeparam name="_BaseItem">The "item prefab" to use as the base for this instance.</typeparam>
     [System.Serializable]
-    public struct ItemInstance<_BaseItem>: IItemInstance<_BaseItem> where _BaseItem : class, IBaseItem
+    public struct ItemInstance<_BaseItem> : IItemInstance<_BaseItem>
+        where _BaseItem : class, IBaseItem
     {
         _BaseItem _item;
         uint _amount;
@@ -13,8 +14,16 @@ namespace SoulShard.InventorySystem
         {
             get => item == null;
         }
-        public _BaseItem item { get => _item; set => _item = value; }
-        public uint amount { get => _amount; set => _amount = value; }
+        public _BaseItem item
+        {
+            get => _item;
+            set => _item = value;
+        }
+        public uint amount
+        {
+            get => _amount;
+            set => _amount = value;
+        }
 
         #region Constructors
         public ItemInstance(_BaseItem item = null, uint amount = 0)
@@ -28,8 +37,6 @@ namespace SoulShard.InventorySystem
             _item = I.item;
             _amount = I.amount;
         }
-        public ItemInstance<_BaseItem> Make(ItemInstance<_BaseItem> I) => new ItemInstance<_BaseItem>(I);
-        public ItemInstance<_BaseItem> Make(_BaseItem item = null, uint amount = 0) => new ItemInstance<_BaseItem>(item, amount);
         #endregion
     }
 }
