@@ -33,3 +33,5 @@ Breaking changes WILL BE MADE up to 1.0.0, so any dependant code will probably b
 
 Pull requests, Feature requests, Issues, e.t.c. are welcome, since this is mostly a one man project
 I would recommend contributing rather than demanding.
+
+See [this discord](https://discord.gg/QfZDqdcQ2Q) to ask questions and get support.
