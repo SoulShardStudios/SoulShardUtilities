@@ -1,5 +1,5 @@
 {
-    "name": "SoulShardUtilities.EditModeTests",
+    "name": "SoulShardStudios.SoulShardUtilities.EditModeTests",
     "rootNamespace": "",
     "references": [
         "SoulShardUtilities.Runtime",
