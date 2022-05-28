@@ -1,4 +1,5 @@
 using SoulShard.InventorySystem;
+using NUnit.Framework;
 
 namespace SoulShard.Tests.InventorySystem
 {
@@ -54,5 +55,15 @@ namespace SoulShard.Tests.InventorySystem
                 InventoryManagementUtilities.AddStackableItemToInventory<BaseItem,Slot<BaseItem, ItemInstance<BaseItem>>,ItemInstance<BaseItem>,Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>,
                 InventoryManagementUtilities.AddUnstackableItemToInventory<BaseItem,Slot<BaseItem, ItemInstance<BaseItem>>,ItemInstance<BaseItem>,Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>
             };
+
+        public static void AssertEqualToSwap(System.Func<
+            ItemInstance<BaseItem>, ItemInstance<BaseItem>, (ItemInstance<BaseItem>, ItemInstance<BaseItem>)> fn, ItemInstance<BaseItem> current, ItemInstance<BaseItem> other)
+        {
+            var _1 = fn(current, other);
+            Assert.AreEqual(_1.Item1.amount, other.amount);
+            Assert.AreEqual(_1.Item1.item, other.item);
+            Assert.AreEqual(_1.Item2.item, current.item);
+            Assert.AreEqual(_1.Item2.amount, current.amount);
+        }
     }
 }

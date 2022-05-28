@@ -1,4 +1,3 @@
-
 using System;
 
 namespace SoulShard.InventorySystem
@@ -8,18 +7,24 @@ namespace SoulShard.InventorySystem
     /// </summary>
     public struct SlotManagementFuncs
     {
-        public static (_ItemInstance, _ItemInstance) Swap<_BaseItem, _ItemInstance>(_ItemInstance current, _ItemInstance other)
+        public static (_ItemInstance, _ItemInstance) Swap<_BaseItem, _ItemInstance>(
+            _ItemInstance current,
+            _ItemInstance other
+        )
             where _BaseItem : class, IBaseItem
-            where _ItemInstance : struct, IItemInstance<IBaseItem>
+            where _ItemInstance : struct, IItemInstance<_BaseItem>
         {
             _ItemInstance originalItem = current;
             current = other;
             return (current, originalItem);
         }
 
-        public static (_ItemInstance, _ItemInstance) CombineStack<_BaseItem, _ItemInstance>(_ItemInstance current, _ItemInstance other)
+        public static (_ItemInstance, _ItemInstance) CombineStack<_BaseItem, _ItemInstance>(
+            _ItemInstance current,
+            _ItemInstance other
+        )
             where _BaseItem : class, IBaseItem
-            where _ItemInstance : struct, IItemInstance<IBaseItem>
+            where _ItemInstance : struct, IItemInstance<_BaseItem>
         {
             if (current.isEmpty || other.isEmpty)
                 return Swap<_BaseItem, _ItemInstance>(current, other);
@@ -29,19 +34,33 @@ namespace SoulShard.InventorySystem
                 return Swap<_BaseItem, _ItemInstance>(current, other);
 
             uint stackSize = other.item.maxStackAmount;
-            if (other.amount >= stackSize)
+
+            if (current.amount >= stackSize || other.amount >= stackSize)
                 return Swap<_BaseItem, _ItemInstance>(current, other);
 
             if (other.amount + current.amount < stackSize)
-                return (new _ItemInstance() { item = current.item, amount = current.amount + other.amount }, new _ItemInstance());
+                return (
+                    new _ItemInstance()
+                    {
+                        item = current.item,
+                        amount = current.amount + other.amount
+                    },
+                    new _ItemInstance()
+                );
 
             uint leftOver = current.amount + other.amount - stackSize;
-            return (new _ItemInstance() { item = current.item, amount = stackSize }, new _ItemInstance() { item = current.item, amount = leftOver });
+            return (
+                new _ItemInstance() { item = current.item, amount = stackSize },
+                new _ItemInstance() { item = current.item, amount = leftOver }
+            );
         }
 
-        public static (_ItemInstance, _ItemInstance) HalfStackSplit<_BaseItem, _ItemInstance>(_ItemInstance current, _ItemInstance other)
+        public static (_ItemInstance, _ItemInstance) HalfStackSplit<_BaseItem, _ItemInstance>(
+            _ItemInstance current,
+            _ItemInstance other
+        )
             where _BaseItem : class, IBaseItem
-            where _ItemInstance : struct, IItemInstance<IBaseItem>
+            where _ItemInstance : struct, IItemInstance<_BaseItem>
         {
             if (!current.item.isStackable)
                 return Swap<_BaseItem, _ItemInstance>(current, other);
@@ -51,26 +70,39 @@ namespace SoulShard.InventorySystem
             uint halfStack = (uint)Math.Ceiling((float)current.amount / 2);
             return (
                 new _ItemInstance() { item = current.item, amount = halfStack },
-                new _ItemInstance() { item = current.item, amount = other.amount + halfStack + current.amount % 2 }
-                );
+                new _ItemInstance()
+                {
+                    item = current.item,
+                    amount = other.amount + halfStack + current.amount % 2
+                }
+            );
         }
 
-        public static (_ItemInstance, _ItemInstance) SingleStackSplit<_BaseItem, _ItemInstance>(_ItemInstance current, _ItemInstance other)
-           where _BaseItem : class, IBaseItem
-           where _ItemInstance : struct, IItemInstance<IBaseItem>
+        public static (_ItemInstance, _ItemInstance) SingleStackSplit<_BaseItem, _ItemInstance>(
+            _ItemInstance current,
+            _ItemInstance other
+        )
+            where _BaseItem : class, IBaseItem
+            where _ItemInstance : struct, IItemInstance<_BaseItem>
         {
             if (!other.item.isStackable)
                 return Swap<_BaseItem, _ItemInstance>(current, other);
             if (other.amount < 2)
                 return Swap<_BaseItem, _ItemInstance>(current, other);
             if (current.isEmpty)
-                return (new _ItemInstance() { item = other.item, amount = 1 }, new _ItemInstance() { item = other.item, amount=other.amount - 1});
+                return (
+                    new _ItemInstance() { item = other.item, amount = 1 },
+                    new _ItemInstance() { item = other.item, amount = other.amount - 1 }
+                );
             if (current.item != current.item)
                 return Swap<_BaseItem, _ItemInstance>(current, other);
             if (current.amount == current.item.maxStackAmount)
                 return Swap<_BaseItem, _ItemInstance>(current, other);
 
-            return (new _ItemInstance() { item = other.item, amount= current.amount + 1 }, new _ItemInstance() { item = other.item, amount = other.amount - 1 });
+            return (
+                new _ItemInstance() { item = other.item, amount = current.amount + 1 },
+                new _ItemInstance() { item = other.item, amount = other.amount - 1 }
+            );
         }
     }
 }
