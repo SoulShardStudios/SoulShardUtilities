@@ -3,7 +3,8 @@
     "rootNamespace": "",
     "references": [
         "SoulShardUtilities.Runtime",
-        "SoulShard.Inventory"
+        "SoulShard.Inventory",
+        "SoulShardStudios.SoulShardUtilities.Runtime"
     ],
     "includePlatforms": [
         "Editor"

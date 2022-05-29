@@ -9,17 +9,17 @@ namespace SoulShard.Animations
     {
         [SerializeField]
         protected Animator _animator;
-        string _currentState;
+        protected string _currentState;
 
         /// <summary>
         /// Sets the current animation state to the state specified.
         /// </summary>
         /// <param name="state">The state to change to.</param>
-        protected void ChangeAnimState(string state)
+        protected void ChangeAnimState(string state, int layer = 0)
         {
             if (_currentState == state)
                 return;
-            _animator.Play(state);
+            _animator.Play(state, layer);
             _currentState = state;
         }
     }
