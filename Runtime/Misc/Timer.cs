@@ -4,98 +4,86 @@ using UnityEngine;
 namespace SoulShard.Utils
 {
     /// <summary>
-    /// a timer stored in a variable, with some extra functionality
+    /// A more concise way to track time versus a coroutine for simple cooldowns.
     /// </summary>
     public class Timer
     {
         #region Variables
         /// <summary>
-        /// the action to call when the timer is done
+        /// The action to call when the timer is done.
         /// </summary>
-        public event Action OnDone;
+        public event Action onDone;
 
         /// <summary>
-        /// the maximum cooldown time
+        /// The current cooldown time.
         /// </summary>
-        float _maxCooldown;
+        public float currentCooldown { get; private set; }
 
         /// <summary>
-        /// the current cooldown time
+        /// Is the timer done?
         /// </summary>
-        float _currentCooldown = 0;
+        public bool done { get; private set; }
 
         /// <summary>
-        /// is the timer done?
+        /// Where the cooldown gets reset to.
         /// </summary>
-        bool _done = true;
-        public float MaxCooldown
+        public float maxCooldown;
+        public float currentCooldownPercent
         {
-            get => _maxCooldown;
-            set => _maxCooldown = value;
-        }
-        public float CurrentCooldown => _currentCooldown;
-        public float CurrentCooldownPercent
-        {
-            get => CurrentCooldown / _maxCooldown;
+            get => Mathf.Clamp(currentCooldown, 0, maxCooldown) / maxCooldown;
         }
 
-        public Timer(float maxCooldown) => _maxCooldown = maxCooldown;
+        public Timer(float maxCooldown)
+        {
+            this.maxCooldown = maxCooldown;
+            Reset();
+        }
         #endregion
         #region Time Update Methods
         /// <summary>
-        /// handles the incrementation of the timer in real time (run this in an update loop)
+        /// Handles the incrementation of the timer in real time (run this in an update loop).
         /// </summary>
         public void HandleTimerUnscaled()
         {
-            _currentCooldown -= Time.unscaledDeltaTime;
-            if (_currentCooldown <= 0 && !_done)
+            currentCooldown -= Time.unscaledDeltaTime;
+            if (currentCooldown <= 0 && !done)
             {
-                OnDone?.Invoke();
-                _done = true;
+                onDone?.Invoke();
+                done = true;
             }
         }
 
         /// <summary>
-        /// handles the incrementation of the timer in scald in game time (run this in an update loop)
+        /// Handles the incrementation of the timer in scald in game time (run this in an update loop).
         /// </summary>
         public void HandleTimerScaled()
         {
-            _currentCooldown -= Time.deltaTime;
-            if (_currentCooldown <= 0 && !_done)
+            currentCooldown -= Time.deltaTime;
+            if (currentCooldown <= 0 && !done)
             {
-                OnDone?.Invoke();
-                _done = true;
+                onDone?.Invoke();
+                done = true;
             }
         }
         #endregion
         #region Cooldown Related Methods
         /// <summary>
-        /// forces the timer to complete
+        /// Forces the timer to complete.
         /// </summary>
-        public void ForceDone() => _currentCooldown = -1;
-
-        /// <summary>
-        /// is the timer done?
-        /// </summary>
-        /// <returns>the respective boolean</returns>
-        public bool IsDone() => _done;
-
-        /// <summary>
-        /// forces the timer to complete immediately
-        /// </summary>
-        public void ForceDoneNoEffect()
+        public void ForceDone()
         {
-            _currentCooldown = -1;
-            _done = true;
+            currentCooldown = -1;
+            done = true;
+            onDone?.Invoke();
         }
 
         /// <summary>
-        /// resets the timer to start again
+        /// Resets the timer to start again.
         /// </summary>
         public void Reset()
         {
-            _currentCooldown = _maxCooldown;
-            _done = false;
+            currentCooldown = maxCooldown;
+            done = false;
         }
         #endregion
     }
