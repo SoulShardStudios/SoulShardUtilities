@@ -6,9 +6,9 @@ namespace SoulShard.Utils
     /// <summary>
     /// A more concise way to track time versus a coroutine for simple cooldowns.
     /// </summary>
+    [Serializable]
     public class Timer
     {
-        #region Variables
         /// <summary>
         /// The action to call when the timer is done.
         /// </summary>
@@ -28,52 +28,52 @@ namespace SoulShard.Utils
         /// Where the cooldown gets reset to.
         /// </summary>
         public float maxCooldown;
+
+        /// <summary>
+        /// Should this timer automatically reset when its done?
+        /// </summary>
+        public bool autoReset;
         public float currentCooldownPercent
         {
             get => Mathf.Clamp(currentCooldown, 0, maxCooldown) / maxCooldown;
         }
 
-        public Timer(float maxCooldown)
+        public Timer(float maxCooldown, bool autoReset = false)
         {
             this.maxCooldown = maxCooldown;
+            this.autoReset = autoReset;
             Reset();
         }
-        #endregion
-        #region Time Update Methods
+
         /// <summary>
-        /// Handles the incrementation of the timer in real time (run this in an update loop).
+        /// Handles the incrementation of time.
         /// </summary>
-        public void HandleTimerUnscaled()
+        /// <param name="delta">The amount of time that has passed since the last Tick.</param>
+        public void Tick(float delta)
         {
-            currentCooldown -= Time.unscaledDeltaTime;
+            if (done)
+                return;
+            currentCooldown -= delta;
             if (currentCooldown <= 0 && !done)
             {
                 onDone?.Invoke();
+                if (autoReset)
+                {
+                    currentCooldown = maxCooldown;
+                    return;
+                }
                 done = true;
             }
         }
 
-        /// <summary>
-        /// Handles the incrementation of the timer in scald in game time (run this in an update loop).
-        /// </summary>
-        public void HandleTimerScaled()
-        {
-            currentCooldown -= Time.deltaTime;
-            if (currentCooldown <= 0 && !done)
-            {
-                onDone?.Invoke();
-                done = true;
-            }
-        }
-        #endregion
-        #region Cooldown Related Methods
         /// <summary>
         /// Forces the timer to complete.
         /// </summary>
         public void ForceDone()
         {
             currentCooldown = -1;
-            done = true;
+            if (!autoReset)
+                done = true;
             onDone?.Invoke();
         }
 
@@ -85,6 +85,5 @@ namespace SoulShard.Utils
             currentCooldown = maxCooldown;
             done = false;
         }
-        #endregion
     }
 }
