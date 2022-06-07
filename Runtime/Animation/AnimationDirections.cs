@@ -1,4 +1,5 @@
 using UnityEngine;
+using SoulShard.Math;
 
 namespace SoulShard.Animations
 {
@@ -9,6 +10,9 @@ namespace SoulShard.Animations
     /// </summary>
     public struct AnimDirections
     {
+        static Vector2[] _cardinals = VectorConstants.CardianlsVf();
+        static Vector2[] _cardinalsAndDiagonals = VectorConstants.CardinalsAndDiagonalsVf();
+
         public string name;
 
         public string down;
@@ -67,10 +71,11 @@ namespace SoulShard.Animations
         /// <summary>
         /// Gets the name for a given direction but only for the cardinals.
         /// </summary>
-        /// <param name="direction">The sirection to get the name of.</param>
+        /// <param name="direction">The direction to get the name of.</param>
         /// <returns>The name of the direction.</returns>
         public string NameForDirCardinal(Vector2 direction)
         {
+            VectorMath.BlendVector2(_cardinals, ref direction);
             ApplyNameToAll(name);
             if (direction == Vector2.zero)
                 return down;
@@ -91,6 +96,7 @@ namespace SoulShard.Animations
         /// <returns>The name of the direction.</returns>
         public string NameForDir(Vector2 direction)
         {
+            VectorMath.BlendVector2(_cardinalsAndDiagonals, ref direction);
             ApplyNameToAll(name);
             if (direction == Vector2.zero)
                 return down;
