@@ -5,7 +5,8 @@
         "SoulShardUtilities.Runtime",
         "SoulShard.Inventory",
         "SoulShardStudios.SoulShardUtilities.Runtime",
-        "SoulShardUtils.Animation"
+        "SoulShardUtils.Animation",
+        "SoulShard.General"
     ],
     "includePlatforms": [
         "Editor"
