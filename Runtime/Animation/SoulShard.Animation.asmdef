@@ -1,0 +1,16 @@
+{
+    "name": "SoulShardUtils.Animation",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1b28749ed95a7764689d6f11cbae9f58"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
