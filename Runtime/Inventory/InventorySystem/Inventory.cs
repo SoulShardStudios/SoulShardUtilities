@@ -5,7 +5,8 @@ namespace SoulShard.InventorySystem
     /// </summary>
     /// <typeparam name="_BaseItem">The base item.</typeparam>
     /// <typeparam name="_Slot">The slot type.</typeparam>
-    public class Inventory<_BaseItem, _Slot, _ItemInstance> : IInventory<_BaseItem, _Slot, _ItemInstance>
+    public class Inventory<_BaseItem, _Slot, _ItemInstance>
+        : IInventory<_BaseItem, _Slot, _ItemInstance>
         where _BaseItem : class, IBaseItem
         where _ItemInstance : struct, IItemInstance<_BaseItem>
         where _Slot : class, ISlot<_BaseItem, _ItemInstance>, new()
@@ -14,7 +15,7 @@ namespace SoulShard.InventorySystem
         /// The slots within this inventory.
         /// </summary>
         public _Slot[] slots { get; set; }
-        
+
         /// <summary>
         /// The remaining capacity of this inventory.
         /// </summary>
@@ -40,9 +41,20 @@ namespace SoulShard.InventorySystem
             }
         }
 
-        public virtual void AddItem(_ItemInstance other) => 
-            InventoryManagementUtilities.AddItemToInventory<_BaseItem,_Slot,_ItemInstance,IInventory<_BaseItem,_Slot,_ItemInstance>>(this, other);
-        public virtual void ContainsItem(_ItemInstance other) => 
-            InventoryManagementUtilities.ContainsItem<_BaseItem, _Slot, _ItemInstance, IInventory<_BaseItem, _Slot, _ItemInstance>>(this, other);
+        public virtual _ItemInstance AddItem(_ItemInstance other) =>
+            InventoryManagementUtilities.AddItemToInventory<
+                _BaseItem,
+                _Slot,
+                _ItemInstance,
+                IInventory<_BaseItem, _Slot, _ItemInstance>
+            >(this, other);
+
+        public virtual void ContainsItem(_ItemInstance other) =>
+            InventoryManagementUtilities.ContainsItem<
+                _BaseItem,
+                _Slot,
+                _ItemInstance,
+                IInventory<_BaseItem, _Slot, _ItemInstance>
+            >(this, other);
     }
 }

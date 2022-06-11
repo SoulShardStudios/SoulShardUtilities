@@ -18,12 +18,20 @@ namespace SoulShard.Tests.InventorySystem
             isStackable: true
         );
 
-        public static Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>> GetFullInventory() =>
+        public static Inventory<
+            BaseItem,
+            Slot<BaseItem, ItemInstance<BaseItem>>,
+            ItemInstance<BaseItem>
+        > GetFullInventory() =>
             new Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>(
                 new ItemInstance<BaseItem>[1] { new ItemInstance<BaseItem>(witchesBrew) }
             );
 
-        public static Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>> GetHoleyInventory() =>
+        public static Inventory<
+            BaseItem,
+            Slot<BaseItem, ItemInstance<BaseItem>>,
+            ItemInstance<BaseItem>
+        > GetHoleyInventory() =>
             new Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>(
                 new ItemInstance<BaseItem>[10]
                 {
@@ -51,13 +59,47 @@ namespace SoulShard.Tests.InventorySystem
                 ItemInstance<BaseItem>
             >[3]
             {
-                InventoryManagementUtilities.AddItemToInventory<BaseItem,Slot<BaseItem, ItemInstance<BaseItem>>,ItemInstance<BaseItem>,Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>,
-                InventoryManagementUtilities.AddStackableItemToInventory<BaseItem,Slot<BaseItem, ItemInstance<BaseItem>>,ItemInstance<BaseItem>,Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>,
-                InventoryManagementUtilities.AddUnstackableItemToInventory<BaseItem,Slot<BaseItem, ItemInstance<BaseItem>>,ItemInstance<BaseItem>,Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>>
+                InventoryManagementUtilities.AddItemToInventory<
+                    BaseItem,
+                    Slot<BaseItem, ItemInstance<BaseItem>>,
+                    ItemInstance<BaseItem>,
+                    Inventory<
+                        BaseItem,
+                        Slot<BaseItem, ItemInstance<BaseItem>>,
+                        ItemInstance<BaseItem>
+                    >
+                >,
+                InventoryManagementUtilities.AddStackableItemToInventory<
+                    BaseItem,
+                    Slot<BaseItem, ItemInstance<BaseItem>>,
+                    ItemInstance<BaseItem>,
+                    Inventory<
+                        BaseItem,
+                        Slot<BaseItem, ItemInstance<BaseItem>>,
+                        ItemInstance<BaseItem>
+                    >
+                >,
+                InventoryManagementUtilities.AddUnstackableItemToInventory<
+                    BaseItem,
+                    Slot<BaseItem, ItemInstance<BaseItem>>,
+                    ItemInstance<BaseItem>,
+                    Inventory<
+                        BaseItem,
+                        Slot<BaseItem, ItemInstance<BaseItem>>,
+                        ItemInstance<BaseItem>
+                    >
+                >
             };
 
-        public static void AssertEqualToSwap(System.Func<
-            ItemInstance<BaseItem>, ItemInstance<BaseItem>, (ItemInstance<BaseItem>, ItemInstance<BaseItem>)> fn, ItemInstance<BaseItem> current, ItemInstance<BaseItem> other)
+        public static void AssertEqualToSwap(
+            System.Func<
+                ItemInstance<BaseItem>,
+                ItemInstance<BaseItem>,
+                (ItemInstance<BaseItem>, ItemInstance<BaseItem>)
+            > fn,
+            ItemInstance<BaseItem> current,
+            ItemInstance<BaseItem> other
+        )
         {
             var _1 = fn(current, other);
             Assert.AreEqual(_1.Item1.amount, other.amount);
