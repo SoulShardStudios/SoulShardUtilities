@@ -15,11 +15,11 @@ namespace SoulShard.Animations
         /// Sets the current animation state to the state specified.
         /// </summary>
         /// <param name="state">The state to change to.</param>
-        protected void ChangeAnimState(string state, int layer = 0)
+        protected void ChangeAnimState(string state, int layer = 0, float normalizedTime = 0)
         {
             if (_currentState == state)
                 return;
-            _animator.Play(state, layer);
+            _animator.Play(state, layer, normalizedTime);
             _currentState = state;
         }
     }
