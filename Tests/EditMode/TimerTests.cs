@@ -1,7 +1,7 @@
 using SoulShard.Utils;
 using NUnit.Framework;
 
-namespace SoulShard.Tests
+namespace SoulShard.Tests.Utils
 {
     public class TimerTests
     {
