@@ -1,15 +1,15 @@
 using NUnit.Framework;
-using SoulShard.Animations;
 using UnityEngine;
+using SoulShard.Utils;
 
-namespace SoulShard.Tests.Animations
+namespace SoulShard.Tests.Utils
 {
-    public class AnimDirectionsTests
+    public class DirectionCollectionTests
     {
         [Test]
         public void TestApplyName()
         {
-            AnimDirections dirs = new AnimDirections();
+            StringDirections dirs = new StringDirections();
 
             dirs.ApplyNameToAll("HELLO_");
 
@@ -39,39 +39,39 @@ namespace SoulShard.Tests.Animations
         [Test]
         public void TestNameForDirCardinal()
         {
-            AnimDirections dirs = new AnimDirections();
+            StringDirections dirs = new StringDirections();
 
             dirs.ApplyNameToAll("_");
 
-            Assert.AreEqual(dirs.NameForDirCardinal(Vector2.down), "_Down");
-            Assert.AreEqual(dirs.NameForDirCardinal(Vector2.up), "_Up");
-            Assert.AreEqual(dirs.NameForDirCardinal(Vector2.left), "_Left");
-            Assert.AreEqual(dirs.NameForDirCardinal(Vector2.right), "_Right");
-            Assert.AreEqual(dirs.NameForDirCardinal(new Vector2(1, 1)), "_Up");
-            Assert.AreEqual(dirs.NameForDirCardinal(new Vector2(1, -1)), "_Down");
+            Assert.True(dirs.CompareCardinalDir(Vector2.down, "_Down"));
+            Assert.True(dirs.CompareCardinalDir(Vector2.up, "_Up"));
+            Assert.True(dirs.CompareCardinalDir(Vector2.left, "_Left"));
+            Assert.True(dirs.CompareCardinalDir(Vector2.right, "_Right"));
+            Assert.True(dirs.CompareCardinalDir(new Vector2(1, 1), "_Up"));
+            Assert.True(dirs.CompareCardinalDir(new Vector2(1, -1), "_Down"));
         }
 
         [Test]
         public void TestNameForDir()
         {
-            AnimDirections dirs = new AnimDirections();
+            StringDirections dirs = new StringDirections();
 
             dirs.ApplyNameToAll("_");
 
-            Assert.AreEqual(dirs.NameForDir(Vector2.down), "_Down");
-            Assert.AreEqual(dirs.NameForDir(Vector2.up), "_Up");
-            Assert.AreEqual(dirs.NameForDir(Vector2.left), "_Left");
-            Assert.AreEqual(dirs.NameForDir(Vector2.right), "_Right");
-            Assert.AreEqual(dirs.NameForDir(new Vector2(1, 1)), "_UpRight");
-            Assert.AreEqual(dirs.NameForDir(new Vector2(1, -1)), "_DownRight");
-            Assert.AreEqual(dirs.NameForDir(new Vector2(-1, 1)), "_UpLeft");
-            Assert.AreEqual(dirs.NameForDir(new Vector2(-1, -1)), "_DownLeft");
+            Assert.True(dirs.CompareDir(Vector2.down, "_Down"));
+            Assert.True(dirs.CompareDir(Vector2.up, "_Up"));
+            Assert.True(dirs.CompareDir(Vector2.left, "_Left"));
+            Assert.True(dirs.CompareDir(Vector2.right, "_Right"));
+            Assert.True(dirs.CompareDir(new Vector2(1, 1), "_UpRight"));
+            Assert.True(dirs.CompareDir(new Vector2(1, -1), "_DownRight"));
+            Assert.True(dirs.CompareDir(new Vector2(-1, 1), "_UpLeft"));
+            Assert.True(dirs.CompareDir(new Vector2(-1, -1), "_DownLeft"));
         }
 
         [Test]
         public void TestClear()
         {
-            AnimDirections dirs = new AnimDirections();
+            StringDirections dirs = new StringDirections();
 
             dirs.ApplyNameToAll("_");
             dirs.Clear();
