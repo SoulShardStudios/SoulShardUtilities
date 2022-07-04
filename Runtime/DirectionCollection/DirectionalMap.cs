@@ -27,7 +27,7 @@ namespace SoulShard.Utils
         public T upRight;
         #endregion
         #region CardinalFuncs
-        public T GetCardinalDir(Vector2 dir)
+        public virtual T GetCardinalDir(Vector2 dir)
         {
             VectorMath.BlendVector2(_cardinals, ref dir);
             if (dir == Vector2.zero)
@@ -42,10 +42,11 @@ namespace SoulShard.Utils
                       : down;
         }
 
-        public bool CompareCardinalDir(Vector2 dir, T value) => GetCardinalDir(dir).Equals(value);
+        public virtual bool CompareCardinalDir(Vector2 dir, T value) =>
+            GetCardinalDir(dir).Equals(value);
         #endregion
         #region DirectionalFuncs
-        public T GetDir(Vector2 dir)
+        public virtual T GetDir(Vector2 dir)
         {
             VectorMath.BlendVector2(_cardinalsAndDiagonals, ref dir);
             if (dir == Vector2.zero)
@@ -68,7 +69,7 @@ namespace SoulShard.Utils
                   : downLeft;
         }
 
-        public bool CompareDir(Vector2 dir, T value) => GetDir(dir).Equals(value);
+        public virtual bool CompareDir(Vector2 dir, T value) => GetDir(dir).Equals(value);
         #endregion
     }
 }

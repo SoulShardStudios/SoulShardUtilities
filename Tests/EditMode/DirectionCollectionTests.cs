@@ -6,34 +6,45 @@ namespace SoulShard.Tests.Utils
 {
     public class DirectionCollectionTests
     {
+        void AssertNameApplied(StringDirections dirs, string name)
+        {
+            Assert.AreEqual(dirs.name, name);
+            Assert.AreEqual(dirs.right, $"{name}Right");
+            Assert.AreEqual(dirs.left, $"{name}Left");
+            Assert.AreEqual(dirs.down, $"{name}Down");
+            Assert.AreEqual(dirs.up, $"{name}Up");
+            Assert.AreEqual(dirs.downRight, $"{name}DownRight");
+            Assert.AreEqual(dirs.upRight, $"{name}UpRight");
+            Assert.AreEqual(dirs.downLeft, $"{name}DownLeft");
+            Assert.AreEqual(dirs.upLeft, $"{name}UpLeft");
+        }
+
+        [Test]
+        public void TestApplyByCardinal()
+        {
+            StringDirections dirs = new StringDirections();
+            dirs.name = ":)";
+            Assert.True(dirs.CompareCardinalDir(Vector2.down, ":)Down"));
+            AssertNameApplied(dirs, ":)");
+        }
+
+        [Test]
+        public void TestApplyByDir()
+        {
+            StringDirections dirs = new StringDirections();
+            dirs.name = ":)";
+            Assert.True(dirs.CompareDir(Vector2.down, ":)Down"));
+            AssertNameApplied(dirs, ":)");
+        }
+
         [Test]
         public void TestApplyName()
         {
             StringDirections dirs = new StringDirections();
-
-            dirs.ApplyNameToAll("HELLO_");
-
-            Assert.AreEqual(dirs.name, "HELLO_");
-            Assert.AreEqual(dirs.right, "HELLO_Right");
-            Assert.AreEqual(dirs.left, "HELLO_Left");
-            Assert.AreEqual(dirs.down, "HELLO_Down");
-            Assert.AreEqual(dirs.up, "HELLO_Up");
-            Assert.AreEqual(dirs.downRight, "HELLO_DownRight");
-            Assert.AreEqual(dirs.upRight, "HELLO_UpRight");
-            Assert.AreEqual(dirs.downLeft, "HELLO_DownLeft");
-            Assert.AreEqual(dirs.upLeft, "HELLO_UpLeft");
-
+            dirs.ApplyNameToAll("HELLO");
+            AssertNameApplied(dirs, "HELLO");
             dirs.ApplyNameToAll("HAHAHA");
-
-            Assert.AreEqual(dirs.name, "HELLO_");
-            Assert.AreEqual(dirs.right, "HELLO_Right");
-            Assert.AreEqual(dirs.left, "HELLO_Left");
-            Assert.AreEqual(dirs.down, "HELLO_Down");
-            Assert.AreEqual(dirs.up, "HELLO_Up");
-            Assert.AreEqual(dirs.downRight, "HELLO_DownRight");
-            Assert.AreEqual(dirs.upRight, "HELLO_UpRight");
-            Assert.AreEqual(dirs.downLeft, "HELLO_DownLeft");
-            Assert.AreEqual(dirs.upLeft, "HELLO_UpLeft");
+            AssertNameApplied(dirs, "HELLO");
         }
 
         [Test]

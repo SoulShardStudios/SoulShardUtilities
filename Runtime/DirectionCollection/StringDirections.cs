@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace SoulShard.Utils
 {
@@ -9,9 +10,12 @@ namespace SoulShard.Utils
     public class StringDirections : DirectionalMap<string>
     {
         public string name;
+        bool _applied;
 
         public void ApplyNameToAll(string name)
         {
+            if (_applied)
+                return;
             if (name == "")
                 return;
             if (down != "" && down != null)
@@ -27,6 +31,7 @@ namespace SoulShard.Utils
             downRight = name + "DownRight";
             upLeft = name + "UpLeft";
             upRight = name + "UpRight";
+            _applied = true;
         }
 
         public void Clear()
@@ -42,6 +47,18 @@ namespace SoulShard.Utils
             downRight = "";
             upLeft = "";
             upRight = "";
+        }
+
+        public override string GetCardinalDir(Vector2 dir)
+        {
+            ApplyNameToAll(name);
+            return base.GetCardinalDir(dir);
+        }
+
+        public override string GetDir(Vector2 dir)
+        {
+            ApplyNameToAll(name);
+            return base.GetDir(dir);
         }
     }
 }
