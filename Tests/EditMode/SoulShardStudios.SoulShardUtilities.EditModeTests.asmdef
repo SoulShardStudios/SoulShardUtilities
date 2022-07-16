@@ -2,11 +2,10 @@
     "name": "SoulShardStudios.SoulShardUtilities.EditModeTests",
     "rootNamespace": "",
     "references": [
-        "SoulShardUtilities.Runtime",
         "SoulShard.Inventory",
         "SoulShardStudios.SoulShardUtilities.Runtime",
-        "SoulShardUtils.Animation",
-        "SoulShard.General"
+        "SoulShard.General",
+        "SoulShard.DirectionCollection"
     ],
     "includePlatforms": [
         "Editor"
