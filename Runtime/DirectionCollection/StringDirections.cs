@@ -60,5 +60,8 @@ namespace SoulShard.Utils
             ApplyNameToAll(name);
             return base.GetDir(dir);
         }
+
+        public override string ToString() =>
+            $"down:{down},up:{up},left:{left},right:{right},downLeft:{downLeft},downRight:{downRight},upLeft:{upLeft},upRight:{upRight}";
     }
 }
