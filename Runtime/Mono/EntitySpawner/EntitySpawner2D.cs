@@ -53,11 +53,11 @@ namespace SoulShard.Utils
         /// Should the script spawn entities on enable?
         /// </summary>
         [SerializeField]
-        bool _spawnOnEnable;
+        bool _spawnOnAwake;
 
-        void OnEnable()
+        void Awake()
         {
-            if (_spawnOnEnable)
+            if (_spawnOnAwake)
                 SpawnAllProps();
         }
 
