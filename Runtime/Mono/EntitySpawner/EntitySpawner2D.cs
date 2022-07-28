@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using SoulShard.Math;
 
 namespace SoulShard.Utils
 {
@@ -84,7 +85,10 @@ namespace SoulShard.Utils
                 Debug.LogError("No entities were provided to the spawner.");
                 return;
             }
-            var mesh = MeshUtility.ConvexPointsToMesh2D(spawnArea, 0);
+            var mesh = MeshUtility.ConvexPointsToMesh2D(
+                VectorMath.TranslateVectorArray(spawnArea, transform.position),
+                0
+            );
             for (
                 int i = 0;
                 i < Mathf.Ceil(Random.Range(props.spawnAmount.x, props.spawnAmount.y));
