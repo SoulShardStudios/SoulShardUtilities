@@ -11,6 +11,9 @@ namespace SoulShard.Utils
         public void OnSceneGUI()
         {
             var spawner = target as EntitySpawner2D;
+            if (spawner.spawnArea == null)
+                return;
+
             var v3 = new Vector3[spawner.spawnArea.Length];
             for (int i = 0; i < spawner.spawnArea.Length; i++)
                 v3[i] = (Vector3)spawner.spawnArea[i];
