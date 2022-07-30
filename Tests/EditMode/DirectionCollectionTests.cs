@@ -97,5 +97,22 @@ namespace SoulShard.Tests.Utils
             Assert.AreEqual(dirs.downLeft, "");
             Assert.AreEqual(dirs.upLeft, "");
         }
+
+        [Test]
+        public void TestSetAll()
+        {
+            StringDirections dirs = new StringDirections();
+
+            dirs.SetAll("_");
+
+            Assert.AreEqual(dirs.right, "_");
+            Assert.AreEqual(dirs.left, "_");
+            Assert.AreEqual(dirs.down, "_");
+            Assert.AreEqual(dirs.up, "_");
+            Assert.AreEqual(dirs.downRight, "_");
+            Assert.AreEqual(dirs.upRight, "_");
+            Assert.AreEqual(dirs.downLeft, "_");
+            Assert.AreEqual(dirs.upLeft, "_");
+        }
     }
 }

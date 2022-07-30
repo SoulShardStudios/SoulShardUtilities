@@ -71,5 +71,21 @@ namespace SoulShard.Utils
 
         public virtual bool CompareDir(Vector2 dir, T value) => GetDir(dir).Equals(value);
         #endregion
+
+        /// <summary>
+        /// Sets all directions to the given value.
+        /// </summary>
+        /// <param name="val">The value to set all directions to.</param>
+        public virtual void SetAll(T val)
+        {
+            down = val;
+            up = val;
+            left = val;
+            right = val;
+            downLeft = val;
+            upLeft = val;
+            downRight = val;
+            upRight = val;
+        }
     }
 }
