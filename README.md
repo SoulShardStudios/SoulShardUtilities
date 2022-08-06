@@ -26,6 +26,7 @@ Includes alot of functionality:
 - Dynamically Allocated Collision Meshes
 - world scaled rects and rect ints (for custom AABB colliders, cheaper trigger detection, e.t.c.)
 - PixelMap: an infinitely tileable, editable image, with a bunch of customization.
+- A simple, generic, easy to understand wave function collapse implementation.
 - with more being added and updated regularly!
 
 WARNING: This is still a PREVIEW PACKAGE, use caution when using this in your projects until this repo goes to 1.0.0, at least.
