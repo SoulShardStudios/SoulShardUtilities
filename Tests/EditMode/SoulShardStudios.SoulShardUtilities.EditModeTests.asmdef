@@ -3,9 +3,10 @@
     "rootNamespace": "",
     "references": [
         "SoulShard.Inventory",
-        "SoulShardStudios.SoulShardUtilities.Runtime",
         "SoulShard.General",
-        "SoulShard.DirectionCollection"
+        "SoulShard.DirectionCollection",
+        "SoulShard.RandomGen",
+        "SoulShard.Math"
     ],
     "includePlatforms": [
         "Editor"

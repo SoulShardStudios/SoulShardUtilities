@@ -1,14 +1,14 @@
 {
-    "name": "SoulShardStudios.SoulShardUtilities.Runtime",
+    "name": "SoulShard.RandomGen",
     "rootNamespace": "",
     "references": [
-        "GUID:2665a8d13d1b3f18800f46e256720795",
-        "GUID:e0cd26848372d4e5c891c569017e11f1"
+        "GUID:7cb54a463a3f7f04eb664d43ad26caa2",
+        "GUID:1b28749ed95a7764689d6f11cbae9f58"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
-    "allowUnsafeCode": true,
-    "overrideReferences": true,
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],

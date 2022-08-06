@@ -12,6 +12,26 @@ namespace SoulShard.Utils
         public string name;
         bool _applied;
 
+        #region Constructors
+        public StringDirections() => SetAllToVal("");
+
+        public StringDirections(string all) : base(all) => ApplyNameToAll(all);
+
+        public StringDirections(string down, string left, string right, string up)
+            : base(down, left, right, up) => SetCardinals(down, left, right, up);
+
+        public StringDirections(
+            string down,
+            string left,
+            string right,
+            string up,
+            string downLeft,
+            string downRight,
+            string upLeft,
+            string upRight
+        ) : base(down, left, right, up, downLeft, downRight, upLeft, upRight) =>
+            SetAll(down, left, right, up, downLeft, downRight, upLeft, upRight);
+        #endregion
         public void ApplyNameToAll(string name)
         {
             if (_applied)
