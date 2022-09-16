@@ -38,7 +38,7 @@ namespace SoulShard.Utils
         /// <summary>
         /// The number of times the timer should reset.
         /// </summary>
-        public readonly int resetCount;
+        public int resetCount;
 
         int _numberOfResets;
         public int numberOfResets { get => _numberOfResets; }
