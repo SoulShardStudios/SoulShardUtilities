@@ -10,6 +10,11 @@ namespace SoulShard.Utils
     public class Timer
     {
         /// <summary>
+        /// The action to call when the timer has completed a cycle
+        /// </summary>
+        public event Action onCycleComplete;
+
+        /// <summary>
         /// The action to call when the timer is done.
         /// </summary>
         public event Action onDone;
@@ -22,7 +27,8 @@ namespace SoulShard.Utils
         /// <summary>
         /// Is the timer done?
         /// </summary>
-        public bool done { get; private set; }
+        public bool done => resetCount > 0 ? _numberOfResets >= resetCount : false;
+        bool _cycleComplete => currentCooldown <= 0;
 
         /// <summary>
         /// Where the cooldown gets reset to.
@@ -30,18 +36,25 @@ namespace SoulShard.Utils
         public float maxCooldown;
 
         /// <summary>
-        /// Should this timer automatically reset when its done?
+        /// The number of times the timer should reset.
         /// </summary>
-        public bool autoReset;
+        public readonly int resetCount;
+
+        int _numberOfResets;
+        public int numberOfResets { get => _numberOfResets; }
+        
+        /// <summary>
+        /// The current percentage of the timer's completion
+        /// </summary>
         public float currentCooldownPercent
         {
             get => Mathf.Clamp(currentCooldown, 0, maxCooldown) / maxCooldown;
         }
 
-        public Timer(float maxCooldown, bool autoReset = false)
+        public Timer(float maxCooldown, int resetCount = 1)
         {
             this.maxCooldown = maxCooldown;
-            this.autoReset = autoReset;
+            this.resetCount = resetCount;
             Reset();
         }
 
@@ -54,27 +67,22 @@ namespace SoulShard.Utils
             if (done)
                 return;
             currentCooldown -= delta;
-            if (currentCooldown <= 0 && !done)
-            {
-                onDone?.Invoke();
-                if (autoReset)
-                {
-                    currentCooldown = maxCooldown;
-                    return;
-                }
-                done = true;
-            }
+            if (!_cycleComplete)
+                return;
+            CompleteCycle();
         }
 
         /// <summary>
-        /// Forces the timer to complete.
+        /// Forces the timer to complete its current cycle.
         /// </summary>
-        public void ForceDone()
+        public void CompleteCycle()
         {
-            currentCooldown = -1;
-            if (!autoReset)
-                done = true;
-            onDone?.Invoke();
+            onCycleComplete?.Invoke();
+            _numberOfResets++;
+            if (!done)
+                currentCooldown = maxCooldown;
+            else
+                onDone?.Invoke();
         }
 
         /// <summary>
@@ -82,8 +90,8 @@ namespace SoulShard.Utils
         /// </summary>
         public void Reset()
         {
+            _numberOfResets = 0;
             currentCooldown = maxCooldown;
-            done = false;
         }
     }
 }
