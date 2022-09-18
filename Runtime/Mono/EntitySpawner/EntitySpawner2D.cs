@@ -10,33 +10,10 @@ namespace SoulShard.Utils
     public class EntitySpawner2D : MonoBehaviour
     {
         /// <summary>
-        /// The properties for each stage of spawning.
-        /// </summary>
-        [System.Serializable]
-        public class Props
-        {
-            /// <summary>
-            /// The collection of entities that could be spawned (Selected randomly)
-            /// </summary>
-            public GameObject[] entities;
-
-            /// <summary>
-            /// The number of attempts to spawn an entity that should be performed.
-            /// </summary>
-            public Vector2 spawnAmount;
-
-            /// <summary>
-            /// The minimum distance away from other entities inside of the transform parent that new entities must be.
-            /// </summary>
-            public float minimumDistance;
-        }
-
-        /// <summary>
-        /// The list of properties of each stage of spawning.
-        /// Goes from the first element to the last and spawns using those parameters in order.
+        /// The props for what entities showld be spawned in what order and what density.
         /// </summary>
         [SerializeField]
-        Props[] _props;
+        EntitySpawnerProps props;
 
         /// <summary>
         /// The transform parent to spawn the entites to.
@@ -74,11 +51,11 @@ namespace SoulShard.Utils
         /// </summary>
         public void SpawnAllProps()
         {
-            foreach (Props p in _props)
+            foreach (var p in props.props)
                 SpawnEntities(p);
         }
 
-        void SpawnEntities(Props props)
+        void SpawnEntities(EntitySpawnerProps.Props props)
         {
             if (props.entities.Length == 0)
             {
