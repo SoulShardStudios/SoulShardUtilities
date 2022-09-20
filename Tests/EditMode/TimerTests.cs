@@ -86,4 +86,15 @@ public class TimerTests
         timer2.CompleteCycle();
         Assert.True(timer2.done);
     }
+
+    [Test]
+    public void TestComplete()
+    {
+        var timer = new Timer(10, 1);
+        timer.Complete();
+        Assert.True(timer.done);
+        var timer2 = new Timer(10, -1);
+        timer2.Complete();
+        Assert.True(!timer2.done);
+    }
 }

@@ -86,6 +86,18 @@ namespace SoulShard.Utils
         }
 
         /// <summary>
+        /// Forces the completion of the timer
+        /// </summary>
+        public void Complete()
+        {
+            if (resetCount <= 0)
+                return;
+            _numberOfResets = resetCount;
+            currentCooldown = 0;
+            onDone?.Invoke();
+        }
+
+        /// <summary>
         /// Resets the timer to start again.
         /// </summary>
         public void Reset()
