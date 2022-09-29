@@ -9,11 +9,11 @@ class TestSlot
         Slot<BaseItem, ItemInstance<BaseItem>> slot = new Slot<BaseItem, ItemInstance<BaseItem>>(
             new ItemInstance<BaseItem>(Helpers.salt, 12)
         );
-        var res = slot.Transfer(new ItemInstance<BaseItem>(Helpers.AXE));
+        var res = slot.Transfer(new ItemInstance<BaseItem>(Helpers.axe));
         Assert.AreEqual(res.amount, 12);
         Assert.AreEqual(res.item.name, Helpers.salt.name);
         Assert.AreEqual(slot.itemInstance.amount, 0);
-        Assert.AreEqual(slot.itemInstance.item.name, Helpers.AXE.name);
+        Assert.AreEqual(slot.itemInstance.item.name, Helpers.axe.name);
     }
 
     [Test]
@@ -24,7 +24,7 @@ class TestSlot
             new ItemInstance<BaseItem>(Helpers.salt, 12)
         );
         slot.onItemModified = (ItemInstance<BaseItem> item) => res = item;
-        var testTransfer = new ItemInstance<BaseItem>(Helpers.AXE);
+        var testTransfer = new ItemInstance<BaseItem>(Helpers.axe);
 
         slot.Transfer(testTransfer);
         Assert.AreEqual(testTransfer.item.name, res.item.name);
@@ -87,7 +87,7 @@ class TestCombineStack
         Helpers.AssertEqualToSwap(
             SlotManagementFuncs.CombineStack<BaseItem, ItemInstance<BaseItem>>,
             new ItemInstance<BaseItem>(Helpers.salt, 80),
-            new ItemInstance<BaseItem>(Helpers.AXE)
+            new ItemInstance<BaseItem>(Helpers.axe)
         );
         Helpers.AssertEqualToSwap(
             SlotManagementFuncs.CombineStack<BaseItem, ItemInstance<BaseItem>>,
@@ -96,8 +96,8 @@ class TestCombineStack
         );
         Helpers.AssertEqualToSwap(
             SlotManagementFuncs.CombineStack<BaseItem, ItemInstance<BaseItem>>,
-            new ItemInstance<BaseItem>(Helpers.AXE, 10),
-            new ItemInstance<BaseItem>(Helpers.AXE, 80)
+            new ItemInstance<BaseItem>(Helpers.axe, 10),
+            new ItemInstance<BaseItem>(Helpers.axe, 80)
         );
         Helpers.AssertEqualToSwap(
             SlotManagementFuncs.CombineStack<BaseItem, ItemInstance<BaseItem>>,
@@ -151,11 +151,11 @@ class TestHalfSplitStack
         Helpers.AssertEqualToSwap(
             SlotManagementFuncs.HalfStackSplit<BaseItem, ItemInstance<BaseItem>>,
             new ItemInstance<BaseItem>(),
-            new ItemInstance<BaseItem>(Helpers.AXE)
+            new ItemInstance<BaseItem>(Helpers.axe)
         );
         Helpers.AssertEqualToSwap(
             SlotManagementFuncs.HalfStackSplit<BaseItem, ItemInstance<BaseItem>>,
-            new ItemInstance<BaseItem>(Helpers.AXE),
+            new ItemInstance<BaseItem>(Helpers.axe),
             new ItemInstance<BaseItem>()
         );
         Helpers.AssertEqualToSwap(
@@ -232,13 +232,13 @@ class TestSIngleStackSplit
         );
         Helpers.AssertEqualToSwap(
             SlotManagementFuncs.HalfStackSplit<BaseItem, ItemInstance<BaseItem>>,
-            new ItemInstance<BaseItem>(Helpers.AXE),
+            new ItemInstance<BaseItem>(Helpers.axe),
             new ItemInstance<BaseItem>()
         );
         Helpers.AssertEqualToSwap(
             SlotManagementFuncs.HalfStackSplit<BaseItem, ItemInstance<BaseItem>>,
             new ItemInstance<BaseItem>(),
-            new ItemInstance<BaseItem>(Helpers.AXE)
+            new ItemInstance<BaseItem>(Helpers.axe)
         );
         Helpers.AssertEqualToSwap(
             SlotManagementFuncs.HalfStackSplit<BaseItem, ItemInstance<BaseItem>>,

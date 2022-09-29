@@ -9,7 +9,7 @@ public static class Helpers
         name: "Salt"
     );
     public static readonly BaseItem witchesBrew = new BaseItem(name: "Witches Brew");
-    public static readonly BaseItem AXE = new BaseItem(name: "AXXXXEEEEEE");
+    public static readonly BaseItem axe = new BaseItem(name: "AXXXXEEEEEE");
     public static readonly BaseItem weed = new BaseItem(
         name: "Weed",
         maxStackAmount: 100,
@@ -23,6 +23,21 @@ public static class Helpers
     > GetFullInventory() =>
         new Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>(
             new ItemInstance<BaseItem>[1] { new ItemInstance<BaseItem>(witchesBrew) }
+        );
+
+    public static Inventory<
+    BaseItem,
+    Slot<BaseItem, ItemInstance<BaseItem>>,
+    ItemInstance<BaseItem>
+    > GetFullInventoryWithStackableHoles() =>
+        new Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>(
+            new ItemInstance<BaseItem>[4] 
+            { 
+                new ItemInstance<BaseItem>(salt, 25),
+                new ItemInstance<BaseItem>(witchesBrew),
+                new ItemInstance<BaseItem>(axe),
+                new ItemInstance<BaseItem>(weed, 20),
+            }
         );
 
     public static Inventory<
@@ -50,7 +65,7 @@ public static class Helpers
         Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>,
         ItemInstance<BaseItem>,
         ItemInstance<BaseItem>
-    >[] addItemFuncs() =>
+    >[] AddItemFuncs() =>
         new System.Func<
             Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>,
             ItemInstance<BaseItem>,
@@ -70,6 +85,38 @@ public static class Helpers
                 Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>
             >,
             InventoryManagementUtilities.AddUnstackableItemToInventory<
+                BaseItem,
+                Slot<BaseItem, ItemInstance<BaseItem>>,
+                ItemInstance<BaseItem>,
+                Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>
+            >
+        };
+
+
+    public static System.Func<
+        Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>,
+        ItemInstance<BaseItem>,
+        bool
+    >[] CanAddItemFuncs() =>
+        new System.Func<
+            Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>,
+            ItemInstance<BaseItem>,
+            bool
+        >[3]
+        {
+            InventoryManagementUtilities.CanAddItemToInventory<
+                BaseItem,
+                Slot<BaseItem, ItemInstance<BaseItem>>,
+                ItemInstance<BaseItem>,
+                Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>
+            >,
+            InventoryManagementUtilities.CanAddStackableItemToInventory<
+                BaseItem,
+                Slot<BaseItem, ItemInstance<BaseItem>>,
+                ItemInstance<BaseItem>,
+                Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>
+            >,
+            InventoryManagementUtilities.CanAddUnstackableItemToInventory<
                 BaseItem,
                 Slot<BaseItem, ItemInstance<BaseItem>>,
                 ItemInstance<BaseItem>,

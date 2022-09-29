@@ -49,8 +49,16 @@ namespace SoulShard.InventorySystem
                 IInventory<_BaseItem, _Slot, _ItemInstance>
             >(this, other);
 
-        public virtual void ContainsItem(_ItemInstance other) =>
+        public virtual bool ContainsItem(_ItemInstance other) =>
             InventoryManagementUtilities.ContainsItem<
+                _BaseItem,
+                _Slot,
+                _ItemInstance,
+                IInventory<_BaseItem, _Slot, _ItemInstance>
+            >(this, other);
+
+        public virtual bool CanAddItem(_ItemInstance other) =>
+            InventoryManagementUtilities.CanAddItemToInventory<
                 _BaseItem,
                 _Slot,
                 _ItemInstance,
