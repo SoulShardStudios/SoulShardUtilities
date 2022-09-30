@@ -1,7 +1,9 @@
 {
     "name": "SoulShardStudios.SoulShardUtilities.Editor",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:6ca081c0695ec8146818339932296f9f"
+    ],
     "includePlatforms": [
         "Editor"
     ],

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace SoulShard.Utils
 {
     [CustomEditor(typeof(EntitySpawner2D)), CanEditMultipleObjects]
-    public class EntitySpawner2DEditor : Editor
+    public class EntitySpawner2DEditor : UnityEditor.Editor
     {
         public void OnSceneGUI()
         {
