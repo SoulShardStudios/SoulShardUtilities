@@ -1,5 +1,7 @@
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using SoulShard.Math;
 
 namespace SoulShard.Utils
@@ -76,14 +78,25 @@ namespace SoulShard.Utils
                 if (!PointIsValid(pos, props.minimumDistance))
                     continue;
                 GameObject entity = props.entities[Random.Range(0, props.entities.Length)];
-                GameObject g = (GameObject)PrefabUtility.InstantiatePrefab(
-                    entity,
-                    _spawnParent.transform
-                );
-                if (g == null)
-                    g = Instantiate(entity, _spawnParent.transform);
-                g.transform.position = pos;
+
+                SpawnEntity(entity).transform.position = pos;
             }
+        }
+
+        GameObject SpawnEntity(GameObject entity)
+        {
+#if UNITY_EDITOR
+            GameObject g = (GameObject)PrefabUtility.InstantiatePrefab(
+                entity,
+                _spawnParent.transform
+            );
+            if (g == null)
+                g = Instantiate(entity, _spawnParent.transform);
+#endif
+#if !UNITY_EDITOR
+            GameObject g = Instantiate(entity, _spawnParent.transform);
+#endif
+            return g;
         }
     }
 }
