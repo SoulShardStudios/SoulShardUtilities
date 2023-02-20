@@ -38,7 +38,7 @@ namespace SoulShard.InventorySystem
             if (current.amount >= stackSize || other.amount >= stackSize)
                 return Swap<_BaseItem, _ItemInstance>(current, other);
 
-            if (other.amount + current.amount < stackSize)
+            if (other.amount + current.amount <= stackSize)
                 return (
                     new _ItemInstance()
                     {

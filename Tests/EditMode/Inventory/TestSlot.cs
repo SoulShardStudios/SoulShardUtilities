@@ -72,6 +72,19 @@ class TestCombineStack
     }
 
     [Test]
+    public void TestCompleteStack()
+    {
+        var res = SlotManagementFuncs.CombineStack<BaseItem, ItemInstance<BaseItem>>(
+            new ItemInstance<BaseItem>(Helpers.salt, 50),
+            new ItemInstance<BaseItem>(Helpers.salt, 50)
+        );
+        Assert.AreEqual(res.Item1.amount, 100);
+        Assert.AreEqual(res.Item2.amount, 0);
+        Assert.AreEqual(res.Item1.item, Helpers.salt);
+        Assert.AreEqual(res.Item2.item, null);
+    }
+
+    [Test]
     public void TestEdgeCases()
     {
         Helpers.AssertEqualToSwap(
