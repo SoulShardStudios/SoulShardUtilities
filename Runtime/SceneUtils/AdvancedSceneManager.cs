@@ -9,6 +9,7 @@ namespace SoulShard.Utils
     /// <summary>
     /// An advanced scene management utility. handles more advanced functionality at the price of an always loaded master scene, that you must put this singleton into.
     /// </summary>
+    [DefaultExecutionOrder(-1000000)]
     public class AdvancedSceneManager : MonoBehaviour
     {
         /// <summary>
