@@ -197,7 +197,7 @@ namespace SoulShard.Math
     /// A serializeable easing that can be embedded in monobehaviors.
     /// </summary>
     [Serializable]
-    class Easing
+    public class Easing
     {
         public EaseType type;
         public EaseDirection direction;
