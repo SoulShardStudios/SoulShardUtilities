@@ -1,6 +1,6 @@
 {
   "name": "com.soulshardstudios.soulshardutilities",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "displayName": "SoulShardUtilities",
   "description": "A collection of usefull project independant functions, constants, and utilities.",
   "unity": "2019.1",
