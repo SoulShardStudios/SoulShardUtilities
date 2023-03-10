@@ -9,6 +9,7 @@ namespace SoulShard.Math
     /// </summary>
     public enum EaseType
     {
+        linear,
         sine,
         quad,
         cubic,
@@ -33,12 +34,17 @@ namespace SoulShard.Math
 
     /// <summary>
     /// Contains a variety of easing functions.
+    /// 
+    /// All of this is modified from https://easings.net/
     /// </summary>
     public class EaseManager
     {
         static readonly Dictionary<(EaseType, EaseDirection), Func<float, float>> easingFunctions =
             new Dictionary<(EaseType, EaseDirection), Func<float, float>>()
-            {
+            {            
+            { (EaseType.linear, EaseDirection.In), EaseLinear },
+            { (EaseType.linear, EaseDirection.Out), EaseLinear },
+            { (EaseType.linear, EaseDirection.InOut), EaseLinear },
             { (EaseType.sine, EaseDirection.In), EaseInSine },
             { (EaseType.sine, EaseDirection.Out), EaseOutSine },
             { (EaseType.sine, EaseDirection.InOut), EaseInOutSine },
@@ -77,6 +83,7 @@ namespace SoulShard.Math
             EaseDirection direction = EaseDirection.In
         ) => easingFunctions[(type, direction)](x);
 
+        public static float EaseLinear(float x) => x;
         public static float EaseInSine(float x) => 1 - Mathf.Cos(x * Mathf.PI / 2);
 
         public static float EaseOutSine(float x) => Mathf.Sin(x * Mathf.PI / 2);
