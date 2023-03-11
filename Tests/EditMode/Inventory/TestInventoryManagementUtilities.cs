@@ -20,19 +20,19 @@ public class TestInventorySystem
     public void TestAddUnstackableToInventory()
     {
         var inven = Helpers.GetHoleyInventory();
-        InventoryManagementUtilities.AddUnstackableItemToInventory<
+        InventoryManagementUtilities.AddItemToInventory<
             BaseItem,
             Slot<BaseItem, ItemInstance<BaseItem>>,
             ItemInstance<BaseItem>,
             Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>
         >(inven, new ItemInstance<BaseItem>(Helpers.witchesBrew));
-        InventoryManagementUtilities.AddUnstackableItemToInventory<
+        InventoryManagementUtilities.AddItemToInventory<
             BaseItem,
             Slot<BaseItem, ItemInstance<BaseItem>>,
             ItemInstance<BaseItem>,
             Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>
         >(inven, new ItemInstance<BaseItem>(Helpers.axe));
-        InventoryManagementUtilities.AddUnstackableItemToInventory<
+        InventoryManagementUtilities.AddItemToInventory<
             BaseItem,
             Slot<BaseItem, ItemInstance<BaseItem>>,
             ItemInstance<BaseItem>,
@@ -47,7 +47,7 @@ public class TestInventorySystem
     public void TestAddStackableItemToInventory()
     {
         var inven = Helpers.GetHoleyInventory();
-        InventoryManagementUtilities.AddStackableItemToInventory<
+        InventoryManagementUtilities.AddItemToInventory<
             BaseItem,
             Slot<BaseItem, ItemInstance<BaseItem>>,
             ItemInstance<BaseItem>,
@@ -55,7 +55,7 @@ public class TestInventorySystem
         >(inven, new ItemInstance<BaseItem>(Helpers.salt, 10));
         Assert.AreEqual(inven.slots[0].itemInstance.amount, 79);
         Assert.AreEqual(inven.slots[0].itemInstance.item.name, Helpers.salt.name);
-        InventoryManagementUtilities.AddStackableItemToInventory<
+        InventoryManagementUtilities.AddItemToInventory<
             BaseItem,
             Slot<BaseItem, ItemInstance<BaseItem>>,
             ItemInstance<BaseItem>,
@@ -71,7 +71,7 @@ public class TestInventorySystem
     public void TestAddToInventoryWithStackableHoles()
     {
         var inven = Helpers.GetFullInventoryWithStackableHoles();
-        InventoryManagementUtilities.AddStackableItemToInventory<
+        InventoryManagementUtilities.AddItemToInventory<
             BaseItem,
             Slot<BaseItem, ItemInstance<BaseItem>>,
             ItemInstance<BaseItem>,
@@ -79,7 +79,7 @@ public class TestInventorySystem
         >(inven, new ItemInstance<BaseItem>(Helpers.salt, 10));
         Assert.AreEqual(inven.slots[0].itemInstance.amount, 35);
         Assert.AreEqual(inven.slots[0].itemInstance.item.name, Helpers.salt.name);
-        InventoryManagementUtilities.AddStackableItemToInventory<
+        InventoryManagementUtilities.AddItemToInventory<
             BaseItem,
             Slot<BaseItem, ItemInstance<BaseItem>>,
             ItemInstance<BaseItem>,
@@ -87,7 +87,7 @@ public class TestInventorySystem
         >(inven, new ItemInstance<BaseItem>(Helpers.salt, 30));
         Assert.AreEqual(inven.slots[0].itemInstance.amount, 65);
         Assert.AreEqual(inven.slots[0].itemInstance.item.name, Helpers.salt.name);
-        var res = InventoryManagementUtilities.AddStackableItemToInventory<
+        var res = InventoryManagementUtilities.AddItemToInventory<
             BaseItem,
             Slot<BaseItem, ItemInstance<BaseItem>>,
             ItemInstance<BaseItem>,
@@ -97,7 +97,7 @@ public class TestInventorySystem
         Assert.AreEqual(inven.slots[0].itemInstance.item.name, Helpers.salt.name);
         Assert.AreEqual(res.amount, 5);
         Assert.AreEqual(res.item.name, Helpers.salt.name);
-        InventoryManagementUtilities.AddStackableItemToInventory<
+        InventoryManagementUtilities.AddItemToInventory<
             BaseItem,
             Slot<BaseItem, ItemInstance<BaseItem>>,
             ItemInstance<BaseItem>,
@@ -179,8 +179,7 @@ public class TestInventorySystem
     public void TestCanAddToInventoryWithStackableHoles()
     {
         var inven = Helpers.GetFullInventoryWithStackableHoles();
-
-        var res = InventoryManagementUtilities.CanAddStackableItemToInventory<
+        var res = InventoryManagementUtilities.CanAddItemToInventory<
             BaseItem,
             Slot<BaseItem, ItemInstance<BaseItem>>,
             ItemInstance<BaseItem>,
@@ -188,7 +187,7 @@ public class TestInventorySystem
         >(inven, new ItemInstance<BaseItem>(Helpers.axe));
         Assert.False(res);
 
-        var res2 = InventoryManagementUtilities.CanAddStackableItemToInventory<
+        var res2 = InventoryManagementUtilities.CanAddItemToInventory<
             BaseItem,
             Slot<BaseItem, ItemInstance<BaseItem>>,
             ItemInstance<BaseItem>,
@@ -196,7 +195,7 @@ public class TestInventorySystem
         >(inven, new ItemInstance<BaseItem>(Helpers.salt, 10));
         Assert.True(res2);
 
-        var res3 = InventoryManagementUtilities.CanAddStackableItemToInventory<
+        var res3 = InventoryManagementUtilities.CanAddItemToInventory<
             BaseItem,
             Slot<BaseItem, ItemInstance<BaseItem>>,
             ItemInstance<BaseItem>,
@@ -204,7 +203,7 @@ public class TestInventorySystem
         >(inven, new ItemInstance<BaseItem>(Helpers.witchesBrew));
         Assert.False(res3);
 
-        var res4 = InventoryManagementUtilities.CanAddStackableItemToInventory<
+        var res4 = InventoryManagementUtilities.CanAddItemToInventory<
             BaseItem,
             Slot<BaseItem, ItemInstance<BaseItem>>,
             ItemInstance<BaseItem>,

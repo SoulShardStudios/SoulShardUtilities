@@ -14,9 +14,6 @@ namespace SoulShard.InventorySystem
         {
             if (other.isEmpty)
                 return other;
-            if (inventory.capacity == 0)
-                return other;
-
             for (int i = 0; i < inventory.slots.Length; i++)
             {
                 if (inventory.slots[i].isEmpty)
@@ -86,9 +83,6 @@ namespace SoulShard.InventorySystem
         {
             if (other.isEmpty)
                 return other;
-            if (inventory.capacity == 0)
-                return other;
-
             if (!other.item.isStackable)
                 return AddUnstackableItemToInventory<_BaseItem, _Slot, _ItemInstance, _Inventory>(inventory, other);
             return AddStackableItemToInventory<_BaseItem, _Slot, _ItemInstance, _Inventory>(inventory, other);
@@ -106,8 +100,6 @@ namespace SoulShard.InventorySystem
             where _Inventory : class, IInventory<_BaseItem, _Slot, _ItemInstance>
         {
             if (other.isEmpty)
-                return false;
-            if (inventory.capacity == 0)
                 return false;
             foreach (_Slot s in inventory.slots)
                 if (!s.isEmpty)
@@ -134,8 +126,6 @@ namespace SoulShard.InventorySystem
             where _Inventory : class, IInventory<_BaseItem, _Slot, _ItemInstance>
         {
             if (other.isEmpty)
-                return false;
-            if (inventory.capacity == 0)
                 return false;
             for (int i = 0; i < inventory.slots.Length; i++)
                 if (inventory.slots[i].isEmpty)
@@ -193,9 +183,6 @@ namespace SoulShard.InventorySystem
         {
             if (other.isEmpty)
                 return false;
-            if (inventory.capacity == 0)
-                return false;
-
             if (!other.item.isStackable)
                 return CanAddUnstackableItemToInventory<_BaseItem, _Slot, _ItemInstance, _Inventory>(inventory, other);
             return CanAddStackableItemToInventory<_BaseItem, _Slot, _ItemInstance, _Inventory>(inventory, other);
