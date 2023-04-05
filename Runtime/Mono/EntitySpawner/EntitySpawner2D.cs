@@ -70,11 +70,11 @@ namespace SoulShard.Utils
             );
             for (
                 int i = 0;
-                i < Mathf.Ceil(Random.Range(props.spawnAmount.x, props.spawnAmount.y));
+                i < Mathf.Ceil(props.spawnAmount.RandomBetween());
                 i++
             )
             {
-                var pos = MeshUtility.GetRandomPointOnMesh(mesh);
+                var pos = mesh.RandomPoint();
                 if (!PointIsValid(pos, props.minimumDistance))
                     continue;
                 GameObject entity = props.entities[Random.Range(0, props.entities.Length)];
