@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace SoulShard.Utils
 {
+    [CreateAssetMenu(menuName = "SoulShardUtils/TilemapEntitySpawnerProperties")]
     public class TilemapEntitySpawnerProps : MonoBehaviour
     {
         [System.Serializable]
@@ -16,5 +17,4 @@ namespace SoulShard.Utils
 
         public SpawnConfig[] toSpawn;
     }
-
 }
