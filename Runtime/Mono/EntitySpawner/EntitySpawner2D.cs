@@ -1,7 +1,4 @@
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 using SoulShard.Math;
 
 namespace SoulShard.Utils
@@ -9,7 +6,7 @@ namespace SoulShard.Utils
     /// <summary>
     /// Fast automation for randomly spawning entities over an area in a natural way.
     /// </summary>
-    public class EntitySpawner2D : MonoBehaviour
+    public class EntitySpawner2D : ExtendedMono
     {
         /// <summary>
         /// The props for what entities showld be spawned in what order and what density.
@@ -78,25 +75,8 @@ namespace SoulShard.Utils
                 if (!PointIsValid(pos, props.minimumDistance))
                     continue;
                 GameObject entity = props.entities[Random.Range(0, props.entities.Length)];
-
-                SpawnEntity(entity).transform.position = pos;
+                InstantiateWithReference(entity, _spawnParent).transform.position = pos;
             }
-        }
-
-        GameObject SpawnEntity(GameObject entity)
-        {
-#if UNITY_EDITOR
-            GameObject g = (GameObject)PrefabUtility.InstantiatePrefab(
-                entity,
-                _spawnParent.transform
-            );
-            if (g == null)
-                g = Instantiate(entity, _spawnParent.transform);
-#endif
-#if !UNITY_EDITOR
-            GameObject g = Instantiate(entity, _spawnParent.transform);
-#endif
-            return g;
         }
     }
 }

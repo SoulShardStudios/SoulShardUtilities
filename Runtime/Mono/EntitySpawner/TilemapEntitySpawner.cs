@@ -6,7 +6,7 @@ using SoulShard.Math;
 
 namespace SoulShard.Utils
 {
-    public class TilemapEntitySpawner2 : ExtendedMono
+    public class TilemapEntitySpawner : ExtendedMono
     {
         [SerializeField]
         Tilemap _tilemap;
