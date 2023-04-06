@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace SoulShard.Utils
 {
     public static class RandomUtility
@@ -12,22 +13,21 @@ namespace SoulShard.Utils
 
         public static int RandomBetween(this Vector2Int vector) => Random.Range(vector.x, vector.y);
 
-
         public static T RandomElement<T>(this IEnumerator<T> enumerator)
         {
             var arr = enumerator.GetEnumerable().ToArray();
-            return arr[Random.Range(0, arr.Length - 1)];
+            return arr[Random.Range(0, arr.Length)];
         }
 
         public static T RandomElement<T>(this IEnumerable<T> enumerator)
         {
             var arr = enumerator.ToArray();
-            return arr[Random.Range(0, arr.Length - 1)];
+            return arr[Random.Range(0, arr.Length)];
         }
 
-        public static T RandomElement<T>(this List<T> list) => list[Random.Range(0, list.Count() - 1)];
+        public static T RandomElement<T>(this List<T> list) => list[Random.Range(0, list.Count())];
 
-        public static T RandomElement<T>(this T[] array) => array[Random.Range(0, array.Count() - 1)];
+        public static T RandomElement<T>(this T[] array) => array[Random.Range(0, array.Count())];
 
         public static Vector3 RandomPoint(this Mesh mesh)
         {
