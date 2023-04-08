@@ -212,4 +212,81 @@ public class TestInventorySystem
         Assert.True(res4);
     }
     #endregion
+    #region Take Item
+    [Test]
+    public void TestTakeItem()
+    {
+        var inven = Helpers.GetHoleyInventory();
+        var result = InventoryManagementUtilities.TakeItemFromInventory<
+                BaseItem,
+                Slot<BaseItem, ItemInstance<BaseItem>>,
+                ItemInstance<BaseItem>,
+                Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>
+            >(inven, Helpers.salt, 20);
+
+        Assert.AreEqual(result.amount, 20);
+        Assert.AreEqual(result.item.name, "Salt");
+        Assert.AreEqual(inven.slots[0].itemInstance.amount, 49);
+        Assert.AreEqual(result.item.name, "Salt");
+    }
+
+    [Test]
+    public void TestTakeItemOverMaxStack()
+    {
+        var inven = Helpers.GetHoleyInventory();
+        Assert.Throws<System.Exception>(() =>
+        {
+            InventoryManagementUtilities.TakeItemFromInventory<
+BaseItem,
+Slot<BaseItem, ItemInstance<BaseItem>>,
+ItemInstance<BaseItem>,
+Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>
+>(inven, Helpers.salt, 999);
+        });
+    }
+    
+    [Test]
+    public void TestTakeItemUnderAsked()
+    {
+        var inven = Helpers.GetHoleyInventory2();
+        var result = InventoryManagementUtilities.TakeItemFromInventory<
+                BaseItem,
+                Slot<BaseItem, ItemInstance<BaseItem>>,
+                ItemInstance<BaseItem>,
+                Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>
+            >(inven, Helpers.weed, 100);
+
+        Assert.AreEqual(result.amount, 75);
+        Assert.AreEqual(result.item.name, "Weed");
+        Assert.AreEqual(inven.slots[7].isEmpty, true);
+        Assert.AreEqual(inven.slots[8].isEmpty, true);
+    }
+
+    [Test]
+    public void TestTakeNoneFound()
+    {
+        var inven = Helpers.GetHoleyInventory2();
+        var result = InventoryManagementUtilities.TakeItemFromInventory<
+                BaseItem,
+                Slot<BaseItem, ItemInstance<BaseItem>>,
+                ItemInstance<BaseItem>,
+                Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>
+            >(inven, Helpers.axe, 1);
+        Assert.AreEqual(result.isEmpty, true);
+    }
+
+    [Test]
+    public void TestTakeUnstackable()
+    {
+        var inven = Helpers.GetHoleyInventory2();
+        var result = InventoryManagementUtilities.TakeItemFromInventory<
+                BaseItem,
+                Slot<BaseItem, ItemInstance<BaseItem>>,
+                ItemInstance<BaseItem>,
+                Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>
+            >(inven, Helpers.witchesBrew, 1);
+        Assert.AreEqual(result.item.name, "Witches Brew");
+        Assert.AreEqual(inven.slots[3].itemInstance.isEmpty, true);
+    }
+    #endregion
 }
