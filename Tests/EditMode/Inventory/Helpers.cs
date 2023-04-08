@@ -61,6 +61,27 @@ public static class Helpers
             }
         );
 
+    public static Inventory<
+    BaseItem,
+    Slot<BaseItem, ItemInstance<BaseItem>>,
+    ItemInstance<BaseItem>
+> GetHoleyInventory2() =>
+    new Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>(
+        new ItemInstance<BaseItem>[10]
+        {
+                new ItemInstance<BaseItem>(salt, 69),
+                new ItemInstance<BaseItem>(),
+                new ItemInstance<BaseItem>(),
+                new ItemInstance<BaseItem>(witchesBrew),
+                new ItemInstance<BaseItem>(),
+                new ItemInstance<BaseItem>(),
+                new ItemInstance<BaseItem>(),
+                new ItemInstance<BaseItem>(weed, 25), // in MG lol
+                new ItemInstance<BaseItem>(weed, 50),
+                new ItemInstance<BaseItem>()
+        }
+    );
+
     public static System.Func<
         Inventory<BaseItem, Slot<BaseItem, ItemInstance<BaseItem>>, ItemInstance<BaseItem>>,
         ItemInstance<BaseItem>,

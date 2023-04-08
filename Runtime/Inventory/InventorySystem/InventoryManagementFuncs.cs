@@ -10,7 +10,7 @@ namespace SoulShard.InventorySystem
             where _BaseItem : class, IBaseItem
             where _ItemInstance : struct, IItemInstance<_BaseItem>
             where _Slot : class, ISlot<_BaseItem, _ItemInstance>, new()
-            where _Inventory: class, IInventory<_BaseItem,_Slot,_ItemInstance>
+            where _Inventory : class, IInventory<_BaseItem, _Slot, _ItemInstance>
         {
             if (other.isEmpty)
                 return other;
@@ -40,7 +40,7 @@ namespace SoulShard.InventorySystem
             uint maxStack = other.item.maxStackAmount;
 
             if (other.amount == maxStack)
-                return AddUnstackableItemToInventory<_BaseItem,_Slot,_ItemInstance,_Inventory>(inventory, other);
+                return AddUnstackableItemToInventory<_BaseItem, _Slot, _ItemInstance, _Inventory>(inventory, other);
 
             for (int i = 0; i < inventory.slots.Length; i++)
             {
@@ -144,7 +144,7 @@ namespace SoulShard.InventorySystem
         {
             if (other.isEmpty)
                 return false;
-            
+
             uint maxStack = other.item.maxStackAmount;
             if (other.amount == maxStack)
                 return CanAddUnstackableItemToInventory<_BaseItem, _Slot, _ItemInstance, _Inventory>(inventory, other);
@@ -188,5 +188,82 @@ namespace SoulShard.InventorySystem
             return CanAddStackableItemToInventory<_BaseItem, _Slot, _ItemInstance, _Inventory>(inventory, other);
         }
         #endregion
-    }
+        #region Take Item
+        public static _ItemInstance TakeItemFromInventoryUnstackable<_BaseItem, _Slot, _ItemInstance, _Inventory>(
+            _Inventory inventory, _BaseItem toTake
+        )
+            where _BaseItem : class, IBaseItem
+            where _ItemInstance : struct, IItemInstance<_BaseItem>
+            where _Slot : class, ISlot<_BaseItem, _ItemInstance>, new()
+            where _Inventory : class, IInventory<_BaseItem, _Slot, _ItemInstance>
+        {
+            foreach (var slot in inventory.slots)
+            {
+                if (slot.itemInstance.isEmpty)
+                    continue;
+                if (slot.itemInstance.item.name == toTake.name)
+                {
+                    var original = slot.itemInstance;
+                    slot.itemInstance = new _ItemInstance();
+                    return original;
+                }
+            }
+            return new _ItemInstance();
+        }
+
+        public static _ItemInstance TakeItemFromInventoryStackable<_BaseItem, _Slot, _ItemInstance, _Inventory>(
+            _Inventory inventory, _BaseItem toTake, uint amount
+        )
+            where _BaseItem : class, IBaseItem
+            where _ItemInstance : struct, IItemInstance<_BaseItem>
+            where _Slot : class, ISlot<_BaseItem, _ItemInstance>, new()
+            where _Inventory : class, IInventory<_BaseItem, _Slot, _ItemInstance>
+        {
+            if (amount > toTake.maxStackAmount)
+                throw new System.Exception("Should not take more than a stack's worth of items.");
+            _ItemInstance result = new _ItemInstance();
+            foreach (var slot in inventory.slots)
+            {
+                if (slot.isEmpty)
+                    continue;
+                if (slot.itemInstance.item.name != toTake.name)
+                    continue;
+                if (result.item == null)
+                    result.item = toTake;
+                if (result.amount + slot.itemInstance.amount < amount)
+                {
+                    result.amount += slot.itemInstance.amount;
+                    slot.itemInstance = new _ItemInstance();
+                }
+                else
+                {
+                    slot.itemInstance = new _ItemInstance() 
+                    { 
+                        item = toTake,
+                        amount = result.amount + slot.itemInstance.amount - amount
+                    };
+                    result.amount = amount;
+                    return result;
+                }
+                if (result.amount == amount)
+                    return result;
+            }
+            return result;
+        }
+
+        public static _ItemInstance TakeItemFromInventory<_BaseItem, _Slot, _ItemInstance, _Inventory>(
+            _Inventory inventory, _BaseItem toTake, uint amount
+        )
+            where _BaseItem : class, IBaseItem
+            where _ItemInstance : struct, IItemInstance<_BaseItem>
+            where _Slot : class, ISlot<_BaseItem, _ItemInstance>, new()
+            where _Inventory : class, IInventory<_BaseItem, _Slot, _ItemInstance>
+        {
+            if (toTake.isStackable)
+                return TakeItemFromInventoryStackable<_BaseItem, _Slot, _ItemInstance, _Inventory>(inventory, toTake, amount);
+            else
+                return TakeItemFromInventoryUnstackable<_BaseItem, _Slot, _ItemInstance, _Inventory>(inventory, toTake);
+        }
+        #endregion
+        }
 }
