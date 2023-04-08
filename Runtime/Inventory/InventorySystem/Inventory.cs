@@ -64,5 +64,13 @@ namespace SoulShard.InventorySystem
                 _ItemInstance,
                 IInventory<_BaseItem, _Slot, _ItemInstance>
             >(this, other);
+
+        public virtual _ItemInstance TakeItem(_BaseItem toTake, uint amount) => 
+            InventoryManagementUtilities.TakeItemFromInventory<
+                _BaseItem, 
+                _Slot, 
+                _ItemInstance, 
+                IInventory<_BaseItem, _Slot, _ItemInstance>
+            >(this, toTake, amount);
     }
 }
