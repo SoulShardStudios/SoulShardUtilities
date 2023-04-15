@@ -1,7 +1,8 @@
 using UnityEngine;
-using SoulShard.FileSystem;
 using System.Collections.Generic;
 using SoulShard.Math;
+using System.IO;
+using SoulShard.Utils;
 
 namespace SoulShard.PixelMaps
 {
@@ -12,24 +13,24 @@ namespace SoulShard.PixelMaps
         /// </summary>
         /// <param name="path">The path to dump serialize</param>
         /// <param name="map">The pixel map to serialize</param>
-        public static void SerializeData(string path, PixelMap map)
+        public static void SerializePixelMapData(string path, PixelMap map)
         {
             if (path == null)
                 return;
 
-            // Make sure the directory exists.
-            DirectoryUtility.Create(path);
-
-            // Delete all of its contents, as we have new contents to give it.
-            // Difference analysis could be done, but this was easier :)
-            DirectoryUtility.DeleteAllContents(path);
-
+            Directory.CreateDirectory(path);
+            var rootDir = new DirectoryInfo(path);
+            foreach (FileInfo file in rootDir.GetFiles())
+                file.Delete();
+            foreach (DirectoryInfo dir in rootDir.GetDirectories())
+                dir.Delete(true);
             // Encodes all chunks as png and makes the files.
             foreach (KeyValuePair<Vector2Int, PixelChunk> k in map.chunkmap.chunks)
             {
                 byte[] pngBytes = k.Value.texture.EncodeToPNG();
                 string filename = k.Value.gameObject.name + ".png";
-                FileUtility.Make(path + filename, pngBytes);
+                using (FileStream stream = File.Open(path + filename, FileMode.Create))
+                    stream.Write(pngBytes, 0, pngBytes.Length);
             }
         }
 
@@ -44,14 +45,14 @@ namespace SoulShard.PixelMaps
                 return null;
 
             // Get all files.
-            string[] items = DirectoryUtility.GetAllFilePaths(path);
+            string[] items = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
             if (items == null)
                 return null;
 
             // Filters contents for images.
             List<string> images = new List<string>(0);
             for (int i = 0; i < items.Length; i++)
-                if (FileUtility.GetExt(items[i]) == ".png")
+                if (Path.GetExtension(items[i]) == ".png")
                     images.Add(items[i]);
             if (images.Count == 0)
                 return null;
@@ -60,10 +61,16 @@ namespace SoulShard.PixelMaps
             Dictionary<Vector2Int, Texture2D> chunkPositionToTexture =
                 new Dictionary<Vector2Int, Texture2D>();
             for (int i = 0; i < images.Count; i++)
+            {
+                byte[] fileData = File.ReadAllBytes(path);
+                Texture2D tex = new Texture2D(2, 2);
+                tex.LoadImage(fileData);
                 chunkPositionToTexture.Add(
                     VectorParser.ParseVector2IntFromString(images[i]),
-                    AssetUtility.LoadTexture2D(images[i], TextureFormat.RGBA32, false)
+                    TextureUtility.ConvertTexture2DFormat(tex, TextureFormat.RGBA32, false)
                 );
+            }
+
             return chunkPositionToTexture;
         }
 

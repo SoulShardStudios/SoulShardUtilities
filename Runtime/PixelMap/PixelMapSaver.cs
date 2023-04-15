@@ -1,5 +1,4 @@
 using UnityEngine;
-using SoulShard.FileSystem;
 using SoulShard.Utils;
 
 namespace SoulShard.PixelMaps
@@ -48,14 +47,15 @@ namespace SoulShard.PixelMaps
         string GetPath()
         {
             if (saveLocation != "")
-                return PathUtility.ParsePath(saveLocation) + '/';
+                return $"{Application.persistentDataPath}/{saveLocation}/";
             return null;
         }
 
         /// <summary>
         /// Save the pixel maps data.
         /// </summary>
-        public void SaveData() => PixelMapSerializationUtility.SerializeData(GetPath(), _map);
+        public void SaveData() =>
+            PixelMapSerializationUtility.SerializePixelMapData(GetPath(), _map);
 
         /// <summary>
         /// Load the pixel maps data.
