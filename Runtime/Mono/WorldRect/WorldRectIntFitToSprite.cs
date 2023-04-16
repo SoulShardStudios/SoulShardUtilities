@@ -2,8 +2,6 @@ using UnityEngine;
 
 namespace SoulShard.Utils
 {
-    using Math;
-
     /// <summary>
     /// fits a world rect int to a sprite
     /// </summary>
@@ -28,8 +26,14 @@ namespace SoulShard.Utils
                 return;
             }
             var rect = _renderer.sprite.rect;
-            Vector2Int size = VectorMath.RoundVector(rect.size);
-            Vector2Int position = VectorMath.RoundVector(_renderer.sprite.pivot);
+            Vector2Int size = new Vector2Int(
+                Mathf.RoundToInt(rect.size.x),
+                Mathf.RoundToInt(rect.size.y)
+            );
+            Vector2Int position = new Vector2Int(
+                Mathf.RoundToInt(_renderer.sprite.pivot.x),
+                Mathf.RoundToInt(_renderer.sprite.pivot.y)
+            );
             bounds = new RectInt(-position, size);
         }
     }

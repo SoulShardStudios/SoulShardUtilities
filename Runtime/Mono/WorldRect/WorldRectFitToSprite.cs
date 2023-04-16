@@ -31,7 +31,10 @@ namespace SoulShard.Utils
         public override Rect GetTranslatedBounds()
         {
             Rect translatedBounds = bounds;
-            Vector2 absscale = VectorMath.AbsVector(transform.localScale);
+            Vector2 absscale = new Vector2(
+                Mathf.Abs(transform.localScale.x),
+                Mathf.Abs(transform.localScale.y)
+            );
             translatedBounds.position +=
                 (Vector2)transform.position
                 - (_renderer.sprite.pivot / _renderer.sprite.pixelsPerUnit * absscale);

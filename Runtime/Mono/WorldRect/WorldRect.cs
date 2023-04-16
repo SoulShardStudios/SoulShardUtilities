@@ -20,7 +20,10 @@ namespace SoulShard.Utils
         public virtual Rect GetTranslatedBounds()
         {
             Rect translatedBounds = bounds;
-            Vector2 absscale = Math.VectorMath.AbsVector(transform.localScale);
+            Vector2 absscale = new Vector2(
+                Mathf.Abs(transform.localScale.x),
+                Mathf.Abs(transform.localScale.y)
+            );
             translatedBounds.position +=
                 (Vector2)transform.position - translatedBounds.size / 2 * absscale;
             translatedBounds.size *= absscale;

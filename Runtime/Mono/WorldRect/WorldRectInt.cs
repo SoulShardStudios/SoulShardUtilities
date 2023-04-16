@@ -2,8 +2,6 @@ using UnityEngine;
 
 namespace SoulShard.Utils
 {
-    using Math;
-
     /// <summary>
     /// A component that manages a 1:1 translation of a rectInt to a world position, with a pixels per unit modifier.
     /// </summary>
@@ -39,10 +37,20 @@ namespace SoulShard.Utils
         /// <returns>the translated rectint</sreturns>
         public virtual RectInt GetTranslatedBounds()
         {
-            Vector2 worldIntPos =
+            // we are essentially getting the translation needed to make the transform
+            // translation align with the pixels per unit grid.
+            var pixelsPerUnitPerWorldUnit = 1f / pixelsPerUnit;
+            var worldIntPos =
                 (Vector2)transform.position
-                - VectorMath.ModVector((Vector2)transform.position, 1f / pixelsPerUnit);
-            Vector2Int transformTranslation = VectorMath.RoundVector(worldIntPos * pixelsPerUnit);
+                - new Vector2(
+                    transform.position.x % pixelsPerUnitPerWorldUnit,
+                    transform.position.y % pixelsPerUnitPerWorldUnit
+                );
+            var scaled = worldIntPos * pixelsPerUnit;
+            Vector2Int transformTranslation = new Vector2Int(
+                Mathf.RoundToInt(scaled.x),
+                Mathf.RoundToInt(scaled.y)
+            );
             RectInt newbounds = bounds;
             newbounds.position += transformTranslation;
             return newbounds;

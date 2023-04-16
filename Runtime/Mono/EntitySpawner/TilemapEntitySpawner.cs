@@ -34,10 +34,7 @@ namespace SoulShard.Utils
             {
                 foreach (Vector3Int v in deltas)
                     newDeltas.UnionWith(
-                        VectorMath.TranslateVectorArray(
-                            VectorConstants.CardinalsAndDiagonalsVi(),
-                            (Vector2Int)v
-                        )
+                        VectorConstants.CardinalsAndDiagonalsVi().Select((x) => x + (Vector2Int)v)
                     );
                 deltas.UnionWith(newDeltas);
                 newDeltas.Clear();

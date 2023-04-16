@@ -8,11 +8,19 @@ namespace SoulShard.Utils
     /// </summary>
     public struct ChunkPositionConversions
     {
-        public static Vector2Int GetOuterChunkPos(Vector2Int position, Vector2Int size) =>
-            VectorMath.FloorVector((Vector2)position / size);
+        public static Vector2Int GetOuterChunkPos(Vector2Int position, Vector2Int size)
+        {
+            var outerPos = (Vector2)position / size;
+            return new Vector2Int(Mathf.FloorToInt(outerPos.x), Mathf.FloorToInt(outerPos.y));
+        }
 
-        public static Vector2Int GetInnerChunkPos(Vector2Int position, Vector2Int size) =>
-            VectorMath.PositiveModVector(position, size.x);
+        public static Vector2Int GetInnerChunkPos(Vector2Int position, Vector2Int size)
+        {
+            return new Vector2Int(
+                MathUtility.PositiveMod(position.x, size.x),
+                MathUtility.PositiveMod(position.y, size.x)
+            );
+        }
 
         public static ChunkPosition GetChunkPos(Vector2Int position, Vector2Int size) =>
             new ChunkPosition(GetOuterChunkPos(position, size), GetInnerChunkPos(position, size));
