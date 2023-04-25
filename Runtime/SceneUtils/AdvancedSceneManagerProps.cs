@@ -5,19 +5,16 @@ namespace SoulShard.Utils
     [CreateAssetMenu(menuName = "SoulShardUtils/AdvancedSceneManagerProperties")]
     public class AdvancedSceneManagerProps : ScriptableObject
     {
-        /// <summary>
-        /// scenes loaded when this object is enabled
-        /// </summary>
+        [Tooltip(tooltip: "Scenes loaded when this object is enabled")]
         public string[] loadOnEnable;
 
-        /// <summary>
-        /// scenes that will always be loaded
-        /// </summary>
+        [Tooltip(tooltip: "Scenes that will always be loaded")]
         public string[] loadAlways;
 
-        /// <summary>
-        /// a collection of scene maps that will determine scene dependencies
-        /// </summary>
+        [Tooltip(tooltip: "A collection of scene maps that will determine scene dependencies")]
         public SceneToScene[] loadWhileOtherIsLoaded;
+
+        [Tooltip(tooltip: "The starting active scene")]
+        public string startingActiveScene;
     }
 }
