@@ -24,15 +24,14 @@ namespace SoulShard.Utils
         void Awake()
         {
             _instance = this;
+            _activeScene = props.startingActiveScene;
             SceneManager.sceneLoaded += OnLoad;
             SceneManager.sceneUnloaded += OnUnload;
             Load(
-                props.startingActiveScene,
+                _activeScene,
                 () =>
                 {
-                    SceneManager.SetActiveScene(
-                        SceneManager.GetSceneByName(_instance._activeScene)
-                    );
+                    SceneManager.SetActiveScene(SceneManager.GetSceneByName(_activeScene));
                 }
             );
             Load(props.loadAlways);
