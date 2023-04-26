@@ -156,7 +156,7 @@ namespace SoulShard.Utils
             ManageDependantScenes();
             for (int i = 0; i < _instance._sceneUnloadCallbacks.Count; i++)
             {
-                if (IsLoaded(_instance._sceneUnloadCallbacks[i].Item1))
+                if (!IsLoaded(_instance._sceneUnloadCallbacks[i].Item1))
                 {
                     _instance._sceneUnloadCallbacks[i].Item2?.Invoke();
                     _instance._sceneUnloadCallbacks.RemoveAt(i);
@@ -168,8 +168,6 @@ namespace SoulShard.Utils
         {
             foreach (SceneToScene sts in _instance.props.loadWhileOtherIsLoaded)
             {
-                if (IsLoaded(sts.dependantScene))
-                    continue;
                 if (IsLoaded(sts.originalScene))
                     Load(sts.dependantScene);
                 else
