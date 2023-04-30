@@ -140,7 +140,6 @@ namespace SoulShard.Utils
 
         static void OnLoad(Scene scene, LoadSceneMode mode)
         {
-            ManageDependantScenes();
             for (int i = _instance._sceneLoadCallbacks.Count - 1; i > -1; i--)
             {
                 if (IsLoaded(_instance._sceneLoadCallbacks[i].Item1))
@@ -153,7 +152,6 @@ namespace SoulShard.Utils
 
         static void OnUnload(Scene scene)
         {
-            ManageDependantScenes();
             for (int i = _instance._sceneUnloadCallbacks.Count - 1; i > -1; i--)
             {
                 if (!IsLoaded(_instance._sceneUnloadCallbacks[i].Item1))
@@ -163,18 +161,6 @@ namespace SoulShard.Utils
                 }
             }
         }
-
-        static void ManageDependantScenes()
-        {
-            foreach (SceneToScene sts in _instance.props.loadWhileOtherIsLoaded)
-            {
-                if (IsLoaded(sts.originalScene))
-                    Load(sts.dependantScene);
-                else
-                    Unload(sts.dependantScene);
-            }
-        }
-
         #endregion
 
         #region Loaded
@@ -237,28 +223,9 @@ namespace SoulShard.Utils
         {
             string[] sceneNames = new string[SceneManager.sceneCount];
             for (int i = 0; i < SceneManager.sceneCount; i++)
-            {
                 sceneNames[i] = SceneManager.GetSceneAt(i).name;
-            }
             return sceneNames;
         }
-
-        /// <summary>
-        /// get all dependant scenes for a specfic scene
-        /// </summary>
-        /// <param name="sceneName">the name of the scene to fetch the information from</param>
-        /// <returns>the collection of dependant scenes</returns>
-        public static string[] GetDependantScenes(string sceneName)
-        {
-            List<string> @return = new List<string>();
-            foreach (SceneToScene sts in _instance.props.loadWhileOtherIsLoaded)
-            {
-                if (sts.originalScene == sceneName)
-                    @return.Add(sts.dependantScene);
-            }
-            return @return.ToArray();
-        }
-
         #endregion
     }
 }

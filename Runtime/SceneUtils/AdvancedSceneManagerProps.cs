@@ -11,9 +11,6 @@ namespace SoulShard.Utils
         [Tooltip(tooltip: "Scenes that will always be loaded")]
         public string[] loadAlways;
 
-        [Tooltip(tooltip: "A collection of scene maps that will determine scene dependencies")]
-        public SceneToScene[] loadWhileOtherIsLoaded;
-
         [Tooltip(tooltip: "The starting active scene")]
         public string startingActiveScene;
     }
