@@ -21,7 +21,7 @@ namespace SoulShard.Utils
 
         string _activeScene;
 
-        void Awake()
+        protected virtual void Awake()
         {
             _instance = this;
             _activeScene = props.startingActiveScene;
@@ -136,7 +136,7 @@ namespace SoulShard.Utils
         List<(string[], Action)> _sceneLoadCallbacks = new List<(string[], Action)>();
         List<(string[], Action)> _sceneUnloadCallbacks = new List<(string[], Action)>();
 
-        void Update()
+        protected virtual void Update()
         {
             for (int i = _instance._sceneLoadCallbacks.Count - 1; i > -1; i--)
             {
