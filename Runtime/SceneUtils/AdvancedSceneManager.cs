@@ -65,8 +65,8 @@ namespace SoulShard.Utils
         {
             if (onComplete != null)
                 _instance._sceneLoadCallbacks.Add((new string[1] { sceneName }, onComplete));
-            if (!IsLoaded(sceneName))
-                SceneManager.LoadScene(sceneName, mode);
+            if (!IsInstantiated(sceneName))
+                SceneManager.LoadSceneAsync(sceneName, mode);
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace SoulShard.Utils
         static void OnLoad(Scene scene, LoadSceneMode mode)
         {
             ManageDependantScenes();
-            for (int i = 0; i < _instance._sceneLoadCallbacks.Count; i++)
+            for (int i = _instance._sceneLoadCallbacks.Count - 1; i > -1; i--)
             {
                 if (IsLoaded(_instance._sceneLoadCallbacks[i].Item1))
                 {
@@ -154,7 +154,7 @@ namespace SoulShard.Utils
         static void OnUnload(Scene scene)
         {
             ManageDependantScenes();
-            for (int i = 0; i < _instance._sceneUnloadCallbacks.Count; i++)
+            for (int i = _instance._sceneUnloadCallbacks.Count - 1; i > -1; i--)
             {
                 if (!IsLoaded(_instance._sceneUnloadCallbacks[i].Item1))
                 {
@@ -198,6 +198,22 @@ namespace SoulShard.Utils
             {
                 Scene scene = SceneManager.GetSceneAt(i);
                 if (scene.name == sceneName && scene.isLoaded)
+                    return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Checks whether the specified scene has been instantiated into the world
+        /// </summary>
+        /// <param name="sceneName">The name of the scene to check for</param>
+        /// <returns>Whether the scene has been instantiated</returns>
+        public static bool IsInstantiated(string sceneName)
+        {
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                Scene scene = SceneManager.GetSceneAt(i);
+                if (scene.name == sceneName)
                     return true;
             }
             return false;
