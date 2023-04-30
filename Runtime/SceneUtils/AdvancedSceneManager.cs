@@ -25,8 +25,6 @@ namespace SoulShard.Utils
         {
             _instance = this;
             _activeScene = props.startingActiveScene;
-            SceneManager.sceneLoaded += OnLoad;
-            SceneManager.sceneUnloaded += OnUnload;
             Load(
                 _activeScene,
                 () =>
@@ -138,7 +136,7 @@ namespace SoulShard.Utils
         List<(string[], Action)> _sceneLoadCallbacks = new List<(string[], Action)>();
         List<(string[], Action)> _sceneUnloadCallbacks = new List<(string[], Action)>();
 
-        static void OnLoad(Scene scene, LoadSceneMode mode)
+        void Update()
         {
             for (int i = _instance._sceneLoadCallbacks.Count - 1; i > -1; i--)
             {
@@ -148,10 +146,6 @@ namespace SoulShard.Utils
                     _instance._sceneLoadCallbacks.RemoveAt(i);
                 }
             }
-        }
-
-        static void OnUnload(Scene scene)
-        {
             for (int i = _instance._sceneUnloadCallbacks.Count - 1; i > -1; i--)
             {
                 if (!IsLoaded(_instance._sceneUnloadCallbacks[i].Item1))
