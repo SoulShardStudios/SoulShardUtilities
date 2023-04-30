@@ -140,7 +140,7 @@ namespace SoulShard.Utils
         {
             for (int i = _instance._sceneLoadCallbacks.Count - 1; i > -1; i--)
             {
-                if (IsLoaded(_instance._sceneLoadCallbacks[i].Item1))
+                if (_instance._sceneLoadCallbacks[i].Item1.All(IsLoaded))
                 {
                     _instance._sceneLoadCallbacks[i].Item2?.Invoke();
                     _instance._sceneLoadCallbacks.RemoveAt(i);
@@ -148,7 +148,7 @@ namespace SoulShard.Utils
             }
             for (int i = _instance._sceneUnloadCallbacks.Count - 1; i > -1; i--)
             {
-                if (!IsLoaded(_instance._sceneUnloadCallbacks[i].Item1))
+                if (!_instance._sceneUnloadCallbacks[i].Item1.Any(IsInstantiated))
                 {
                     _instance._sceneUnloadCallbacks[i].Item2?.Invoke();
                     _instance._sceneUnloadCallbacks.RemoveAt(i);
@@ -197,20 +197,6 @@ namespace SoulShard.Utils
                     return true;
             }
             return false;
-        }
-
-        /// <summary>
-        /// checks if the collection of scenes is loaded
-        /// </summary>
-        /// <param name="sceneNames">the names of the scenes to check</param>
-        /// <returns>whether the collection of scenes is all loaded</returns>
-        public static bool IsLoaded(string[] sceneNames)
-        {
-            bool isLoaded = true;
-            foreach (string sceneName in sceneNames)
-                if (!IsLoaded(sceneName))
-                    isLoaded = false;
-            return isLoaded;
         }
 
         public static string[] GetAllLoadedSceneNames()
