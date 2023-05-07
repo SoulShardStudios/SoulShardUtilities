@@ -66,6 +66,32 @@ namespace SoulShard.Utils
             return false;
         }
 
+        bool OverlapsConfig(
+            TilemapEntitySpawnerProps[,] chosenConfigs,
+            TilemapEntitySpawnerProps configToCheck,
+            Vector2Int chosenConfigsIdx
+        )
+        {
+            if (configToCheck.tileGap == 0)
+                return false;
+            foreach (var delta in GetTileGapDeltas(configToCheck.tileGap))
+            {
+                var pos = delta + chosenConfigsIdx;
+                TilemapEntitySpawnerProps configAtPos;
+                try
+                {
+                    configAtPos = chosenConfigs[pos.x, pos.y];
+                }
+                catch
+                {
+                    continue;
+                }
+                if (configAtPos == configToCheck)
+                    return true;
+            }
+            return false;
+        }
+
         void ApplySpawnConfigToTile(
             Rect rect,
             TileBase tile,
@@ -81,35 +107,16 @@ namespace SoulShard.Utils
                     continue;
                 if (!configToCheck.validTiles.Contains(tile))
                     continue;
-                if (configToCheck.tileGap == 0)
-                {
-                    config = configToCheck;
-                    break;
-                }
-                foreach (var delta in GetTileGapDeltas(configToCheck.tileGap))
-                {
-                    var pos = delta + chosenConfigsIdx;
-                    TilemapEntitySpawnerProps configAtPos;
-                    try
-                    {
-                        configAtPos = chosenConfigs[pos.x, pos.y];
-                    }
-                    catch
-                    {
-                        continue;
-                    }
-                    if (configAtPos == configToCheck)
-                        return;
-                }
+                if (OverlapsConfig(chosenConfigs, configToCheck, chosenConfigsIdx))
+                    continue;
                 if (OverlapsForbiddenTilemap(configToCheck.tileGapToForbiddenTilemap, tilePos))
-                    return;
+                    continue;
                 config = configToCheck;
+                break;
             }
             if (config == null)
                 return;
-
             chosenConfigs[chosenConfigsIdx.x, chosenConfigsIdx.y] = config;
-
             for (int i = 0; i < config.spawnPerTile.RandomBetween(); i++)
                 InstantiateWithReference(
                     config.entities.RandomElement(),
