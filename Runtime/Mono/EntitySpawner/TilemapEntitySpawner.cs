@@ -121,7 +121,8 @@ namespace SoulShard.Utils
                 InstantiateWithReference(
                     config.entities.RandomElement(),
                     _spawnParent
-                ).transform.position = rect.RandomInside();
+                ).transform.position = rect.ScaleRectCenterPivot(1 - config.tileEdgePad)
+                    .RandomInside();
         }
 
         [ContextMenu("Spawn Entities")]

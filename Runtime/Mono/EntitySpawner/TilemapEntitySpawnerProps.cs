@@ -27,5 +27,10 @@ namespace SoulShard.Utils
             tooltip: "The minimum gap distance between where this spawn config will be applied and a forbidden tilemap"
         )]
         public uint tileGapToForbiddenTilemap;
+
+        [Tooltip(
+            tooltip: "A percentage of the tile's size. The amount of padding to add so the entities spawn closer to the center."
+        )]
+        public float tileEdgePad;
     }
 }
