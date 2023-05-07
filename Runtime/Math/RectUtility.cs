@@ -7,8 +7,9 @@ namespace SoulShard.Math
         // see https://www.desmos.com/calculator/gc6sog1flh
         public static Rect ScaleRectCenterPivot(this Rect rect, float percentage)
         {
-            var padding = (rect.size - (rect.size * percentage)) / 2;
-            return new Rect(rect.min + padding, rect.size - padding);
+            var scaledSize = rect.size * percentage;
+            var padMinPos = rect.min + (rect.size - scaledSize) / 2;
+            return new Rect(padMinPos, scaledSize);
         }
     }
 }
