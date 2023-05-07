@@ -42,9 +42,11 @@ namespace SoulShard.Utils
             HashSet<Vector2Int> newDeltas = new HashSet<Vector2Int>();
             for (int i = 0; i < size; i++)
             {
-                foreach (Vector3Int v in deltas)
+                foreach (Vector3Int delta in deltas)
                     newDeltas.UnionWith(
-                        VectorConstants.CardinalsAndDiagonalsVi().Select((x) => x + (Vector2Int)v)
+                        VectorConstants
+                            .CardinalsAndDiagonalsVi()
+                            .Select((x) => x + (Vector2Int)delta)
                     );
                 deltas.UnionWith(newDeltas);
                 newDeltas.Clear();
@@ -54,9 +56,9 @@ namespace SoulShard.Utils
 
         bool OverlapsForbiddenTilemap(uint distance, Vector3Int tilePos)
         {
-            foreach (var v in GetTileGapDeltas(distance))
+            foreach (var delta in GetTileGapDeltas(distance))
             {
-                var pos = v + (Vector2Int)tilePos;
+                var pos = delta + (Vector2Int)tilePos;
                 foreach (var t in _forbiddenTilemaps)
                     if (t.GetTile((Vector3Int)pos) != null)
                         return true;
@@ -73,20 +75,20 @@ namespace SoulShard.Utils
         {
             Vector2Int chosenConfigsIdx = (Vector2Int)(tilePos - _tilemapMin);
             TilemapEntitySpawnerProps config = null;
-            foreach (var c in _props)
+            foreach (var configToCheck in _props)
             {
-                if (c.chance <= Random.Range(0f, 1.1f))
+                if (configToCheck.chance <= Random.Range(0f, 1.1f))
                     continue;
-                if (!c.validTiles.Contains(tile))
+                if (!configToCheck.validTiles.Contains(tile))
                     continue;
-                if (c.tileGap == 0)
+                if (configToCheck.tileGap == 0)
                 {
-                    config = c;
+                    config = configToCheck;
                     break;
                 }
-                foreach (var v in GetTileGapDeltas(c.tileGap))
+                foreach (var delta in GetTileGapDeltas(configToCheck.tileGap))
                 {
-                    var pos = v + chosenConfigsIdx;
+                    var pos = delta + chosenConfigsIdx;
                     TilemapEntitySpawnerProps configAtPos;
                     try
                     {
@@ -96,12 +98,12 @@ namespace SoulShard.Utils
                     {
                         continue;
                     }
-                    if (configAtPos == c)
+                    if (configAtPos == configToCheck)
                         return;
                 }
-                if (OverlapsForbiddenTilemap(config.tileGapToForbiddenTilemap, tilePos))
+                if (OverlapsForbiddenTilemap(configToCheck.tileGapToForbiddenTilemap, tilePos))
                     return;
-                config = c;
+                config = configToCheck;
             }
             if (config == null)
                 return;
