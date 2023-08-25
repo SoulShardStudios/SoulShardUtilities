@@ -1,3 +1,16 @@
 {
-	"name": "SoulShard.Sound"
+    "name": "SoulShard.Sound",
+    "rootNamespace": "",
+    "references": [
+        "GUID:09b8d01a88f6fc2428e2c783d2431a85"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

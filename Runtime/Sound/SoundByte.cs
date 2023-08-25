@@ -8,11 +8,10 @@ namespace SoulShard.Utils
     [CreateAssetMenu(menuName = "SoulShardUtils/Sounds/SoundByte")]
     public class SoundByte : ScriptableObject
     {
-        [HideInInspector]
-        public AudioSource Source;
-        public string Name;
-        public bool Loop,
-            PlayOnAwake;
+        public bool loop,
+            playOnAwake = false;
+        public float fadeInDuration = 0;
+        public float fadeOutDuration = 0;
         public Sound[] possibleSounds;
     }
 }
