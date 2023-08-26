@@ -129,7 +129,7 @@ namespace SoulShard.Utils
         public static bool IsPlaying(string soundName)
         {
             foreach (var source in _instance._sources)
-                if (source.Item2.name == soundName)
+                if (source.Item2.name == soundName && source.Item1.isPlaying)
                     return true;
             return false;
         }
