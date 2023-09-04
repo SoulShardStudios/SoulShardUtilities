@@ -23,6 +23,7 @@ namespace SoulShard.Utils
             source.pitch = soundClip.GetPitch();
             source.playOnAwake = playOnAwake;
             source.loop = loop;
+            source.spatialBlend = soundClip.GetSpatialBlend();
             var volume = soundClip.GetVolume();
             source.volume = 0;
             if (fadeInDuration != 0)

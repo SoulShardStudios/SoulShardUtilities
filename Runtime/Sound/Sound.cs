@@ -24,11 +24,20 @@ namespace SoulShard.Utils
 
         public float maxStartDelay = 0;
 
+        [Range(0f, 1f)]
+        public float minSpatialBlend = 0;
+
+        [Range(0f, 1f)]
+        public float maxSpatialBlend = 0;
+
         public float GetStartDelay() => new Vector2(minStartDelay, maxStartDelay).RandomBetween();
 
         public float GetPitch() => new Vector2(minPitch, maxPitch).RandomBetween();
 
         public float GetVolume() => new Vector2(minVolume, maxVolume).RandomBetween();
+
+        public float GetSpatialBlend() =>
+            new Vector2(minSpatialBlend, maxSpatialBlend).RandomBetween();
 
         public AudioClip audio;
     }
