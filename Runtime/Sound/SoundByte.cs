@@ -24,6 +24,9 @@ namespace SoulShard.Utils
             source.playOnAwake = playOnAwake;
             source.loop = loop;
             source.spatialBlend = soundClip.GetSpatialBlend();
+            source.rolloffMode = soundClip.rolloff;
+            source.minDistance = soundClip.minDistance;
+            source.maxDistance = soundClip.maxDistance;
             var volume = soundClip.GetVolume();
             source.volume = 0;
             if (fadeInDuration != 0)

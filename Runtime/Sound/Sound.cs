@@ -39,6 +39,10 @@ namespace SoulShard.Utils
         public float GetSpatialBlend() =>
             new Vector2(minSpatialBlend, maxSpatialBlend).RandomBetween();
 
+        public AudioRolloffMode rolloff;
+        public float minDistance;
+        public float maxDistance;
+
         public AudioClip audio;
     }
 }
