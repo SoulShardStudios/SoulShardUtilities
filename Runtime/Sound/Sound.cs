@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.ComponentModel;
 
 namespace SoulShard.Utils
 {
@@ -10,20 +9,26 @@ namespace SoulShard.Utils
     public class Sound
     {
         [Range(0f, 1f)]
-        [DefaultValue(1)]
         public float minVolume = 1;
 
         [Range(0f, 1f)]
-        [DefaultValue(1)]
         public float maxVolume = 1;
 
         [Range(.1f, 3f)]
-        [DefaultValue(1)]
         public float minPitch = 1;
 
         [Range(.1f, 3f)]
-        [DefaultValue(1)]
         public float maxPitch = 1;
+
+        public float minStartDelay = 0;
+
+        public float maxStartDelay = 0;
+
+        public float GetStartDelay() => new Vector2(minStartDelay, maxStartDelay).RandomBetween();
+
+        public float GetPitch() => new Vector2(minPitch, maxPitch).RandomBetween();
+
+        public float GetVolume() => new Vector2(minVolume, maxVolume).RandomBetween();
 
         public AudioClip audio;
     }
