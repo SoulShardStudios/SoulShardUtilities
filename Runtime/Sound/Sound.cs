@@ -43,6 +43,9 @@ namespace SoulShard.Utils
         public float minDistance;
         public float maxDistance;
 
+        [Range(0f, 5f)]
+        public float dopplerLevel;
+
         public AudioClip audio;
     }
 }

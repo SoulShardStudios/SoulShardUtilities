@@ -27,6 +27,7 @@ namespace SoulShard.Utils
             source.rolloffMode = soundClip.rolloff;
             source.minDistance = soundClip.minDistance;
             source.maxDistance = soundClip.maxDistance;
+            source.dopplerLevel = soundClip.dopplerLevel;
             var volume = soundClip.GetVolume();
             source.volume = 0;
             if (fadeInDuration != 0)
