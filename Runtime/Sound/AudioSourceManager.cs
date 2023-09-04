@@ -61,6 +61,9 @@ namespace SoulShard.Utils
 
         public AudioSource PlaySoundByte(string sound) => PlaySoundByte(ConvertNameToSound(sound));
 
+        // this is so unity events can pick up this function. thanks for the duct tape due to the return type here.
+        public void Play(string sound) => PlaySoundByte(sound);
+
         public void StopAllSoundBytes(string soundName)
         {
             foreach (var source in _sources)
